@@ -1,6 +1,9 @@
 let orders = {};
 let deliveryMode = {};
 
+const pendingOrders = {};
+const deliveredOrders = {};
+
 const USD_TO_BDT = 127;
 
 function convertDollarToTaka(price) {
@@ -24,7 +27,10 @@ async function showPaymentMethods(bot, chatId, data) {
 
   await bot.sendMessage(
     chatId,
-    `💳 Payment for ${data.name}\n📦 Package: ${data.package}\n💰 Price: ${data.price}`,
+    `💳 Payment for ${data.name}
+📦 Package: ${data.package}
+🧾 Type: ${data.accountType || "N/A"}
+💰 Price: ${data.price}`,
     {
       reply_markup: {
         inline_keyboard: [
@@ -52,7 +58,7 @@ async function handlePaymentMethod(bot, query) {
 
 📦 Product: ${order.name}
 📊 Package: ${order.package}
-🧾 Account Type: ${order.accountType || "N/A"}
+🧾 Type: ${order.accountType || "N/A"}
 💵 Amount: ${order.price}
 
 🆔 Binance ID:
@@ -64,16 +70,14 @@ Payment complete হলে screenshot পাঠাও।`
   }
 
   if (data === "pay_nagad") {
-    const takaAmount = convertDollarToTaka(order.price);
-
     await bot.sendMessage(
       chatId,
       `📱 Nagad Agent Payment
 
 📦 Product: ${order.name}
 📊 Package: ${order.package}
-🧾 Account Type: ${order.accountType || "N/A"}
-💰 Amount: ${takaAmount}
+🧾 Type: ${order.accountType || "N/A"}
+💰 Amount: ${convertDollarToTaka(order.price)}
 💵 Rate: 1$ = ৳127
 
 📞 Nagad Number:
@@ -136,13 +140,16 @@ async function handlePaymentDone(bot, query) {
   order.customerName = name;
   order.username = username;
   order.userId = userId;
-  order.status = "payment_done";
+  order.status = "pending";
+  order.createdAt = new Date().toISOString();
+
+  pendingOrders[chatId] = order;
 
   const adminCaption =
     `🛒 New Order Received!\n\n` +
     `📦 Product: ${order.name}\n` +
     `📊 Package: ${order.package}\n` +
-    `🧾 Account Type: ${order.accountType || "N/A"}\n` +
+    `🧾 Type: ${order.accountType || "N/A"}\n` +
     `💰 Price: ${order.price}\n` +
     `💰 Nagad Amount: ${convertDollarToTaka(order.price)}\n\n` +
     `👤 Name: ${name}\n` +
@@ -187,7 +194,7 @@ async function handleDeliveryButton(bot, query) {
   if (!data.startsWith("delivery_")) return false;
 
   const customerChatId = data.replace("delivery_", "");
-  const order = orders[customerChatId];
+  const order = pendingOrders[customerChatId] || orders[customerChatId];
 
   if (!order) {
     await bot.sendMessage(adminId, "❌ Order not found or already delivered.");
@@ -209,7 +216,7 @@ Now send the product/data for:
 
 📦 Product: ${order.name}
 📊 Package: ${order.package}
-🧾 Account Type: ${order.accountType || "N/A"}
+🧾 Type: ${order.accountType || "N/A"}
 💰 Price: ${order.price}
 💰 Nagad Amount: ${convertDollarToTaka(order.price)}
 
@@ -243,7 +250,7 @@ async function handleAdminDeliveryMessage(bot, msg) {
 
 📦 Product: ${order.name}
 📊 Package: ${order.package}
-🧾 Account Type: ${order.accountType || "N/A"}
+🧾 Type: ${order.accountType || "N/A"}
 
 🔐 Your Data:
 ${msg.text}`
@@ -256,7 +263,7 @@ ${msg.text}`
         `🎉 Delivery Received!\n\n` +
         `📦 Product: ${order.name}\n` +
         `📊 Package: ${order.package}\n` +
-        `🧾 Account Type: ${order.accountType || "N/A"}`
+        `🧾 Type: ${order.accountType || "N/A"}`
     });
   } else if (msg.document) {
     await bot.sendDocument(customerChatId, msg.document.file_id, {
@@ -264,12 +271,21 @@ ${msg.text}`
         `🎉 Delivery Received!\n\n` +
         `📦 Product: ${order.name}\n` +
         `📊 Package: ${order.package}\n` +
-        `🧾 Account Type: ${order.accountType || "N/A"}`
+        `🧾 Type: ${order.accountType || "N/A"}`
     });
   } else {
     await bot.sendMessage(adminId, "⚠️ Please send text, photo, or document.");
     return true;
   }
+
+  order.status = "delivered";
+  order.deliveredAt = new Date().toISOString();
+
+  deliveredOrders[customerChatId] = order;
+
+  delete pendingOrders[customerChatId];
+  delete orders[customerChatId];
+  delete deliveryMode[adminId];
 
   await bot.editMessageReplyMarkup(
     {
@@ -285,9 +301,6 @@ ${msg.text}`
 
   await bot.sendMessage(adminId, "✅ Product delivered to customer successfully.");
 
-  delete orders[customerChatId];
-  delete deliveryMode[adminId];
-
   return true;
 }
 
@@ -297,5 +310,7 @@ module.exports = {
   handlePaymentScreenshot,
   handlePaymentDone,
   handleDeliveryButton,
-  handleAdminDeliveryMessage
+  handleAdminDeliveryMessage,
+  pendingOrders,
+  deliveredOrders
 };
