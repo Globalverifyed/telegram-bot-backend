@@ -19,9 +19,13 @@ const { showMainMenu } = require("./handlers/menu");
 const { handleSupport } = require("./handlers/support");
 const { handleIPProxy } = require("./handlers/ip_proxy");
 const { handleDataImpulse } = require("./handlers/dataimpulse");
-const { handleProductOptions } = require("./handlers/product_options");
 const { handleProxyIP } = require("./handlers/9proxy_ip");
 const { handleProxyGB } = require("./handlers/9proxy_gb");
+const { handleProductOptions } = require("./handlers/product_options");
+
+// 🔥 ADMIN PANEL
+const { handleAdmin, handleAdminButtons } = require("./handlers/admin");
+
 const {
   handlePaymentMethod,
   handlePaymentScreenshot,
@@ -50,6 +54,11 @@ bot.onText(/\/start/, (msg) => {
   showMainMenu(bot, msg.chat.id);
 });
 
+// ===== ADMIN COMMAND =====
+bot.onText(/\/admin/, async (msg) => {
+  await handleAdmin(bot, msg);
+});
+
 // ===== ADMIN TEST =====
 bot.onText(/\/testadmin/, (msg) => {
   bot.sendMessage(process.env.ADMIN_CHAT_ID, "Admin test message ✅");
@@ -72,17 +81,23 @@ bot.on("callback_query", async (query) => {
 
   console.log("CLICK:", query.data);
 
+  // ==== MAIN HANDLERS ====
   if (await handleSupport(bot, query)) return;
   if (await handleIPProxy(bot, query)) return;
   if (await handleDataImpulse(bot, query)) return;
   if (await handleProxyIP(bot, query)) return;
+  if (await handleProxyGB(bot, query)) return;
 
+  // ==== ADMIN PANEL ====
+  if (await handleAdminButtons(bot, query)) return;
+
+  // ==== ACCOUNT TYPE (ONLY 9PROXY) ====
+  if (await handleProductOptions(bot, query)) return;
+
+  // ==== PAYMENT & DELIVERY ====
   if (await handlePaymentMethod(bot, query)) return;
   if (await handlePaymentDone(bot, query)) return;
   if (await handleDeliveryButton(bot, query)) return;
-  if (await handleProxyGB(bot, query)) return;
-
-
 });
 
 // ===== POLLING ERROR =====
@@ -92,7 +107,7 @@ bot.on("polling_error", (error) => {
 
 console.log("Bot running...");
 
-// ===== HTTP SERVER =====
+// ===== HTTP SERVER (KEEP ALIVE) =====
 const PORT = process.env.PORT || 10000;
 
 http
