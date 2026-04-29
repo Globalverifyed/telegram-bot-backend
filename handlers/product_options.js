@@ -1,4 +1,5 @@
 const { showPaymentMethods } = require("./payment");
+const { sendOrEdit } = require("./utils");
 
 const pendingOrders = {};
 
@@ -8,11 +9,13 @@ const accountTypes = {
   redeem_code: "Redeem Code"
 };
 
-async function showProductOptions(bot, chatId, order) {
+async function showProductOptions(bot, query, order) {
+  const chatId = query.message.chat.id;
   pendingOrders[chatId] = order;
 
-  await bot.sendMessage(
-    chatId,
+  await sendOrEdit(
+    bot,
+    query,
     `✅ Selected Product
 
 📦 Product: ${order.name}
@@ -20,22 +23,14 @@ async function showProductOptions(bot, chatId, order) {
 💰 Price: ${order.price}
 
 Select account type:`,
-    {
-      reply_markup: {
-        inline_keyboard: [
-          [
-            { text: "👴 OLD Account", callback_data: "old_account" },
-            { text: "🆕 New Account", callback_data: "new_account" }
-          ],
-          [
-            { text: "🎟 Redeem Code", callback_data: "redeem_code" }
-          ],
-          [
-            { text: "⬅ Back", callback_data: order.back }
-          ]
-        ]
-      }
-    }
+    [
+      [
+        { text: "👴 OLD Account", callback_data: "old_account" },
+        { text: "🆕 New Account", callback_data: "new_account" }
+      ],
+      [{ text: "🎟 Redeem Code", callback_data: "redeem_code" }],
+      [{ text: "⬅ Back", callback_data: order.back }]
+    ]
   );
 }
 
