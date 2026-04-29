@@ -8,8 +8,8 @@ const stockRegistry = {
 
     di_7_5: { label: "7.5 GB", stock: 0 },
 
-    di_8: { label: "8 GB", stock: 0 },
-    di_8_5: { label: "8.5 GB", stock: 0 },
+    di_8: { label: "8 GB", stock: 1 },
+    di_8_5: { label: "8.5 GB", stock: 1 },
     di_10: { label: "10 GB", stock: 0 },
     di_12_5: { label: "12.5 GB", stock: 0 },
     di_14: { label: "14 GB", stock: 1 },
