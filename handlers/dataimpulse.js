@@ -20,10 +20,11 @@ const discountPackages = {
   di_8_5: { label: "8.5 GB", price: "$5.50", best: false },
   di_10: { label: "10 GB", price: "$6.5", best: false },
   di_12_5: { label: "12.5 GB", price: "$8.00", best: false },
+  di_14: { label: "14", price: "$8.00", best: true },
   di_15: { label: "15 GB", price: "$9.5", best: false },
   di_16: { label: "16 GB", price: "$9.4", best: false },
   di_17_5: { label: "17.5 GB", price: "$11.00", best: false },
-  di_20: { label: "20 GB", price: "$12.5", best: false },
+  di_20: { label: "20 GB", price: "$12.5", best: true },
   di_25: {
     label: "25 GB",
     price: "$15.00",
