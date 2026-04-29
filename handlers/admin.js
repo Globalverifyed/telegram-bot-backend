@@ -9,14 +9,7 @@ function getPriceNumber(price) {
   return Number.isNaN(num) ? 0 : num;
 }
 
-async function handleAdmin(bot, msg) {
-  const chatId = msg.chat.id;
-
-  if (!isAdmin(msg.from.id)) {
-    await bot.sendMessage(chatId, "❌ You are not admin.");
-    return true;
-  }
-
+async function showAdminDashboard(bot, chatId) {
   await bot.sendMessage(chatId, "📊 Admin Dashboard", {
     reply_markup: {
       inline_keyboard: [
@@ -29,12 +22,25 @@ async function handleAdmin(bot, msg) {
           { text: "👥 Customers", callback_data: "admin_customers" }
         ],
         [
+          { text: "📊 Stock Dashboard", callback_data: "admin_stock" }
+        ],
+        [
           { text: "⚙ Settings", callback_data: "admin_settings" }
         ]
       ]
     }
   });
+}
 
+async function handleAdmin(bot, msg) {
+  const chatId = msg.chat.id;
+
+  if (!isAdmin(msg.from.id)) {
+    await bot.sendMessage(chatId, "❌ You are not admin.");
+    return true;
+  }
+
+  await showAdminDashboard(bot, chatId);
   return true;
 }
 
@@ -43,6 +49,11 @@ async function handleAdminButtons(bot, query) {
   const data = query.data;
 
   if (!isAdmin(query.from.id)) return false;
+
+  if (data === "admin_back") {
+    await showAdminDashboard(bot, chatId);
+    return true;
+  }
 
   if (data === "admin_pending") {
     const orders = Object.values(pendingOrders);
@@ -102,7 +113,8 @@ async function handleAdminButtons(bot, query) {
 💰 Price: ${order.price}
 
 👤 Customer: ${order.customerName || "No Name"}
-🔗 Username: ${order.username || "No Username"}`
+🔗 Username: ${order.username || "No Username"}
+🆔 ID: ${order.userId || order.customerChatId}`
       );
     }
 
@@ -167,7 +179,8 @@ async function handleAdminButtons(bot, query) {
 ✅ Admin ID: ${process.env.ADMIN_CHAT_ID}
 ✅ Bot Status: Online
 ✅ Payment: Binance + Nagad
-✅ Delivery: Manual Admin Delivery`
+✅ Delivery: Manual Admin Delivery
+✅ Stock Dashboard: Enabled`
     );
 
     return true;

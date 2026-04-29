@@ -25,8 +25,8 @@ const { handleSwiftProxy } = require("./handlers/swift_proxy");
 const { handleNiceProxy } = require("./handlers/nice_proxy");
 const { handleProductOptions } = require("./handlers/product_options");
 
-// 🔥 ADMIN PANEL
 const { handleAdmin, handleAdminButtons } = require("./handlers/admin");
+const { handleAdminStock } = require("./handlers/admin_stock");
 
 const {
   handlePaymentMethod,
@@ -83,7 +83,7 @@ bot.on("callback_query", async (query) => {
 
   console.log("CLICK:", query.data);
 
-  // ==== MAIN HANDLERS ====
+  // MAIN MENU HANDLERS
   if (await handleSupport(bot, query)) return;
   if (await handleIPProxy(bot, query)) return;
   if (await handleDataImpulse(bot, query)) return;
@@ -92,13 +92,14 @@ bot.on("callback_query", async (query) => {
   if (await handleSwiftProxy(bot, query)) return;
   if (await handleNiceProxy(bot, query)) return;
 
-  // ==== ADMIN PANEL ====
+  // ADMIN PANEL
   if (await handleAdminButtons(bot, query)) return;
+  if (await handleAdminStock(bot, query)) return;
 
-  // ==== ACCOUNT TYPE (ONLY 9PROXY) ====
+  // PRODUCT OPTIONS
   if (await handleProductOptions(bot, query)) return;
 
-  // ==== PAYMENT & DELIVERY ====
+  // PAYMENT + DELIVERY
   if (await handlePaymentMethod(bot, query)) return;
   if (await handlePaymentDone(bot, query)) return;
   if (await handleDeliveryButton(bot, query)) return;
@@ -111,7 +112,7 @@ bot.on("polling_error", (error) => {
 
 console.log("Bot running...");
 
-// ===== HTTP SERVER (KEEP ALIVE) =====
+// ===== HTTP SERVER =====
 const PORT = process.env.PORT || 10000;
 
 http
