@@ -6,7 +6,7 @@ const stockRegistry = {
     di_6: { label: "6 GB", stock: 0 },
     di_6_5: { label: "6.5 GB", stock: 0 },
 
-    di_7_5: { label: "7.5 GB", stock: 5 },
+    di_7_5: { label: "7.5 GB", stock: 0 },
 
     di_8: { label: "8 GB", stock: 0 },
     di_8_5: { label: "8.5 GB", stock: 0 },
