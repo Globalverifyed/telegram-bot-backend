@@ -22,6 +22,7 @@ const { handleDataImpulse } = require("./handlers/dataimpulse");
 const { handleProxyIP } = require("./handlers/9proxy_ip");
 const { handleProxyGB } = require("./handlers/9proxy_gb");
 const { handleSwiftProxy } = require("./handlers/swift_proxy");
+const { handleNiceProxy } = require("./handlers/nice_proxy");
 const { handleProductOptions } = require("./handlers/product_options");
 
 // 🔥 ADMIN PANEL
@@ -89,6 +90,7 @@ bot.on("callback_query", async (query) => {
   if (await handleProxyIP(bot, query)) return;
   if (await handleProxyGB(bot, query)) return;
   if (await handleSwiftProxy(bot, query)) return;
+  if (await handleNiceProxy(bot, query)) return;
 
   // ==== ADMIN PANEL ====
   if (await handleAdminButtons(bot, query)) return;
