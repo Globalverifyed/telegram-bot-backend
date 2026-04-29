@@ -1,22 +1,6 @@
 const { showProductOptions } = require("./product_options");
 const { sendOrEdit } = require("./utils");
-
-/* ===================== 9 PROXY IP STOCK ===================== */
-/*
-Admin এখানে stock count edit করবে।
-Customer stock count দেখবে না।
-Stock 0 হলে auto Stock Out হবে।
-*/
-
-const stockData = {
-  ip25: 5,
-  ip50: 5,
-  ip100: 5,
-  ip200: 5,
-  ip300: 5,
-  ip500: 5,
-  ip1000: 5
-};
+const { isAvailable, reduceStock } = require("./stock_manager");
 
 /* ===================== 9 PROXY IP PACKAGES ===================== */
 
@@ -30,31 +14,15 @@ const proxyIPPackages = {
   ip1000: { label: "1000 IP", price: "$27.99" }
 };
 
-/* ===================== HELPERS ===================== */
-
-function getStock(key) {
-  return stockData[key] || 0;
-}
-
-function isAvailable(key) {
-  return getStock(key) > 0;
-}
-
-function reduceStock(key) {
-  if (stockData[key] && stockData[key] > 0) {
-    stockData[key] -= 1;
-  }
-}
+const PRODUCT_KEY = "proxy_ip";
 
 function getButtonText(key, item) {
-  if (isAvailable(key)) {
+  if (isAvailable(PRODUCT_KEY, key)) {
     return `🌍 ${item.label} - ${item.price} ✅`;
   }
 
   return `🌍 ${item.label} ❌ Stock Out`;
 }
-
-/* ===================== HANDLER ===================== */
 
 async function handleProxyIP(bot, query) {
   const data = query.data;
@@ -81,7 +49,7 @@ async function handleProxyIP(bot, query) {
   if (proxyIPPackages[data]) {
     const pkg = proxyIPPackages[data];
 
-    if (!isAvailable(data)) {
+    if (!isAvailable(PRODUCT_KEY, data)) {
       await sendOrEdit(
         bot,
         query,
@@ -94,8 +62,7 @@ Please choose another available package.`,
       return true;
     }
 
-    // Stock কমবে customer package select করার সময়
-    reduceStock(data);
+    reduceStock(PRODUCT_KEY, data);
 
     await showProductOptions(bot, query, {
       name: "9proxy IP",
@@ -111,6 +78,5 @@ Please choose another available package.`,
 }
 
 module.exports = {
-  handleProxyIP,
-  stockData
+  handleProxyIP
 };

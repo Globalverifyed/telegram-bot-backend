@@ -1,22 +1,6 @@
 const { showPaymentMethods } = require("./payment");
 const { sendOrEdit } = require("./utils");
-
-/* ===================== SWIFT PROXY STOCK ===================== */
-/*
-Admin এখানে stock count edit করবে।
-Customer stock count দেখবে না।
-Stock 0 হলে auto Stock Out হবে।
-*/
-
-const stockData = {
-  sw1: 5,
-  sw2: 5,
-  sw3: 5,
-  sw5: 5,
-  sw10: 5,
-  sw15: 5,
-  sw20: 5
-};
+const { isAvailable, reduceStock } = require("./stock_manager");
 
 /* ===================== SWIFT PROXY PACKAGES ===================== */
 
@@ -30,31 +14,15 @@ const swiftPackages = {
   sw20: { label: "20 GB", price: "$21.00" }
 };
 
-/* ===================== HELPERS ===================== */
-
-function getStock(key) {
-  return stockData[key] || 0;
-}
-
-function isAvailable(key) {
-  return getStock(key) > 0;
-}
-
-function reduceStock(key) {
-  if (stockData[key] && stockData[key] > 0) {
-    stockData[key] -= 1;
-  }
-}
+const PRODUCT_KEY = "swift_proxy";
 
 function getButtonText(key, item) {
-  if (isAvailable(key)) {
+  if (isAvailable(PRODUCT_KEY, key)) {
     return `🚀 ${item.label} - ${item.price} ✅`;
   }
 
   return `🚀 ${item.label} ❌ Stock Out`;
 }
-
-/* ===================== HANDLER ===================== */
 
 async function handleSwiftProxy(bot, query) {
   const data = query.data;
@@ -82,7 +50,7 @@ async function handleSwiftProxy(bot, query) {
   if (swiftPackages[data]) {
     const pkg = swiftPackages[data];
 
-    if (!isAvailable(data)) {
+    if (!isAvailable(PRODUCT_KEY, data)) {
       await sendOrEdit(
         bot,
         query,
@@ -95,8 +63,7 @@ Please choose another available package.`,
       return true;
     }
 
-    // Stock কমবে customer package select করার সময়
-    reduceStock(data);
+    reduceStock(PRODUCT_KEY, data);
 
     await showPaymentMethods(bot, chatId, {
       name: "Swift Proxy",
@@ -112,6 +79,5 @@ Please choose another available package.`,
 }
 
 module.exports = {
-  handleSwiftProxy,
-  stockData
+  handleSwiftProxy
 };

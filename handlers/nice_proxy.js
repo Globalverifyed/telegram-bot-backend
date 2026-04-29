@@ -1,65 +1,33 @@
 const { showPaymentMethods } = require("./payment");
 const { sendOrEdit } = require("./utils");
-
-/* ===================== NICE PROXY STOCK ===================== */
-/*
-Admin এখানে stock control করবে
-Customer stock count দেখবে না
-*/
-
-const stockData = {
-  np1: 5,
-  np2: 5,
-  np3: 5,
-  np5: 5,
-  np10: 5,
-  np15: 5,
-  np20: 5
-};
+const { isAvailable, reduceStock } = require("./stock_manager");
 
 /* ===================== NICE PROXY PACKAGES ===================== */
 
 const nicePackages = {
-  np1: { label: "1 GB", price: "$1.00" },
-  np2: { label: "2 GB", price: "$2.00" },
-  np3: { label: "3 GB", price: "$3.00" },
-  np5: { label: "5 GB", price: "$5.00" },
-  np10: { label: "10 GB", price: "$9.50" },
-  np15: { label: "15 GB", price: "$14.00" },
-  np20: { label: "20 GB", price: "$18.00" }
+  np1: { label: "1 GB", price: "$0.80" },
+  np2: { label: "2 GB", price: "$1.60" },
+  np3: { label: "3 GB", price: "$2.40" },
+  np5: { label: "5 GB", price: "$3.99" },
+  np10: { label: "10 GB", price: "$7.99" },
+  np15: { label: "15 GB", price: "$11.99" },
+  np20: { label: "20 GB", price: "$15.99" }
 };
 
-/* ===================== HELPERS ===================== */
-
-function getStock(key) {
-  return stockData[key] || 0;
-}
-
-function isAvailable(key) {
-  return getStock(key) > 0;
-}
-
-function reduceStock(key) {
-  if (stockData[key] && stockData[key] > 0) {
-    stockData[key] -= 1;
-  }
-}
+const PRODUCT_KEY = "nice_proxy";
 
 function getButtonText(key, item) {
-  if (isAvailable(key)) {
+  if (isAvailable(PRODUCT_KEY, key)) {
     return `🔥 ${item.label} - ${item.price} ✅`;
   }
 
   return `🔥 ${item.label} ❌ Stock Out`;
 }
 
-/* ===================== HANDLER ===================== */
-
 async function handleNiceProxy(bot, query) {
   const data = query.data;
   const chatId = query.message.chat.id;
 
-  // ===== MENU =====
   if (data === "nice_proxy") {
     const entries = Object.entries(nicePackages);
     const buttons = [];
@@ -79,11 +47,10 @@ async function handleNiceProxy(bot, query) {
     return true;
   }
 
-  // ===== PACKAGE SELECT =====
   if (nicePackages[data]) {
     const pkg = nicePackages[data];
 
-    if (!isAvailable(data)) {
+    if (!isAvailable(PRODUCT_KEY, data)) {
       await sendOrEdit(
         bot,
         query,
@@ -96,8 +63,7 @@ Please choose another available package.`,
       return true;
     }
 
-    // 🔥 STOCK REDUCE
-    reduceStock(data);
+    reduceStock(PRODUCT_KEY, data);
 
     await showPaymentMethods(bot, chatId, {
       name: "Nice Proxy",
@@ -113,6 +79,5 @@ Please choose another available package.`,
 }
 
 module.exports = {
-  handleNiceProxy,
-  stockData
+  handleNiceProxy
 };

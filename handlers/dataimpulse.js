@@ -1,34 +1,6 @@
 const { showPaymentMethods } = require("./payment");
 const { sendOrEdit } = require("./utils");
-
-/* ===================== STOCK COUNT ===================== */
-/*
-Admin only এখানে stock count edit করবে।
-Customer stock count দেখবে না।
-Stock 0 হলে auto Stock Out হবে।
-*/
-
-const stockData = {
-  di_7_5: 5,
-  di_25: 3,
-  di_100: 1,
-
-  r1: 10,
-  r2: 10,
-  r3: 10,
-  r4: 10,
-  r5: 10,
-  r7_5: 10,
-  r10: 10,
-  r12: 10,
-  r12_5: 10,
-  r15: 10,
-  r25: 10,
-  r30: 10,
-  r50: 10,
-  r80: 10,
-  r100: 10
-};
+const { isAvailable, reduceStock, getStock } = require("./stock_manager");
 
 /* ===================== DISCOUNT PACKAGES ===================== */
 
@@ -108,26 +80,14 @@ const regularPackages = {
   }
 };
 
+const PRODUCT_KEY = "dataimpulse";
+
 /* ===================== HELPERS ===================== */
-
-function getStock(key) {
-  return stockData[key] || 0;
-}
-
-function isAvailable(key) {
-  return getStock(key) > 0;
-}
-
-function reduceStock(key) {
-  if (stockData[key] && stockData[key] > 0) {
-    stockData[key] -= 1;
-  }
-}
 
 function sortPackages(packages) {
   return Object.entries(packages).sort((a, b) => {
-    if (isAvailable(a[0]) && !isAvailable(b[0])) return -1;
-    if (!isAvailable(a[0]) && isAvailable(b[0])) return 1;
+    if (isAvailable(PRODUCT_KEY, a[0]) && !isAvailable(PRODUCT_KEY, b[0])) return -1;
+    if (!isAvailable(PRODUCT_KEY, a[0]) && isAvailable(PRODUCT_KEY, b[0])) return 1;
 
     if (a[1].recommended && !b[1].recommended) return -1;
     if (!a[1].recommended && b[1].recommended) return 1;
@@ -147,10 +107,10 @@ function getButtonText(key, item) {
 
   text += item.label;
 
-  if (isAvailable(key)) {
+  if (isAvailable(PRODUCT_KEY, key)) {
     text += ` - ${item.price} ✅`;
 
-    if (item.lowStock || getStock(key) <= 2) text += " 🟢 Low Stock";
+    if (item.lowStock || getStock(PRODUCT_KEY, key) <= 2) text += " 🟢 Low Stock";
     if (item.highlight) text += ` | ${item.highlight}`;
   } else {
     text += " ❌ Stock Out";
@@ -161,7 +121,7 @@ function getButtonText(key, item) {
 
 function getRecommendedText(packages, typeName) {
   const recommended = Object.entries(packages).filter(
-    ([key, item]) => isAvailable(key) && item.recommended
+    ([key, item]) => isAvailable(PRODUCT_KEY, key) && item.recommended
   );
 
   if (recommended.length === 0) return "";
@@ -233,7 +193,7 @@ async function handleDataImpulse(bot, query) {
   if (allPackages[data]) {
     const pkg = allPackages[data];
 
-    if (!isAvailable(data)) {
+    if (!isAvailable(PRODUCT_KEY, data)) {
       await sendOrEdit(
         bot,
         query,
@@ -246,8 +206,7 @@ Please choose another available package.`,
       return true;
     }
 
-    // Stock কমবে customer package select করার সময়
-    reduceStock(data);
+    reduceStock(PRODUCT_KEY, data);
 
     await showPaymentMethods(bot, chatId, {
       name: "DataImpulse",
@@ -264,6 +223,5 @@ Please choose another available package.`,
 }
 
 module.exports = {
-  handleDataImpulse,
-  stockData
+  handleDataImpulse
 };

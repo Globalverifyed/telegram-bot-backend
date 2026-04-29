@@ -1,22 +1,6 @@
 const { showProductOptions } = require("./product_options");
 const { sendOrEdit } = require("./utils");
-
-/* ===================== 9 PROXY GB STOCK ===================== */
-/*
-Admin এখানে stock count edit করবে।
-Customer stock count দেখবে না।
-Stock 0 হলে auto Stock Out হবে।
-*/
-
-const stockData = {
-  gb1: 5,
-  gb2: 5,
-  gb3: 5,
-  gb5: 5,
-  gb10: 5,
-  gb15: 5,
-  gb20: 5
-};
+const { isAvailable, reduceStock } = require("./stock_manager");
 
 /* ===================== 9 PROXY GB PACKAGES ===================== */
 
@@ -30,31 +14,15 @@ const proxyGBPackages = {
   gb20: { label: "20 GB", price: "$15.99" }
 };
 
-/* ===================== HELPERS ===================== */
-
-function getStock(key) {
-  return stockData[key] || 0;
-}
-
-function isAvailable(key) {
-  return getStock(key) > 0;
-}
-
-function reduceStock(key) {
-  if (stockData[key] && stockData[key] > 0) {
-    stockData[key] -= 1;
-  }
-}
+const PRODUCT_KEY = "proxy_gb";
 
 function getButtonText(key, item) {
-  if (isAvailable(key)) {
+  if (isAvailable(PRODUCT_KEY, key)) {
     return `📦 ${item.label} - ${item.price} ✅`;
   }
 
   return `📦 ${item.label} ❌ Stock Out`;
 }
-
-/* ===================== HANDLER ===================== */
 
 async function handleProxyGB(bot, query) {
   const data = query.data;
@@ -81,7 +49,7 @@ async function handleProxyGB(bot, query) {
   if (proxyGBPackages[data]) {
     const pkg = proxyGBPackages[data];
 
-    if (!isAvailable(data)) {
+    if (!isAvailable(PRODUCT_KEY, data)) {
       await sendOrEdit(
         bot,
         query,
@@ -94,8 +62,7 @@ Please choose another available package.`,
       return true;
     }
 
-    // Stock কমবে customer package select করার সময়
-    reduceStock(data);
+    reduceStock(PRODUCT_KEY, data);
 
     await showProductOptions(bot, query, {
       name: "9proxy GB",
@@ -111,6 +78,5 @@ Please choose another available package.`,
 }
 
 module.exports = {
-  handleProxyGB,
-  stockData
+  handleProxyGB
 };
