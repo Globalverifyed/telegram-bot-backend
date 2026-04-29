@@ -24,6 +24,25 @@ const stockRegistry = {
     di_50: { label: "50 GB", stock: 0 },
     di_100: { label: "100 GB", stock: 0 }
   }
+  r1: { label: "1 GB", stock: 5 },
+r2: { label: "2 GB", stock: 5 },
+r3: { label: "3 GB", stock: 5 },
+r4: { label: "4 GB", stock: 5 },
+r5: { label: "5 GB", stock: 5 },
+
+r7_5: { label: "7.5 GB", stock: 5 },
+
+r10: { label: "10 GB", stock: 5 },
+r12: { label: "12 GB", stock: 5 },
+r12_5: { label: "12.5 GB", stock: 5 },
+r15: { label: "15 GB", stock: 5 },
+
+r25: { label: "25 GB", stock: 5 },
+
+r30: { label: "30 GB", stock: 5 },
+r50: { label: "50 GB", stock: 5 },
+r80: { label: "80 GB", stock: 5 },
+r100: { label: "100 GB", stock: 5 },
 },
 
   proxy_ip: {
