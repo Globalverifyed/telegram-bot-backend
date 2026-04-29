@@ -1,49 +1,44 @@
 const stockRegistry = {
   dataimpulse: {
-  title: "⚡ DataImpulse",
-  items: {
-    di_5: { label: "5 GB", stock: 0 },
-    di_6: { label: "6 GB", stock: 0 },
-    di_6_5: { label: "6.5 GB", stock: 0 },
+    title: "⚡ DataImpulse",
+    items: {
+      // Discount packages
+      di_5: { label: "5 GB", stock: 0 },
+      di_6: { label: "6 GB", stock: 0 },
+      di_6_5: { label: "6.5 GB", stock: 0 },
+      di_7_5: { label: "7.5 GB", stock: 5 },
+      di_8: { label: "8 GB", stock: 0 },
+      di_8_5: { label: "8.5 GB", stock: 0 },
+      di_10: { label: "10 GB", stock: 0 },
+      di_12_5: { label: "12.5 GB", stock: 0 },
+      di_14: { label: "14 GB", stock: 0 },
+      di_15: { label: "15 GB", stock: 0 },
+      di_16: { label: "16 GB", stock: 0 },
+      di_17_5: { label: "17.5 GB", stock: 0 },
+      di_20: { label: "20 GB", stock: 0 },
+      di_25: { label: "25 GB", stock: 3 },
+      di_30: { label: "30 GB", stock: 0 },
+      di_50: { label: "50 GB", stock: 0 },
+      di_100: { label: "100 GB", stock: 1 },
 
-    di_7_5: { label: "7.5 GB", stock: 0 },
-
-    di_8: { label: "8 GB", stock: 1 },
-    di_8_5: { label: "8.5 GB", stock: 1 },
-    di_10: { label: "10 GB", stock: 0 },
-    di_12_5: { label: "12.5 GB", stock: 0 },
-    di_14: { label: "14 GB", stock: 1 },
-    di_15: { label: "15 GB", stock: 0 },
-    di_16: { label: "16 GB", stock: 0 },
-    di_17_5: { label: "17.5 GB", stock: 0 },
-    di_20: { label: "20 GB", stock: 4 },
-
-    di_25: { label: "25 GB", stock: 0 },
-
-    di_30: { label: "30 GB", stock: 0 },
-    di_50: { label: "50 GB", stock: 0 },
-    di_100: { label: "100 GB", stock: 0 }
-  }
-  r1: { label: "1 GB", stock: 5 },
-r2: { label: "2 GB", stock: 5 },
-r3: { label: "3 GB", stock: 5 },
-r4: { label: "4 GB", stock: 5 },
-r5: { label: "5 GB", stock: 5 },
-
-r7_5: { label: "7.5 GB", stock: 5 },
-
-r10: { label: "10 GB", stock: 5 },
-r12: { label: "12 GB", stock: 5 },
-r12_5: { label: "12.5 GB", stock: 5 },
-r15: { label: "15 GB", stock: 5 },
-
-r25: { label: "25 GB", stock: 5 },
-
-r30: { label: "30 GB", stock: 5 },
-r50: { label: "50 GB", stock: 5 },
-r80: { label: "80 GB", stock: 5 },
-r100: { label: "100 GB", stock: 5 },
-},
+      // Regular packages
+      r1: { label: "1 GB", stock: 5 },
+      r2: { label: "2 GB", stock: 5 },
+      r3: { label: "3 GB", stock: 5 },
+      r4: { label: "4 GB", stock: 5 },
+      r5: { label: "5 GB", stock: 5 },
+      r7_5: { label: "7.5 GB", stock: 5 },
+      r10: { label: "10 GB", stock: 5 },
+      r12: { label: "12 GB", stock: 5 },
+      r12_5: { label: "12.5 GB", stock: 5 },
+      r15: { label: "15 GB", stock: 5 },
+      r25: { label: "25 GB", stock: 5 },
+      r30: { label: "30 GB", stock: 5 },
+      r50: { label: "50 GB", stock: 5 },
+      r80: { label: "80 GB", stock: 5 },
+      r100: { label: "100 GB", stock: 5 }
+    }
+  },
 
   proxy_ip: {
     title: "🌍 9proxy IP",
