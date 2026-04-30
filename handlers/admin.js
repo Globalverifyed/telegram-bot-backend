@@ -1,8 +1,5 @@
 const { pendingOrders = {}, deliveredOrders = {} } = require("./payment");
-
-function isAdmin(userId) {
-  return String(userId) === String(process.env.ADMIN_CHAT_ID);
-}
+const { isAdmin } = require("./admin_access");
 
 function getPriceNumber(price) {
   const num = parseFloat(String(price).replace(/[^0-9.]/g, ""));
@@ -176,8 +173,8 @@ async function handleAdminButtons(bot, query) {
       chatId,
       `⚙ Settings
 
-✅ Admin ID: ${process.env.ADMIN_CHAT_ID}
 ✅ Bot Status: Online
+✅ Multi Admin: Enabled
 ✅ Payment: Binance + Nagad
 ✅ Delivery: Manual Admin Delivery
 ✅ Stock Dashboard: Enabled`
