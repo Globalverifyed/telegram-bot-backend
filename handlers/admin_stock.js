@@ -1,170 +1,183 @@
-const { stockRegistry, addStock, removeStock } = require("./stock_manager");
+const { pendingOrders = {}, deliveredOrders = {} } = require("./payment");
+const { isAdmin } = require("./admin_access");
 
-function isAdmin(userId) {
-  return String(userId) === String(process.env.ADMIN_CHAT_ID);
+function getPriceNumber(price) {
+  const num = parseFloat(String(price).replace(/[^0-9.]/g, ""));
+  return Number.isNaN(num) ? 0 : num;
 }
 
-function buildTwoColumnButtons(items, productKey) {
-  const entries = Object.entries(items);
-  const rows = [];
+async function showAdminDashboard(bot, chatId) {
+  await bot.sendMessage(chatId, "📊 Admin Dashboard", {
+    reply_markup: {
+      inline_keyboard: [
+        [
+          { text: "📦 Pending Orders", callback_data: "admin_pending" },
+          { text: "✅ Delivered Orders", callback_data: "admin_delivered" }
+        ],
+        [
+          { text: "💰 Today Sales", callback_data: "admin_sales" },
+          { text: "👥 Customers", callback_data: "admin_customers" }
+        ],
+        [
+          { text: "📊 Stock Dashboard", callback_data: "admin_stock" }
+        ],
+        [
+          { text: "⚙ Settings", callback_data: "admin_settings" }
+        ]
+      ]
+    }
+  });
+}
 
-  for (let i = 0; i < entries.length; i += 2) {
-    const row = entries.slice(i, i + 2).map(([key, item]) => ({
-      text: `${item.label} (${item.stock})`,
-      callback_data: `stock_view_${productKey}_${key}`
-    }));
-    rows.push(row);
+async function handleAdmin(bot, msg) {
+  const chatId = msg.chat.id;
+
+  if (!isAdmin(msg.from.id)) {
+    await bot.sendMessage(chatId, "❌ You are not admin.");
+    return true;
   }
 
-  return rows;
+  await showAdminDashboard(bot, chatId);
+  return true;
 }
 
-async function handleAdminStock(bot, query) {
+async function handleAdminButtons(bot, query) {
   const chatId = query.message.chat.id;
   const data = query.data;
 
   if (!isAdmin(query.from.id)) return false;
 
-  // ===== MAIN DASHBOARD =====
-  if (data === "admin_stock") {
-    const buttons = Object.entries(stockRegistry).map(([key, product]) => [
-      { text: product.title, callback_data: `stock_product_${key}` }
-    ]);
+  if (data === "admin_back") {
+    await showAdminDashboard(bot, chatId);
+    return true;
+  }
 
-    await bot.sendMessage(chatId, "📊 Stock Dashboard", {
-      reply_markup: { inline_keyboard: buttons }
-    });
+  if (data === "admin_pending") {
+    const orders = Object.values(pendingOrders);
+
+    if (orders.length === 0) {
+      await bot.sendMessage(chatId, "📭 No pending orders.");
+      return true;
+    }
+
+    for (const order of orders) {
+      await bot.sendMessage(
+        chatId,
+        `📦 Pending Order
+
+🛒 Product: ${order.name}
+📊 Package: ${order.package}
+🧾 Type: ${order.accountType || "N/A"}
+💰 Price: ${order.price}
+
+👤 Customer: ${order.customerName || "No Name"}
+🔗 Username: ${order.username || "No Username"}
+🆔 ID: ${order.userId || order.customerChatId}`,
+        {
+          reply_markup: {
+            inline_keyboard: [
+              [
+                {
+                  text: "🚚 Deliver This Order",
+                  callback_data: `delivery_${order.customerChatId}`
+                }
+              ]
+            ]
+          }
+        }
+      );
+    }
 
     return true;
   }
 
-  // ===== PRODUCT VIEW =====
-  if (data.startsWith("stock_product_")) {
-    const productKey = data.replace("stock_product_", "");
-    const product = stockRegistry[productKey];
+  if (data === "admin_delivered") {
+    const orders = Object.values(deliveredOrders);
 
-    if (!product) return true;
-
-    // 🔥 Discount & Regular আলাদা করা
-    const discountItems = {};
-    const regularItems = {};
-
-    for (const [key, item] of Object.entries(product.items)) {
-      if (key.startsWith("di_")) {
-        discountItems[key] = item;
-      } else if (key.startsWith("r")) {
-        regularItems[key] = item;
-      } else {
-        discountItems[key] = item; // fallback
-      }
+    if (orders.length === 0) {
+      await bot.sendMessage(chatId, "📭 No delivered orders yet.");
+      return true;
     }
 
-    const buttons = [];
+    for (const order of orders) {
+      await bot.sendMessage(
+        chatId,
+        `✅ Delivered Order
 
-    // ===== DISCOUNT TITLE =====
-    if (Object.keys(discountItems).length > 0) {
-      buttons.push([
-        { text: "🔥 Discount Stock", callback_data: "no_action" }
-      ]);
+🛒 Product: ${order.name}
+📊 Package: ${order.package}
+🧾 Type: ${order.accountType || "N/A"}
+💰 Price: ${order.price}
 
-      buttons.push(...buildTwoColumnButtons(discountItems, productKey));
+👤 Customer: ${order.customerName || "No Name"}
+🔗 Username: ${order.username || "No Username"}
+🆔 ID: ${order.userId || order.customerChatId}`
+      );
     }
-
-    // ===== REGULAR TITLE =====
-    if (Object.keys(regularItems).length > 0) {
-      buttons.push([
-        { text: "💰 Regular Stock", callback_data: "no_action" }
-      ]);
-
-      buttons.push(...buildTwoColumnButtons(regularItems, productKey));
-    }
-
-    // ===== BACK BUTTON =====
-    buttons.push([{ text: "⬅ Back", callback_data: "admin_stock" }]);
-
-    await bot.sendMessage(chatId, `📦 ${product.title}`, {
-      reply_markup: { inline_keyboard: buttons }
-    });
 
     return true;
   }
 
-  // ===== VIEW ITEM =====
-  if (data.startsWith("stock_view_")) {
-    const parts = data.replace("stock_view_", "").split("_");
-    const itemKey = parts.pop();
-    const productKey = parts.join("_");
-
-    const item = stockRegistry[productKey]?.items[itemKey];
-    if (!item) return true;
+  if (data === "admin_sales") {
+    const delivered = Object.values(deliveredOrders);
+    const total = delivered.reduce((sum, order) => {
+      return sum + getPriceNumber(order.price);
+    }, 0);
 
     await bot.sendMessage(
       chatId,
-      `📦 ${item.label}\n📊 Stock: ${item.stock}`,
-      {
-        reply_markup: {
-          inline_keyboard: [
-            [
-              {
-                text: "➕ Add",
-                callback_data: `stock_add_${productKey}_${itemKey}`
-              },
-              {
-                text: "➖ Remove",
-                callback_data: `stock_remove_${productKey}_${itemKey}`
-              }
-            ],
-            [
-              {
-                text: "⬅ Back",
-                callback_data: `stock_product_${productKey}`
-              }
-            ]
-          ]
-        }
-      }
+      `💰 Today Sales
+
+✅ Delivered Orders: ${delivered.length}
+💵 Total Sales: $${total.toFixed(2)}`
     );
 
     return true;
   }
 
-  // ===== ADD / REMOVE =====
-  if (data.startsWith("stock_add_") || data.startsWith("stock_remove_")) {
-    const isAdd = data.startsWith("stock_add_");
-    const raw = data.replace(isAdd ? "stock_add_" : "stock_remove_", "");
-    const parts = raw.split("_");
-    const itemKey = parts.pop();
-    const productKey = parts.join("_");
+  if (data === "admin_customers") {
+    const allOrders = [
+      ...Object.values(pendingOrders),
+      ...Object.values(deliveredOrders)
+    ];
 
-    if (isAdd) {
-      addStock(productKey, itemKey);
-    } else {
-      removeStock(productKey, itemKey);
+    if (allOrders.length === 0) {
+      await bot.sendMessage(chatId, "👥 No customers yet.");
+      return true;
     }
 
-    const item = stockRegistry[productKey]?.items[itemKey];
+    const customers = {};
 
+    allOrders.forEach((order) => {
+      const id = order.userId || order.customerChatId;
+      customers[id] = {
+        name: order.customerName || "No Name",
+        username: order.username || "No Username",
+        id
+      };
+    });
+
+    const text = Object.values(customers)
+      .map(
+        (c, index) =>
+          `${index + 1}. 👤 ${c.name}\n🔗 ${c.username}\n🆔 ${c.id}`
+      )
+      .join("\n\n");
+
+    await bot.sendMessage(chatId, `👥 Customers List\n\n${text}`);
+    return true;
+  }
+
+  if (data === "admin_settings") {
     await bot.sendMessage(
       chatId,
-      `✅ Updated\n📦 ${item.label}\n📊 New Stock: ${item.stock}`,
-      {
-        reply_markup: {
-          inline_keyboard: [
-            [
-              {
-                text: "🔄 Refresh",
-                callback_data: `stock_view_${productKey}_${itemKey}`
-              }
-            ],
-            [
-              {
-                text: "⬅ Back",
-                callback_data: `stock_product_${productKey}`
-              }
-            ]
-          ]
-        }
-      }
+      `⚙ Settings
+
+✅ Bot Status: Online
+✅ Multi Admin: Enabled
+✅ Payment: Binance + Nagad
+✅ Delivery: Manual Admin Delivery
+✅ Stock Dashboard: Enabled`
     );
 
     return true;
@@ -173,4 +186,7 @@ async function handleAdminStock(bot, query) {
   return false;
 }
 
-module.exports = { handleAdminStock };
+module.exports = {
+  handleAdmin,
+  handleAdminButtons
+};
