@@ -92,9 +92,11 @@ bot.on("callback_query", async (query) => {
   if (await handleSwiftProxy(bot, query)) return;
   if (await handleNiceProxy(bot, query)) return;
 
-  // ADMIN PANEL
-  if (await handleAdminButtons(bot, query)) return;
+  // ADMIN STOCK FIRST
   if (await handleAdminStock(bot, query)) return;
+
+  // ADMIN PANEL BUTTONS
+  if (await handleAdminButtons(bot, query)) return;
 
   // PRODUCT OPTIONS
   if (await handleProductOptions(bot, query)) return;
