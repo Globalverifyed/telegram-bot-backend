@@ -40,17 +40,35 @@ const stockRegistry = {
   },
 
   proxy_ip: {
-    title: "🌍 9proxy IP",
-    items: {
-      ip25: { label: "25 IP", stock: 5 },
-      ip50: { label: "50 IP", stock: 5 },
-      ip100: { label: "100 IP", stock: 5 },
-      ip200: { label: "200 IP", stock: 5 },
-      ip300: { label: "300 IP", stock: 5 },
-      ip500: { label: "500 IP", stock: 5 },
-      ip1000: { label: "1000 IP", stock: 5 }
-    }
-  },
+  title: "🌍 9proxy IP",
+  items: {
+    ip_d_25: { label: "25 IP (Discount)", stock: 5 },
+    ip_d_50: { label: "50 IP (Discount)", stock: 5 },
+    ip_d_100: { label: "100 IP (Discount)", stock: 5 },
+    ip_d_200: { label: "200 IP (Discount)", stock: 5 },
+    ip_d_300: { label: "300 IP (Discount)", stock: 5 },
+    ip_d_400: { label: "400 IP (Discount)", stock: 5 },
+    ip_d_500: { label: "500 IP (Discount)", stock: 5 },
+    ip_d_1000: { label: "1000 IP (Discount)", stock: 5 },
+    ip_d_2000: { label: "2000 IP (Discount)", stock: 5 },
+    ip_d_3000: { label: "3000 IP (Discount)", stock: 5 },
+    ip_d_4000: { label: "4000 IP (Discount)", stock: 5 },
+    ip_d_5000: { label: "5000 IP (Discount)", stock: 5 },
+
+    ip_r_25: { label: "25 IP (Regular)", stock: 5 },
+    ip_r_50: { label: "50 IP (Regular)", stock: 5 },
+    ip_r_100: { label: "100 IP (Regular)", stock: 5 },
+    ip_r_200: { label: "200 IP (Regular)", stock: 5 },
+    ip_r_300: { label: "300 IP (Regular)", stock: 5 },
+    ip_r_400: { label: "400 IP (Regular)", stock: 5 },
+    ip_r_500: { label: "500 IP (Regular)", stock: 5 },
+    ip_r_1000: { label: "1000 IP (Regular)", stock: 5 },
+    ip_r_2000: { label: "2000 IP (Regular)", stock: 5 },
+    ip_r_3000: { label: "3000 IP (Regular)", stock: 5 },
+    ip_r_4000: { label: "4000 IP (Regular)", stock: 5 },
+    ip_r_5000: { label: "5000 IP (Regular)", stock: 5 }
+  }
+},
 
   proxy_gb: {
     title: "📦 9proxy GB",
