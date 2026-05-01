@@ -71,17 +71,25 @@ const stockRegistry = {
 },
 
   proxy_gb: {
-    title: "📦 9proxy GB",
-    items: {
-      gb1: { label: "1 GB", stock: 5 },
-      gb2: { label: "2 GB", stock: 5 },
-      gb3: { label: "3 GB", stock: 5 },
-      gb5: { label: "5 GB", stock: 5 },
-      gb10: { label: "10 GB", stock: 5 },
-      gb15: { label: "15 GB", stock: 5 },
-      gb20: { label: "20 GB", stock: 5 }
-    }
-  },
+  title: "📦 9proxy GB",
+  items: {
+    gb_d_1: { label: "1GB (Discount)", stock: 5 },
+    gb_d_2: { label: "2GB (Discount)", stock: 5 },
+    gb_d_3: { label: "3GB (Discount)", stock: 5 },
+    gb_d_5: { label: "5GB (Discount)", stock: 5 },
+    gb_d_10: { label: "10GB (Discount)", stock: 5 },
+    gb_d_15: { label: "15GB (Discount)", stock: 5 },
+    gb_d_20: { label: "20GB (Discount)", stock: 5 },
+
+    gb_r_1: { label: "1GB (Regular)", stock: 5 },
+    gb_r_2: { label: "2GB (Regular)", stock: 5 },
+    gb_r_3: { label: "3GB (Regular)", stock: 5 },
+    gb_r_5: { label: "5GB (Regular)", stock: 5 },
+    gb_r_10: { label: "10GB (Regular)", stock: 5 },
+    gb_r_15: { label: "15GB (Regular)", stock: 5 },
+    gb_r_20: { label: "20GB (Regular)", stock: 5 }
+  }
+},
 
   swift_proxy: {
     title: "🚀 Swift Proxy",
