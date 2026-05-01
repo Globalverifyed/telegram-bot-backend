@@ -158,10 +158,7 @@ async function handleAdminButtons(bot, query) {
     });
 
     const text = Object.values(customers)
-      .map(
-        (c, index) =>
-          `${index + 1}. 👤 ${c.name}\n🔗 ${c.username}\n🆔 ${c.id}`
-      )
+      .map((c, index) => `${index + 1}. 👤 ${c.name}\n🔗 ${c.username}\n🆔 ${c.id}`)
       .join("\n\n");
 
     await bot.sendMessage(chatId, `👥 Customers List\n\n${text}`);
