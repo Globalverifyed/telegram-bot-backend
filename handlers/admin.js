@@ -1,4 +1,28 @@
-const { pendingOrders = {}, deliveredOrders = {} } = require("./payment");
+[11:40 pm, 01/05/2026] Promoter Mahadi: require("dotenv").config();
+
+console.log("STARTING BOT...");
+
+// ===== ERROR HANDLING =====
+process.on("uncaughtException", (err) => {
+  console.log("UNCAUGHT ERROR:", err);
+});
+
+process.on("unhandledRejection", (err) => {
+  console.log("UNHANDLED ERROR:", err);
+});
+
+const TelegramBot = require("node-telegram-bot-api");
+const http = require("http");
+
+// ===== IMPORT HANDLERS =====
+const { showMainMenu } = require("./handlers/menu");
+const { handleSupport } = require("./handlers/support");
+const { handleIPProxy } = require("./handlers/ip_proxy");
+const { handleDataImpulse } = require("./handlers/dataimpulse");
+const { handleProxyIP } = require("./handlers/9proxy_ip");
+const { handleProxyGB } = require("./handlers/9proxy_gb");
+const { handleSwiftProxy } = requ…
+[11:43 pm, 01/05/2026] Promoter Mahadi: const { pendingOrders = {}, deliveredOrders = {} } = require("./payment");
 const { isAdmin } = require("./admin_access");
 
 function getPriceNumber(price) {
@@ -22,7 +46,7 @@ async function showAdminDashboard(bot, chatId) {
           { text: "📊 Stock Dashboard", callback_data: "admin_stock" }
         ],
         [
-          { text: "⚙ Settings", callback_data: "admin_settings" }
+          { text: "⚙️ Settings", callback_data: "admin_settings" }
         ]
       ]
     }
@@ -79,7 +103,7 @@ async function handleAdminButtons(bot, query) {
               [
                 {
                   text: "🚚 Deliver This Order",
-                  callback_data: `delivery_${order.customerChatId}`
+                  callback_data: delivery_${order.customerChatId}
                 }
               ]
             ]
@@ -160,18 +184,18 @@ async function handleAdminButtons(bot, query) {
     const text = Object.values(customers)
       .map(
         (c, index) =>
-          `${index + 1}. 👤 ${c.name}\n🔗 ${c.username}\n🆔 ${c.id}`
+          ${index + 1}. 👤 ${c.name}\n🔗 ${c.username}\n🆔 ${c.id}
       )
       .join("\n\n");
 
-    await bot.sendMessage(chatId, `👥 Customers List\n\n${text}`);
+    await bot.sendMessage(chatId, 👥 Customers List\n\n${text});
     return true;
   }
 
   if (data === "admin_settings") {
     await bot.sendMessage(
       chatId,
-      `⚙ Settings
+      `⚙️ Settings
 
 ✅ Bot Status: Online
 ✅ Multi Admin: Enabled
@@ -189,4 +213,4 @@ async function handleAdminButtons(bot, query) {
 module.exports = {
   handleAdmin,
   handleAdminButtons
-};
+);
