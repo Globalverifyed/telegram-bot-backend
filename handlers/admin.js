@@ -22,7 +22,7 @@ async function showAdminDashboard(bot, chatId) {
           { text: "📊 Stock Dashboard", callback_data: "admin_stock" }
         ],
         [
-          { text: "⚙️ Settings", callback_data: "admin_settings" }
+          { text: "⚙ Settings", callback_data: "admin_settings" }
         ]
       ]
     }
@@ -79,7 +79,7 @@ async function handleAdminButtons(bot, query) {
               [
                 {
                   text: "🚚 Deliver This Order",
-                  callback_data: delivery_${order.customerChatId}
+                  callback_data: `delivery_${order.customerChatId}`
                 }
               ]
             ]
@@ -160,18 +160,18 @@ async function handleAdminButtons(bot, query) {
     const text = Object.values(customers)
       .map(
         (c, index) =>
-          ${index + 1}. 👤 ${c.name}\n🔗 ${c.username}\n🆔 ${c.id}
+          `${index + 1}. 👤 ${c.name}\n🔗 ${c.username}\n🆔 ${c.id}`
       )
       .join("\n\n");
 
-    await bot.sendMessage(chatId, 👥 Customers List\n\n${text});
+    await bot.sendMessage(chatId, `👥 Customers List\n\n${text}`);
     return true;
   }
 
   if (data === "admin_settings") {
     await bot.sendMessage(
       chatId,
-      `⚙️ Settings
+      `⚙ Settings
 
 ✅ Bot Status: Online
 ✅ Multi Admin: Enabled
@@ -189,4 +189,4 @@ async function handleAdminButtons(bot, query) {
 module.exports = {
   handleAdmin,
   handleAdminButtons
- }; 
+};
