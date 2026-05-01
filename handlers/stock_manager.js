@@ -96,17 +96,36 @@ const stockRegistry = {
   },
 
   swift_proxy: {
-    title: "🚀 Swift Proxy",
-    items: {
-      sw1: { label: "1 GB", stock: 5 },
-      sw2: { label: "2 GB", stock: 5 },
-      sw3: { label: "3 GB", stock: 5 },
-      sw5: { label: "5 GB", stock: 5 },
-      sw10: { label: "10 GB", stock: 5 },
-      sw15: { label: "15 GB", stock: 5 },
-      sw20: { label: "20 GB", stock: 5 }
-    }
-  },
+  title: "🚀 Swift Proxy",
+  items: {
+    // Discount
+    sw_d_1: { label: "1GB (Discount)", stock: 5 },
+    sw_d_2: { label: "2GB (Discount)", stock: 5 },
+    sw_d_3: { label: "3GB (Discount)", stock: 5 },
+    sw_d_5: { label: "5GB (Discount)", stock: 5 },
+    sw_d_10: { label: "10GB (Discount)", stock: 5 },
+    sw_d_15: { label: "15GB (Discount)", stock: 5 },
+    sw_d_20: { label: "20GB (Discount)", stock: 5 },
+    sw_d_25: { label: "25GB (Discount)", stock: 5 },
+    sw_d_30: { label: "30GB (Discount)", stock: 5 },
+    sw_d_35: { label: "35GB (Discount)", stock: 5 },
+    sw_d_50: { label: "50GB (Discount)", stock: 5 },
+    sw_d_100: { label: "100GB (Discount)", stock: 5 },
+
+    // Regular
+    sw_r_1: { label: "1GB (Regular)", stock: 5 },
+    sw_r_2: { label: "2GB (Regular)", stock: 5 },
+    sw_r_5: { label: "5GB (Regular)", stock: 5 },
+    sw_r_10: { label: "10GB (Regular)", stock: 5 },
+    sw_r_15: { label: "15GB (Regular)", stock: 5 },
+    sw_r_20: { label: "20GB (Regular)", stock: 5 },
+    sw_r_25: { label: "25GB (Regular)", stock: 5 },
+    sw_r_30: { label: "30GB (Regular)", stock: 5 },
+    sw_r_35: { label: "35GB (Regular)", stock: 5 },
+    sw_r_50: { label: "50GB (Regular)", stock: 5 },
+    sw_r_100: { label: "100GB (Regular)", stock: 5 }
+  }
+},
 
   nice_proxy: {
     title: "🔥 Nice Proxy",
