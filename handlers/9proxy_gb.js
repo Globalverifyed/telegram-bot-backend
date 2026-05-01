@@ -2,65 +2,89 @@ const { showProductOptions } = require("./product_options");
 const { sendOrEdit } = require("./utils");
 const { isAvailable, reduceStock } = require("./stock_manager");
 
-/* ===================== 9 PROXY GB PACKAGES ===================== */
-
-const proxyGBPackages = {
-  gb1: { label: "1 GB", price: "$0.80" },
-  gb2: { label: "2 GB", price: "$1.60" },
-  gb3: { label: "3 GB", price: "$2.40" },
-  gb5: { label: "5 GB", price: "$3.99" },
-  gb10: { label: "10 GB", price: "$7.99" },
-  gb15: { label: "15 GB", price: "$11.99" },
-  gb20: { label: "20 GB", price: "$15.99" }
-};
-
 const PRODUCT_KEY = "proxy_gb";
 
-function getButtonText(key, item) {
-  if (isAvailable(PRODUCT_KEY, key)) {
-    return `📦 ${item.label} - ${item.price} ✅`;
+/* ===== DISCOUNT ===== */
+const discountPackages = {
+  gb_d_1: { label: "1GB", price: "$1.00" },
+  gb_d_2: { label: "2GB", price: "$2.00" },
+  gb_d_3: { label: "3GB", price: "$3.00" },
+  gb_d_5: { label: "5GB", price: "$5.00" },
+  gb_d_10: { label: "10GB", price: "$10.00" },
+  gb_d_15: { label: "15GB", price: "$15.00" },
+  gb_d_20: { label: "20GB", price: "$20.00" }
+};
+
+/* ===== REGULAR ===== */
+const regularPackages = {
+  gb_r_1: { label: "1GB", price: "$1.25" },
+  gb_r_2: { label: "2GB", price: "$2.50" },
+  gb_r_3: { label: "3GB", price: "$3.75" },
+  gb_r_5: { label: "5GB", price: "$6.00" },
+  gb_r_10: { label: "10GB", price: "$12.00" },
+  gb_r_15: { label: "15GB", price: "$18.00" },
+  gb_r_20: { label: "20GB", price: "$24.00" }
+};
+
+function buildButtons(packages) {
+  const entries = Object.entries(packages);
+  const rows = [];
+
+  for (let i = 0; i < entries.length; i += 2) {
+    rows.push(
+      entries.slice(i, i + 2).map(([key, item]) => ({
+        text: isAvailable(PRODUCT_KEY, key)
+          ? `${item.label} - ${item.price} ✅`
+          : `${item.label} ❌`,
+        callback_data: key
+      }))
+    );
   }
 
-  return `📦 ${item.label} ❌ Stock Out`;
+  return rows;
 }
 
 async function handleProxyGB(bot, query) {
   const data = query.data;
 
   if (data === "order_9proxy_gb") {
-    const entries = Object.entries(proxyGBPackages);
-    const buttons = [];
-
-    for (let i = 0; i < entries.length; i += 2) {
-      buttons.push(
-        entries.slice(i, i + 2).map(([key, item]) => ({
-          text: getButtonText(key, item),
-          callback_data: key
-        }))
-      );
-    }
-
-    buttons.push([{ text: "⬅ Back", callback_data: "ip_proxy" }]);
-
-    await sendOrEdit(bot, query, "📦 Select 9proxy GB Package:", buttons);
+    await sendOrEdit(bot, query, "📦 Select 9proxy GB Type:", [
+      [
+        { text: "🔥 Discount Price", callback_data: "gb_discount" },
+        { text: "💰 Regular Price", callback_data: "gb_regular" }
+      ],
+      [{ text: "⬅ Back", callback_data: "ip_proxy" }]
+    ]);
     return true;
   }
 
-  if (proxyGBPackages[data]) {
-    const pkg = proxyGBPackages[data];
+  if (data === "gb_discount") {
+    const buttons = buildButtons(discountPackages);
+    buttons.push([{ text: "⬅ Back", callback_data: "order_9proxy_gb" }]);
 
+    await sendOrEdit(bot, query, "🔥 Discount Packages:", buttons);
+    return true;
+  }
+
+  if (data === "gb_regular") {
+    const buttons = buildButtons(regularPackages);
+    buttons.push([{ text: "⬅ Back", callback_data: "order_9proxy_gb" }]);
+
+    await sendOrEdit(bot, query, "💰 Regular Packages:", buttons);
+    return true;
+  }
+
+  const all = { ...discountPackages, ...regularPackages };
+
+  if (all[data]) {
     if (!isAvailable(PRODUCT_KEY, data)) {
-      await sendOrEdit(
-        bot,
-        query,
-        `❌ ${pkg.label} is currently Stock Out.
-
-Please choose another available package.`,
-        [[{ text: "⬅ Back", callback_data: "order_9proxy_gb" }]]
-      );
-
+      await sendOrEdit(bot, query, "❌ Stock Out", [
+        [{ text: "⬅ Back", callback_data: "order_9proxy_gb" }]
+      ]);
       return true;
     }
+
+    const pkg = all[data];
 
     reduceStock(PRODUCT_KEY, data);
 
@@ -77,6 +101,4 @@ Please choose another available package.`,
   return false;
 }
 
-module.exports = {
-  handleProxyGB
-};
+module.exports = { handleProxyGB };
