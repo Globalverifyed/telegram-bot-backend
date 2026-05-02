@@ -523,6 +523,115 @@ vpn_cyberghost: {
       vless_2y: { label: "2 Year", stock: 5 }
     }
   }
+  sub_google_ai: {
+    title: "💎 Google AI Pro (Gemini)",
+    items: {
+      google_1m: { label: "1 Month", stock: 0 },
+      google_3m: { label: "3 Month", stock: 0 },
+      google_6m: { label: "6 Month", stock: 0 },
+      google_1y: { label: "1 Year", stock: 0 }
+    }
+  },
+
+  sub_chatgpt_go: {
+    title: "💎 ChatGPT Go",
+    items: {
+      go_1m: { label: "1 Month", stock: 0 },
+      go_3m: { label: "3 Month", stock: 0 },
+      go_6m: { label: "6 Month", stock: 0 },
+      go_1y: { label: "1 Year", stock: 5 }
+    }
+  },
+
+  sub_chatgpt_plus: {
+    title: "💎 ChatGPT Plus",
+    items: {
+      plus_1m: { label: "1 Month", stock: 5 },
+      plus_3m: { label: "3 Month", stock: 0 },
+      plus_6m: { label: "6 Month", stock: 0 },
+      plus_1y: { label: "1 Year", stock: 0 }
+    }
+  },
+
+  sub_capcut: {
+    title: "💎 CapCut Pro",
+    items: {
+      capcut_1m: { label: "1 Month", stock: 5 },
+      capcut_3m: { label: "3 Month", stock: 5 },
+      capcut_6m: { label: "6 Month", stock: 5 },
+      capcut_1y: { label: "1 Year", stock: 5 }
+    }
+  },
+
+  sub_telegram: {
+    title: "💎 Telegram Premium",
+    items: {
+      telegram_1m: { label: "1 Month", stock: 0 },
+      telegram_3m: { label: "3 Month", stock: 5 },
+      telegram_6m: { label: "6 Month", stock: 5 },
+      telegram_1y: { label: "1 Year", stock: 5 }
+    }
+  },
+
+  sub_canva: {
+    title: "💎 Canva Pro Subscriptions",
+    items: {
+      canva_1m: { label: "1 Month", stock: 5 },
+      canva_3m: { label: "3 Month", stock: 5 },
+      canva_6m: { label: "6 Month", stock: 5 },
+      canva_1y: { label: "1 Year", stock: 5 }
+    }
+  },
+
+  sub_amazon: {
+    title: "💎 Amazon Prime Video",
+    items: {
+      amazon_1m: { label: "1 Month", stock: 5 },
+      amazon_3m: { label: "3 Month", stock: 0 },
+      amazon_6m: { label: "6 Month", stock: 5 },
+      amazon_1y: { label: "1 Year", stock: 5 }
+    }
+  },
+
+  sub_disney: {
+    title: "💎 Disney Plus",
+    items: {
+      disney_1m: { label: "1 Month", stock: 5 },
+      disney_3m: { label: "3 Month", stock: 0 },
+      disney_6m: { label: "6 Month", stock: 0 },
+      disney_1y: { label: "1 Year", stock: 0 }
+    }
+  },
+
+  sub_netflix: {
+    title: "💎 Netflix Premium Personal",
+    items: {
+      netflix_1m: { label: "1 Month", stock: 5 },
+      netflix_3m: { label: "3 Month", stock: 5 },
+      netflix_6m: { label: "6 Month", stock: 5 },
+      netflix_1y: { label: "1 Year", stock: 0 }
+    }
+  },
+
+  sub_veo3: {
+    title: "💎 VEO 3",
+    items: {
+      veo_1m: { label: "1 Month", stock: 0 },
+      veo_3m: { label: "3 Month", stock: 0 },
+      veo_6m: { label: "6 Month", stock: 0 },
+      veo_1y: { label: "1 Year", stock: 0 }
+    }
+  },
+
+  sub_spotify: {
+    title: "💎 Spotify Premium",
+    items: {
+      spotify_1m: { label: "1 Month", stock: 0 },
+      spotify_3m: { label: "3 Month", stock: 0 },
+      spotify_6m: { label: "6 Month", stock: 0 },
+      spotify_1y: { label: "1 Year", stock: 0 }
+    }
+  },
 };
 
 function getStock(productKey, itemKey) {
