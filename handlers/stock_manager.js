@@ -522,7 +522,7 @@ vpn_cyberghost: {
       vless_1y: { label: "1 Year", stock: 5 },
       vless_2y: { label: "2 Year", stock: 5 }
     }
-  }
+  },
   sub_google_ai: {
     title: "💎 Google AI Pro (Gemini)",
     items: {
@@ -632,6 +632,7 @@ vpn_cyberghost: {
       spotify_1y: { label: "1 Year", stock: 0 }
     }
   },
+  
 };
 
 function getStock(productKey, itemKey) {
