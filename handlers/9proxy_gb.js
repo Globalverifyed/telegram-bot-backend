@@ -1,6 +1,6 @@
 const { showProductOptions } = require("./product_options");
 const { sendOrEdit } = require("./utils");
-const { isAvailable, reduceStock } = require("./stock_manager");
+const { isAvailable } = require("./stock_manager");
 
 const PRODUCT_KEY = "proxy_gb";
 
@@ -53,14 +53,14 @@ async function handleProxyGB(bot, query) {
         { text: "🔥 Discount Price", callback_data: "gb_discount" },
         { text: "💰 Regular Price", callback_data: "gb_regular" }
       ],
-      [{ text: "⬅ Back", callback_data: "ip_proxy" }]
+      [{ text: "⬅️ Back", callback_data: "ip_proxy" }]
     ]);
     return true;
   }
 
   if (data === "gb_discount") {
     const buttons = buildButtons(discountPackages);
-    buttons.push([{ text: "⬅ Back", callback_data: "order_9proxy_gb" }]);
+    buttons.push([{ text: "⬅️ Back", callback_data: "order_9proxy_gb" }]);
 
     await sendOrEdit(bot, query, "🔥 Discount Packages:", buttons);
     return true;
@@ -68,7 +68,7 @@ async function handleProxyGB(bot, query) {
 
   if (data === "gb_regular") {
     const buttons = buildButtons(regularPackages);
-    buttons.push([{ text: "⬅ Back", callback_data: "order_9proxy_gb" }]);
+    buttons.push([{ text: "⬅️ Back", callback_data: "order_9proxy_gb" }]);
 
     await sendOrEdit(bot, query, "💰 Regular Packages:", buttons);
     return true;
@@ -79,16 +79,16 @@ async function handleProxyGB(bot, query) {
   if (all[data]) {
     if (!isAvailable(PRODUCT_KEY, data)) {
       await sendOrEdit(bot, query, "❌ Stock Out", [
-        [{ text: "⬅ Back", callback_data: "order_9proxy_gb" }]
+        [{ text: "⬅️ Back", callback_data: "order_9proxy_gb" }]
       ]);
       return true;
     }
 
     const pkg = all[data];
 
-    reduceStock(PRODUCT_KEY, data);
-
     await showProductOptions(bot, query, {
+      productKey: PRODUCT_KEY,
+      itemKey: data,
       name: "9proxy GB",
       package: pkg.label,
       price: pkg.price,
