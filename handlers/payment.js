@@ -1,3 +1,5 @@
+const { reduceStock } = require("./stock_manager");
+
 let orders = {};
 let deliveryMode = {};
 
@@ -22,21 +24,33 @@ async function showPaymentMethods(bot, chatId, data) {
     ...data,
     customerChatId: chatId,
     screenshotFileId: null,
-    status: "waiting_payment"
+    status: "waiting_payment",
+    stockReduced: false
   };
 
   await bot.sendMessage(
     chatId,
     `💳 Payment for ${data.name}
+
 📦 Package: ${data.package}
 🧾 Type: ${data.accountType || "N/A"}
 💰 Price: ${data.price}`,
     {
       reply_markup: {
         inline_keyboard: [
-          [{ text: "💰 Binance", callback_data: "pay_binance" }],
-          [{ text: "📱 Nagad Agent", callback_data: "pay_nagad" }],
-          [{ text: "⬅ Back", callback_data: data.back }]
+          [
+            {
+              text: "💰 Binance",
+              callback_data: `pay_binance_${data.productKey || "product"}_${data.itemKey || "item"}`
+            }
+          ],
+          [
+            {
+              text: "📱 Nagad Agent",
+              callback_data: `pay_nagad_${data.productKey || "product"}_${data.itemKey || "item"}`
+            }
+          ],
+          [{ text: "⬅️ Back", callback_data: data.back }]
         ]
       }
     }
@@ -51,7 +65,7 @@ async function handlePaymentMethod(bot, query) {
 
   if (!order) return false;
 
-  if (data === "pay_binance") {
+  if (data.startsWith("pay_binance")) {
     await bot.sendMessage(
       chatId,
       `💰 Binance Payment
@@ -66,10 +80,11 @@ async function handlePaymentMethod(bot, query) {
 
 Payment complete হলে screenshot পাঠাও।`
     );
+
     return true;
   }
 
-  if (data === "pay_nagad") {
+  if (data.startsWith("pay_nagad")) {
     await bot.sendMessage(
       chatId,
       `📱 Nagad Agent Payment
@@ -85,6 +100,7 @@ Payment complete হলে screenshot পাঠাও।`
 
 Payment complete হলে screenshot পাঠাও।`
     );
+
     return true;
   }
 
@@ -143,19 +159,27 @@ async function handlePaymentDone(bot, query) {
   order.status = "pending";
   order.createdAt = new Date().toISOString();
 
+  // Stock reduce only once
+  if (order.productKey && order.itemKey && !order.stockReduced) {
+    reduceStock(order.productKey, order.itemKey);
+    order.stockReduced = true;
+  }
+
   pendingOrders[chatId] = order;
 
   const adminCaption =
-    `🛒 New Order Received!\n\n` +
-    `📦 Product: ${order.name}\n` +
-    `📊 Package: ${order.package}\n` +
-    `🧾 Type: ${order.accountType || "N/A"}\n` +
-    `💰 Price: ${order.price}\n` +
-    `💰 Nagad Amount: ${convertDollarToTaka(order.price)}\n\n` +
-    `👤 Name: ${name}\n` +
-    `🔗 Username: ${username}\n` +
-    `🆔 ID: ${userId}\n` +
-    `💬 Customer Chat ID: ${chatId}`;
+`🛒 New Order Received!
+
+📦 Product: ${order.name}
+📊 Package: ${order.package}
+🧾 Type: ${order.accountType || "N/A"}
+💰 Price: ${order.price}
+💰 Nagad Amount: ${convertDollarToTaka(order.price)}
+
+👤 Name: ${name}
+🔗 Username: ${username}
+🆔 ID: ${userId}
+💬 Customer Chat ID: ${chatId}`;
 
   await bot.sendPhoto(process.env.ADMIN_CHAT_ID, order.screenshotFileId, {
     caption: adminCaption,
@@ -260,18 +284,20 @@ ${msg.text}`
 
     await bot.sendPhoto(customerChatId, photo, {
       caption:
-        `🎉 Delivery Received!\n\n` +
-        `📦 Product: ${order.name}\n` +
-        `📊 Package: ${order.package}\n` +
-        `🧾 Type: ${order.accountType || "N/A"}`
+`🎉 Delivery Received!
+
+📦 Product: ${order.name}
+📊 Package: ${order.package}
+🧾 Type: ${order.accountType || "N/A"}`
     });
   } else if (msg.document) {
     await bot.sendDocument(customerChatId, msg.document.file_id, {
       caption:
-        `🎉 Delivery Received!\n\n` +
-        `📦 Product: ${order.name}\n` +
-        `📊 Package: ${order.package}\n` +
-        `🧾 Type: ${order.accountType || "N/A"}`
+`🎉 Delivery Received!
+
+📦 Product: ${order.name}
+📊 Package: ${order.package}
+🧾 Type: ${order.accountType || "N/A"}`
     });
   } else {
     await bot.sendMessage(adminId, "⚠️ Please send text, photo, or document.");
