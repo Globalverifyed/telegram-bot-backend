@@ -31,6 +31,7 @@ const { handleCliProxy } = require("./handlers/cliproxy");
 const { handleCherryProxy } = require("./handlers/cherry_proxy");
 const { handleDigiProxy } = require("./handlers/digi_proxy");
 const { handleVPN } = require("./handlers/vpn");
+const { handleCyberGhostVPN } = require("./handlers/vpn_cyberghost");
 const { handleProductOptions } = require("./handlers/product_options");
 
 const { handleAdmin, handleAdminButtons } = require("./handlers/admin");
@@ -101,6 +102,7 @@ bot.on("callback_query", async (query) => {
   if (await handleCherryProxy(bot, query)) return;
   if (await handleDigiProxy(bot, query)) return;
   if (await handleVPN(bot, query)) return;
+  if (await handleCyberGhostVPN(bot, query)) return;
 
   // PRODUCT OPTIONS
   if (await handleProductOptions(bot, query)) return;
