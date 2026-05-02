@@ -1,6 +1,6 @@
 const { showProductOptions } = require("./product_options");
 const { sendOrEdit } = require("./utils");
-const { isAvailable, reduceStock, getStock } = require("./stock_manager");
+const { isAvailable, getStock } = require("./stock_manager");
 
 const PRODUCT_KEY = "proxy_ip";
 
@@ -88,7 +88,7 @@ async function showPackageList(bot, query, packages, typeName) {
     );
   }
 
-  buttons.push([{ text: "⬅ Back", callback_data: "order_9proxy_ip" }]);
+  buttons.push([{ text: "⬅️ Back", callback_data: "order_9proxy_ip" }]);
 
   await sendOrEdit(
     bot,
@@ -108,7 +108,7 @@ async function handleProxyIP(bot, query) {
         { text: "🔥 Discount Price", callback_data: "ip_discount" },
         { text: "💰 Regular Price", callback_data: "ip_regular" }
       ],
-      [{ text: "⬅ Back", callback_data: "ip_proxy" }]
+      [{ text: "⬅️ Back", callback_data: "ip_proxy" }]
     ]);
 
     return true;
@@ -136,15 +136,15 @@ async function handleProxyIP(bot, query) {
         `❌ ${pkg.label} is currently Stock Out.
 
 Please choose another available package.`,
-        [[{ text: "⬅ Back", callback_data: "order_9proxy_ip" }]]
+        [[{ text: "⬅️ Back", callback_data: "order_9proxy_ip" }]]
       );
 
       return true;
     }
 
-    reduceStock(PRODUCT_KEY, data);
-
     await showProductOptions(bot, query, {
+      productKey: PRODUCT_KEY,
+      itemKey: data,
       name: "9proxy IP",
       package: pkg.label,
       price: pkg.price,
