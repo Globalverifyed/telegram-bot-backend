@@ -1,12 +1,12 @@
 const { sendOrEdit } = require("./utils");
 
 const abcDiscountPackages = [
-  { name: "1 GB", price: "130 BDT / $1 USDT", callback: "abc_discount_1gb" },
-  { name: "2 GB", price: "260 BDT / $2 USDT", callback: "abc_discount_2gb" },
-  { name: "3 GB", price: "390 BDT / $3 USDT", callback: "abc_discount_3gb" },
-  { name: "4 GB", price: "520 BDT / $4 USDT", callback: "abc_discount_4gb" },
-  { name: "5 GB", price: "645 BDT / $5 USDT", callback: "abc_discount_5gb" },
-  { name: "10 GB", price: "1235 BDT / $9.5 USDT", callback: "abc_discount_10gb" }
+  { name: "1 GB", price: "$1 USDT", callback: "abc_discount_1gb" },
+  { name: "2 GB", price: "$2 USDT", callback: "abc_discount_2gb" },
+  { name: "3 GB", price: "$3 USDT", callback: "abc_discount_3gb" },
+  { name: "4 GB", price: "$4 USDT", callback: "abc_discount_4gb" },
+  { name: "5 GB", price: "$5 USDT", callback: "abc_discount_5gb" },
+  { name: "10 GB", price: "$9.5 USDT", callback: "abc_discount_10gb" }
 ];
 
 const abcRegularPackages = [
