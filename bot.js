@@ -30,6 +30,7 @@ const { handleNodemaven } = require("./handlers/nodemaven");
 const { handleCliProxy } = require("./handlers/cliproxy");
 const { handleCherryProxy } = require("./handlers/cherry_proxy");
 const { handleDigiProxy } = require("./handlers/digi_proxy");
+const { handleVPN } = require("./handlers/vpn");
 const { handleProductOptions } = require("./handlers/product_options");
 
 const { handleAdmin, handleAdminButtons } = require("./handlers/admin");
@@ -99,6 +100,7 @@ bot.on("callback_query", async (query) => {
   if (await handleCliProxy(bot, query)) return;
   if (await handleCherryProxy(bot, query)) return;
   if (await handleDigiProxy(bot, query)) return;
+  if (await handleVPN(bot, query)) return;
 
   // PRODUCT OPTIONS
   if (await handleProductOptions(bot, query)) return;
