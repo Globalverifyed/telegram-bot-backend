@@ -159,6 +159,179 @@ const stockRegistry = {
     np_r_5000: { label: "5000 IP (Regular)", stock: 5 }
   }
 },
+abc_proxy: {
+  title: "🌐 ABC Proxy",
+  items: {
+    abc_d_1: { label: "1GB (Discount)", stock: 5 },
+    abc_d_2: { label: "2GB (Discount)", stock: 5 },
+    abc_d_3: { label: "3GB (Discount)", stock: 5 },
+    abc_d_4: { label: "4GB (Discount)", stock: 5 },
+    abc_d_5: { label: "5GB (Discount)", stock: 5 },
+    abc_d_10: { label: "10GB (Discount)", stock: 5 },
+
+    abc_r_1: { label: "1GB (Regular)", stock: 5 },
+    abc_r_2: { label: "2GB (Regular)", stock: 5 },
+    abc_r_3: { label: "3GB (Regular)", stock: 5 },
+    abc_r_4: { label: "4GB (Regular)", stock: 5 },
+    abc_r_5: { label: "5GB (Regular)", stock: 5 },
+    abc_r_10: { label: "10GB (Regular)", stock: 5 },
+    abc_r_15: { label: "15GB (Regular)", stock: 5 },
+    abc_r_20: { label: "20GB (Regular)", stock: 5 }
+  }
+},
+proxy_seller: {
+  title: "🌐 Proxy Seller",
+  items: {
+    ps_d_1: { label: "1GB (Discount)", stock: 5 },
+    ps_d_2: { label: "2GB (Discount)", stock: 5 },
+    ps_d_3: { label: "3GB (Discount)", stock: 5 },
+    ps_d_4: { label: "4GB (Discount)", stock: 5 },
+    ps_d_5: { label: "5GB (Discount)", stock: 5 },
+
+    ps_r_1: { label: "1GB (Regular)", stock: 5 },
+    ps_r_2: { label: "2GB (Regular)", stock: 5 },
+    ps_r_3: { label: "3GB (Regular)", stock: 5 },
+    ps_r_4: { label: "4GB (Regular)", stock: 5 },
+    ps_r_5: { label: "5GB (Regular)", stock: 5 },
+    ps_r_10: { label: "10GB (Regular)", stock: 5 },
+    ps_r_15: { label: "15GB (Regular)", stock: 5 },
+    ps_r_20: { label: "20GB (Regular)", stock: 5 }
+  }
+},
+proxy_light: {
+  title: "🌐 Proxy Light",
+  items: {
+    pl_d_1: { label: "1GB (Discount)", stock: 5 },
+    pl_d_2: { label: "2GB (Discount)", stock: 5 },
+    pl_d_3: { label: "3GB (Discount)", stock: 5 },
+    pl_d_4: { label: "4GB (Discount)", stock: 5 },
+    pl_d_5: { label: "5GB (Discount)", stock: 5 },
+
+    pl_r_1: { label: "1GB (Regular)", stock: 5 },
+    pl_r_2: { label: "2GB (Regular)", stock: 5 },
+    pl_r_3: { label: "3GB (Regular)", stock: 5 },
+    pl_r_4: { label: "4GB (Regular)", stock: 5 },
+    pl_r_5: { label: "5GB (Regular)", stock: 5 },
+    pl_r_10: { label: "10GB (Regular)", stock: 5 },
+    pl_r_15: { label: "15GB (Regular)", stock: 5 },
+    pl_r_20: { label: "20GB (Regular)", stock: 5 }
+  }
+},
+nov_proxy: {
+  title: "🌐 Nov Proxy",
+  items: {
+    nv_d_1: { label: "1GB (Discount)", stock: 5 },
+    nv_d_2: { label: "2GB (Discount)", stock: 5 },
+    nv_d_3: { label: "3GB (Discount)", stock: 5 },
+    nv_d_4: { label: "4GB (Discount)", stock: 5 },
+    nv_d_5: { label: "5GB (Discount)", stock: 5 },
+
+    nv_r_1: { label: "1GB (Regular)", stock: 5 },
+    nv_r_2: { label: "2GB (Regular)", stock: 5 },
+    nv_r_3: { label: "3GB (Regular)", stock: 5 },
+    nv_r_4: { label: "4GB (Regular)", stock: 5 },
+    nv_r_5: { label: "5GB (Regular)", stock: 5 },
+    nv_r_10: { label: "10GB (Regular)", stock: 5 },
+    nv_r_15: { label: "15GB (Regular)", stock: 5 },
+    nv_r_20: { label: "20GB (Regular)", stock: 5 }
+  }
+},
+iprocket_proxy: {
+  title: "🌐 IpRocket Proxy",
+  items: {
+    ir_d_1: { label: "1GB (Discount)", stock: 5 },
+    ir_d_2: { label: "2GB (Discount)", stock: 5 },
+    ir_d_3: { label: "3GB (Discount)", stock: 5 },
+    ir_d_4: { label: "4GB (Discount)", stock: 5 },
+    ir_d_5: { label: "5GB (Discount)", stock: 5 },
+
+    ir_r_1: { label: "1GB (Regular)", stock: 5 },
+    ir_r_2: { label: "2GB (Regular)", stock: 5 },
+    ir_r_3: { label: "3GB (Regular)", stock: 5 },
+    ir_r_4: { label: "4GB (Regular)", stock: 5 },
+    ir_r_5: { label: "5GB (Regular)", stock: 5 },
+    ir_r_10: { label: "10GB (Regular)", stock: 5 },
+    ir_r_15: { label: "15GB (Regular)", stock: 5 },
+    ir_r_20: { label: "20GB (Regular)", stock: 5 }
+  }
+},
+nodemaven: {
+  title: "🌐 Nodemaven",
+  items: {
+    nm_d_1: { label: "1GB (Discount)", stock: 5 },
+    nm_d_2: { label: "2GB (Discount)", stock: 5 },
+    nm_d_3: { label: "3GB (Discount)", stock: 5 },
+    nm_d_4: { label: "4GB (Discount)", stock: 5 },
+    nm_d_5: { label: "5GB (Discount)", stock: 5 },
+
+    nm_r_1: { label: "1GB (Regular)", stock: 5 },
+    nm_r_2: { label: "2GB (Regular)", stock: 5 },
+    nm_r_3: { label: "3GB (Regular)", stock: 5 },
+    nm_r_4: { label: "4GB (Regular)", stock: 5 },
+    nm_r_5: { label: "5GB (Regular)", stock: 5 },
+    nm_r_10: { label: "10GB (Regular)", stock: 5 },
+    nm_r_15: { label: "15GB (Regular)", stock: 5 },
+    nm_r_20: { label: "20GB (Regular)", stock: 5 }
+  }
+},
+cliproxy: {
+  title: "🌐 CLiProxy",
+  items: {
+    cp_d_1: { label: "1GB (Discount)", stock: 5 },
+    cp_d_2: { label: "2GB (Discount)", stock: 5 },
+    cp_d_3: { label: "3GB (Discount)", stock: 5 },
+    cp_d_4: { label: "4GB (Discount)", stock: 5 },
+    cp_d_5: { label: "5GB (Discount)", stock: 5 },
+
+    cp_r_1: { label: "1GB (Regular)", stock: 5 },
+    cp_r_2: { label: "2GB (Regular)", stock: 5 },
+    cp_r_3: { label: "3GB (Regular)", stock: 5 },
+    cp_r_4: { label: "4GB (Regular)", stock: 5 },
+    cp_r_5: { label: "5GB (Regular)", stock: 5 },
+    cp_r_10: { label: "10GB (Regular)", stock: 5 },
+    cp_r_15: { label: "15GB (Regular)", stock: 5 },
+    cp_r_20: { label: "20GB (Regular)", stock: 5 }
+  }
+},
+cherry_proxy: {
+  title: "🍒 CHerry Proxy",
+  items: {
+    ch_d_1: { label: "1GB (Discount)", stock: 5 },
+    ch_d_2: { label: "2GB (Discount)", stock: 5 },
+    ch_d_3: { label: "3GB (Discount)", stock: 5 },
+    ch_d_4: { label: "4GB (Discount)", stock: 5 },
+    ch_d_5: { label: "5GB (Discount)", stock: 5 },
+
+    ch_r_1: { label: "1GB (Regular)", stock: 5 },
+    ch_r_2: { label: "2GB (Regular)", stock: 5 },
+    ch_r_3: { label: "3GB (Regular)", stock: 5 },
+    ch_r_4: { label: "4GB (Regular)", stock: 5 },
+    ch_r_5: { label: "5GB (Regular)", stock: 5 },
+    ch_r_10: { label: "10GB (Regular)", stock: 5 },
+    ch_r_15: { label: "15GB (Regular)", stock: 5 },
+    ch_r_20: { label: "20GB (Regular)", stock: 5 }
+  }
+},
+
+digi_proxy: {
+  title: "📡 Digi Proxy",
+  items: {
+    dg_d_1: { label: "1GB (Discount)", stock: 5 },
+    dg_d_2: { label: "2GB (Discount)", stock: 5 },
+    dg_d_3: { label: "3GB (Discount)", stock: 5 },
+    dg_d_4: { label: "4GB (Discount)", stock: 5 },
+    dg_d_5: { label: "5GB (Discount)", stock: 5 },
+
+    dg_r_1: { label: "1GB (Regular)", stock: 5 },
+    dg_r_2: { label: "2GB (Regular)", stock: 5 },
+    dg_r_3: { label: "3GB (Regular)", stock: 5 },
+    dg_r_4: { label: "4GB (Regular)", stock: 5 },
+    dg_r_5: { label: "5GB (Regular)", stock: 5 },
+    dg_r_10: { label: "10GB (Regular)", stock: 5 },
+    dg_r_15: { label: "15GB (Regular)", stock: 5 },
+    dg_r_20: { label: "20GB (Regular)", stock: 5 }
+  }
+},
 };
 
 function getStock(productKey, itemKey) {
