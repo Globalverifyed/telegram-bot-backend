@@ -15,6 +15,29 @@ function needsAccountType(order) {
 }
 
 const proxyProducts = {
+// =========================
+  // 🌍 9PROXY IP
+  // Account type লাগবে: OLD / New / Redeem
+  // =========================
+  proxy_ip_discount_25: { productKey: "proxy_ip", itemKey: "ip_d_25", name: "9proxy IP", package: "25 IP Discount", price: "$0.85", back: "proxy_ip_discount_menu" },
+  proxy_ip_discount_50: { productKey: "proxy_ip", itemKey: "ip_d_50", name: "9proxy IP", package: "50 IP Discount", price: "$1.69", back: "proxy_ip_discount_menu" },
+  proxy_ip_discount_100: { productKey: "proxy_ip", itemKey: "ip_d_100", name: "9proxy IP", package: "100 IP Discount", price: "$3.35", back: "proxy_ip_discount_menu" },
+  proxy_ip_discount_200: { productKey: "proxy_ip", itemKey: "ip_d_200", name: "9proxy IP", package: "200 IP Discount", price: "$6.49", back: "proxy_ip_discount_menu" },
+  proxy_ip_discount_300: { productKey: "proxy_ip", itemKey: "ip_d_300", name: "9proxy IP", package: "300 IP Discount", price: "$9.59", back: "proxy_ip_discount_menu" },
+  proxy_ip_discount_500: { productKey: "proxy_ip", itemKey: "ip_d_500", name: "9proxy IP", package: "500 IP Discount", price: "$14.99", back: "proxy_ip_discount_menu" },
+  proxy_ip_discount_1000: { productKey: "proxy_ip", itemKey: "ip_d_1000", name: "9proxy IP", package: "1000 IP Discount", price: "$27.99", back: "proxy_ip_discount_menu" },
+
+  // =========================
+  // 📦 9PROXY GB
+  // Account type লাগবে: OLD / New / Redeem
+  // =========================
+  proxy_gb_discount_1: { productKey: "proxy_gb", itemKey: "gb_d_1", name: "9proxy GB", package: "1GB Discount", price: "$0.80", back: "proxy_gb_discount_menu" },
+  proxy_gb_discount_2: { productKey: "proxy_gb", itemKey: "gb_d_2", name: "9proxy GB", package: "2GB Discount", price: "$1.60", back: "proxy_gb_discount_menu" },
+  proxy_gb_discount_3: { productKey: "proxy_gb", itemKey: "gb_d_3", name: "9proxy GB", package: "3GB Discount", price: "$2.40", back: "proxy_gb_discount_menu" },
+  proxy_gb_discount_5: { productKey: "proxy_gb", itemKey: "gb_d_5", name: "9proxy GB", package: "5GB Discount", price: "$3.99", back: "proxy_gb_discount_menu" },
+  proxy_gb_discount_10: { productKey: "proxy_gb", itemKey: "gb_d_10", name: "9proxy GB", package: "10GB Discount", price: "$7.99", back: "proxy_gb_discount_menu" },
+  proxy_gb_discount_15: { productKey: "proxy_gb", itemKey: "gb_d_15", name: "9proxy GB", package: "15GB Discount", price: "$11.99", back: "proxy_gb_discount_menu" },
+  proxy_gb_discount_20: { productKey: "proxy_gb", itemKey: "gb_d_20", name: "9proxy GB", package: "20GB Discount", price: "$15.99", back: "proxy_gb_discount_menu" },
   // =========================
   // ABC PROXY
   // =========================
