@@ -28,6 +28,8 @@ const { handleNovProxy } = require("./handlers/nov_proxy");
 const { handleIpRocketProxy } = require("./handlers/iprocket_proxy");
 const { handleNodemaven } = require("./handlers/nodemaven");
 const { handleCliProxy } = require("./handlers/cliproxy");
+const { handleCherryProxy } = require("./handlers/cherry_proxy");
+const { handleDigiProxy } = require("./handlers/digi_proxy");
 const { handleProductOptions } = require("./handlers/product_options");
 
 const { handleAdmin, handleAdminButtons } = require("./handlers/admin");
@@ -95,6 +97,8 @@ bot.on("callback_query", async (query) => {
   if (await handleIpRocketProxy(bot, query)) return;
   if (await handleNodemaven(bot, query)) return;
   if (await handleCliProxy(bot, query)) return;
+  if (await handleCherryProxy(bot, query)) return;
+  if (await handleDigiProxy(bot, query)) return;
 
   // PRODUCT OPTIONS
   if (await handleProductOptions(bot, query)) return;
