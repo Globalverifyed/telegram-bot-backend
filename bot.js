@@ -23,6 +23,7 @@ const { handleSwiftProxy } = require("./handlers/swift_proxy");
 const { handleNiceProxy } = require("./handlers/nice_proxy");
 const { handleABCProxy } = require("./handlers/abc_proxy");
 const { handleProxySeller } = require("./handlers/proxy_seller");
+const { handleProxyLight } = require("./handlers/proxy_light");
 const { handleProductOptions } = require("./handlers/product_options");
 
 const { handleAdmin, handleAdminButtons } = require("./handlers/admin");
@@ -85,6 +86,7 @@ bot.on("callback_query", async (query) => {
   if (await handleNiceProxy(bot, query)) return;
   if (await handleABCProxy(bot, query)) return;
   if (await handleProxySeller(bot, query)) return;
+  if (await handleProxyLight(bot, query)) return;
 
   // PRODUCT OPTIONS
   if (await handleProductOptions(bot, query)) return;
