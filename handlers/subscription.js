@@ -8,10 +8,10 @@ const services = {
   sub_google_ai: {
     name: "Google AI Pro (Gemini)",
     packages: {
-      google_1m: { label: "1 Month", price: "Contact Support" },
-      google_3m: { label: "3 Month", price: "Contact Support" },
-      google_6m: { label: "6 Month", price: "Contact Support" },
-      google_1y: { label: "1 Year", price: "Contact Support" }
+      google_1m: { label: "1 Month", price: "$6" },
+      google_3m: { label: "3 Month", price: "Stock Out" },
+      google_6m: { label: "6 Month", price: "Stock Out" },
+      google_1y: { label: "1 Year", price: "Stock Out" }
     }
   },
 
