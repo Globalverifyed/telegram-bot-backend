@@ -332,6 +332,17 @@ digi_proxy: {
     dg_r_20: { label: "20GB (Regular)", stock: 5 }
   }
 },
+vpn_cyberghost: {
+  title: "🔐 CyberGhost VPN",
+  items: {
+    cg_3d: { label: "3 Days", stock: 5 },
+    cg_7d: { label: "7 Days", stock: 5 },
+    cg_1m: { label: "1 Month", stock: 5 },
+    cg_6m: { label: "6 Month", stock: 5 },
+    cg_1y: { label: "1 Year", stock: 5 },
+    cg_2y: { label: "2 Year", stock: 5 }
+  }
+},
 };
 
 function getStock(productKey, itemKey) {
