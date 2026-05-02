@@ -526,7 +526,7 @@ vpn_cyberghost: {
   sub_google_ai: {
     title: "💎 Google AI Pro (Gemini)",
     items: {
-      google_1m: { label: "1 Month", stock: 5 },
+      google_1m: { label: "1 Month", stock: 10 },
       google_3m: { label: "3 Month", stock: 0 },
       google_6m: { label: "6 Month", stock: 0 },
       google_1y: { label: "1 Year", stock: 0 }
