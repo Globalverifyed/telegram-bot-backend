@@ -32,8 +32,8 @@ const regularPackages = {
   ip_r_1000: { label: "1000 IP", price: "$55" },
   ip_r_2000: { label: "2000 IP", price: "$107.55" },
   ip_r_3000: { label: "3000 IP", price: "$162.50" },
-  ip_r_4000: { label: "4000 IP", price: "$80" },
-  ip_r_5000: { label: "5000 IP", price: "$100" }
+  ip_r_4000: { label: "4000 IP", price: "$208" },
+  ip_r_5000: { label: "5000 IP", price: "$260" }
 };
 
 function sortPackages(packages) {
