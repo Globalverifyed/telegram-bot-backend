@@ -1,22 +1,22 @@
 const { sendOrEdit } = require("./utils");
 
 const proxySellerDiscountPackages = [
-  { name: "1 GB", price: "$1.5 USDT", callback: "proxy_seller_discount_1gb" },
-  { name: "2 GB", price: "$3 USDT", callback: "proxy_seller_discount_2gb" },
-  { name: "3 GB", price: "$4.5 USDT", callback: "proxy_seller_discount_3gb" },
-  { name: "4 GB", price: "$6 USDT", callback: "proxy_seller_discount_4gb" },
-  { name: "5 GB", price: "$7.5 USDT", callback: "proxy_seller_discount_5gb" }
+  { name: "1 GB", price: "$2.00 USDT", callback: "proxy_seller_discount_1gb" },
+  { name: "2 GB", price: "$4.00 USDT", callback: "proxy_seller_discount_2gb" },
+  { name: "3 GB", price: "$5.90 USDT", callback: "proxy_seller_discount_3gb" },
+  { name: "4 GB", price: "$7.85 USDT", callback: "proxy_seller_discount_4gb" },
+  { name: "5 GB", price: "$9.80 USDT", callback: "proxy_seller_discount_5gb" }
 ];
 
 const proxySellerRegularPackages = [
-  { name: "1 GB", price: "$1.10", callback: "proxy_seller_regular_1gb" },
-  { name: "2 GB", price: "$2.20", callback: "proxy_seller_regular_2gb" },
-  { name: "3 GB", price: "$3.30", callback: "proxy_seller_regular_3gb" },
-  { name: "4 GB", price: "$4.40", callback: "proxy_seller_regular_4gb" },
-  { name: "5 GB", price: "$5.50", callback: "proxy_seller_regular_5gb" },
-  { name: "10 GB", price: "$10.50", callback: "proxy_seller_regular_10gb" },
-  { name: "15 GB", price: "$16.50", callback: "proxy_seller_regular_15gb" },
-  { name: "20 GB", price: "$21.00", callback: "proxy_seller_regular_20gb" }
+  { name: "1 GB", price: "$2.50", callback: "proxy_seller_regular_1gb" },
+  { name: "2 GB", price: "$5.00", callback: "proxy_seller_regular_2gb" },
+  { name: "3 GB", price: "$7.50", callback: "proxy_seller_regular_3gb" },
+  { name: "4 GB", price: "$9.50", callback: "proxy_seller_regular_4gb" },
+  { name: "5 GB", price: "$11.50", callback: "proxy_seller_regular_5gb" },
+  { name: "10 GB", price: "$22.50", callback: "proxy_seller_regular_10gb" },
+  { name: "15 GB", price: "$33.00", callback: "proxy_seller_regular_15gb" },
+  { name: "20 GB", price: "$42.00", callback: "proxy_seller_regular_20gb" }
 ];
 
 function makePackageButtons(packages) {
