@@ -8,7 +8,7 @@ const services = {
   sub_google_ai: {
     name: "Google AI Pro (Gemini)",
     packages: {
-      google_1m: { label: "1 Month", price: "$6" },
+      google_1m: { label: "1 Month", price: "$6.00" },
       google_3m: { label: "3 Month", price: "Stock Out" },
       google_6m: { label: "6 Month", price: "Stock Out" },
       google_1y: { label: "1 Year", price: "Stock Out" }
@@ -21,14 +21,14 @@ const services = {
       go_1m: { label: "1 Month", price: "Stock Out" },
       go_3m: { label: "3 Month", price: "Stock Out" },
       go_6m: { label: "6 Month", price: "Stock Out" },
-      go_1y: { label: "1 Year", price: "$7.00" }
+      go_1y: { label: "1 Year", price: "$8.50" }
     }
   },
 
   sub_chatgpt_plus: {
     name: "ChatGPT Plus",
     packages: {
-      plus_1m: { label: "1 Month", price: "$5.00" },
+      plus_1m: { label: "1 Month", price: "$5.50" },
       plus_3m: { label: "3 Month", price: "Stock Out" },
       plus_6m: { label: "6 Month", price: "Stock Out" },
       plus_1y: { label: "1 Year", price: "Stock Out" }
@@ -38,7 +38,7 @@ const services = {
   sub_capcut: {
     name: "CapCut Pro",
     packages: {
-      capcut_1m: { label: "1 Month", price: "$1.50" },
+      capcut_1m: { label: "1 Month", price: "$1.80" },
       capcut_3m: { label: "3 Month", price: "$5.00" },
       capcut_6m: { label: "6 Month", price: "$15.00" },
       capcut_1y: { label: "1 Year", price: "$35.00" }
@@ -58,8 +58,8 @@ const services = {
   sub_canva: {
     name: "Canva Pro Subscriptions",
     packages: {
-      canva_1m: { label: "1 Month", price: "$0.35" },
-      canva_3m: { label: "3 Month", price: "$0.60" },
+      canva_1m: { label: "1 Month", price: "$0.30" },
+      canva_3m: { label: "3 Month", price: "$0.50" },
       canva_6m: { label: "6 Month", price: "$1.00" },
       canva_1y: { label: "1 Year", price: "$2.00" }
     }
@@ -70,8 +70,8 @@ const services = {
     packages: {
       amazon_1m: { label: "1 Month", price: "$5.00" },
       amazon_3m: { label: "3 Month", price: "Stock Out" },
-      amazon_6m: { label: "6 Month", price: "$20.00" },
-      amazon_1y: { label: "1 Year", price: "$32.00" }
+      amazon_6m: { label: "6 Month", price: "Stock Out" },
+      amazon_1y: { label: "1 Year", price: "Stock Out" }
     }
   },
 
