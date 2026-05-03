@@ -162,18 +162,18 @@ const stockRegistry = {
 abc_proxy: {
   title: "🌐 ABC Proxy",
   items: {
-    abc_d_1: { label: "1GB (Discount)", stock: 5 },
-    abc_d_2: { label: "2GB (Discount)", stock: 5 },
-    abc_d_3: { label: "3GB (Discount)", stock: 5 },
-    abc_d_4: { label: "4GB (Discount)", stock: 5 },
-    abc_d_5: { label: "5GB (Discount)", stock: 5 },
+    abc_d_1: { label: "1GB (Discount)", stock: 15 },
+    abc_d_2: { label: "2GB (Discount)", stock: 15 },
+    abc_d_3: { label: "3GB (Discount)", stock: 15 },
+    abc_d_4: { label: "4GB (Discount)", stock: 15 },
+    abc_d_5: { label: "5GB (Discount)", stock: 10 },
     abc_d_10: { label: "10GB (Discount)", stock: 5 },
 
-    abc_r_1: { label: "1GB (Regular)", stock: 5 },
-    abc_r_2: { label: "2GB (Regular)", stock: 5 },
-    abc_r_3: { label: "3GB (Regular)", stock: 5 },
-    abc_r_4: { label: "4GB (Regular)", stock: 5 },
-    abc_r_5: { label: "5GB (Regular)", stock: 5 },
+    abc_r_1: { label: "1GB (Regular)", stock: 15 },
+    abc_r_2: { label: "2GB (Regular)", stock: 15 },
+    abc_r_3: { label: "3GB (Regular)", stock: 15 },
+    abc_r_4: { label: "4GB (Regular)", stock: 15 },
+    abc_r_5: { label: "5GB (Regular)", stock: 10 },
     abc_r_10: { label: "10GB (Regular)", stock: 5 },
     abc_r_15: { label: "15GB (Regular)", stock: 5 },
     abc_r_20: { label: "20GB (Regular)", stock: 5 }
