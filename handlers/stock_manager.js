@@ -336,11 +336,11 @@ vpn_cyberghost: {
     title: "🔐 CyberGhost VPN",
     items: {
       cg_3d: { label: "3 Days", stock: 5 },
-      cg_7d: { label: "7 Days", stock: 5 },
-      cg_1m: { label: "1 Month", stock: 5 },
-      cg_6m: { label: "6 Month", stock: 5 },
-      cg_1y: { label: "1 Year", stock: 5 },
-      cg_2y: { label: "2 Year", stock: 5 }
+      cg_7d: { label: "7 Days", stock: 0 },
+      cg_1m: { label: "1 Month", stock: 0 },
+      cg_6m: { label: "6 Month", stock: 0 },
+      cg_1y: { label: "1 Year", stock: 0 },
+      cg_2y: { label: "2 Year", stock: 0 }
     }
   },
 
@@ -348,179 +348,179 @@ vpn_cyberghost: {
     title: "🔐 Panda VPN",
     items: {
       panda_3d: { label: "3 Days", stock: 5 },
-      panda_7d: { label: "7 Days", stock: 5 },
+      panda_7d: { label: "7 Days", stock: 0 },
       panda_1m: { label: "1 Month", stock: 5 },
-      panda_6m: { label: "6 Month", stock: 5 },
-      panda_1y: { label: "1 Year", stock: 5 },
-      panda_2y: { label: "2 Year", stock: 5 }
+      panda_6m: { label: "6 Month", stock: 0 },
+      panda_1y: { label: "1 Year", stock: 0 },
+      panda_2y: { label: "2 Year", stock: 0 }
     }
   },
 
   vpn_express: {
     title: "🔐 Express VPN",
     items: {
-      express_3d: { label: "3 Days", stock: 5 },
-      express_7d: { label: "7 Days", stock: 5 },
-      express_1m: { label: "1 Month", stock: 5 },
-      express_6m: { label: "6 Month", stock: 5 },
-      express_1y: { label: "1 Year", stock: 5 },
-      express_2y: { label: "2 Year", stock: 5 }
+      express_3d: { label: "3 Days", stock: 0 },
+      express_7d: { label: "7 Days", stock: 25 },
+      express_1m: { label: "1 Month", stock: 25 },
+      express_6m: { label: "6 Month", stock: 0 },
+      express_1y: { label: "1 Year", stock: 0 },
+      express_2y: { label: "2 Year", stock: 0 }
     }
   },
 
   vpn_hma: {
     title: "🔐 HMA VPN",
     items: {
-      hma_3d: { label: "3 Days", stock: 5 },
-      hma_7d: { label: "7 Days", stock: 5 },
+      hma_3d: { label: "3 Days", stock: 0 },
+      hma_7d: { label: "7 Days", stock: 15 },
       hma_1m: { label: "1 Month", stock: 5 },
-      hma_6m: { label: "6 Month", stock: 5 },
-      hma_1y: { label: "1 Year", stock: 5 },
-      hma_2y: { label: "2 Year", stock: 5 }
+      hma_6m: { label: "6 Month", stock: 0 },
+      hma_1y: { label: "1 Year", stock: 0 },
+      hma_2y: { label: "2 Year", stock: 0 }
     }
   },
 
   vpn_ipvanish: {
     title: "🔐 IPVanish VPN",
     items: {
-      ipvanish_3d: { label: "3 Days", stock: 5 },
+      ipvanish_3d: { label: "3 Days", stock: 0 },
       ipvanish_7d: { label: "7 Days", stock: 5 },
-      ipvanish_1m: { label: "1 Month", stock: 5 },
-      ipvanish_6m: { label: "6 Month", stock: 5 },
-      ipvanish_1y: { label: "1 Year", stock: 5 },
-      ipvanish_2y: { label: "2 Year", stock: 5 }
+      ipvanish_1m: { label: "1 Month", stock: 0 },
+      ipvanish_6m: { label: "6 Month", stock: 0 },
+      ipvanish_1y: { label: "1 Year", stock: 0 },
+      ipvanish_2y: { label: "2 Year", stock: 0 }
     }
   },
 
   vpn_nord: {
     title: "🔐 Nord VPN",
     items: {
-      nord_3d: { label: "3 Days", stock: 5 },
-      nord_7d: { label: "7 Days", stock: 5 },
+      nord_3d: { label: "3 Days", stock: 0 },
+      nord_7d: { label: "7 Days", stock: 25 },
       nord_1m: { label: "1 Month", stock: 5 },
-      nord_6m: { label: "6 Month", stock: 5 },
-      nord_1y: { label: "1 Year", stock: 5 },
-      nord_2y: { label: "2 Year", stock: 5 }
+      nord_6m: { label: "6 Month", stock: 0 },
+      nord_1y: { label: "1 Year", stock: 0 },
+      nord_2y: { label: "2 Year", stock: 0 }
     }
   },
 
   vpn_x: {
     title: "🔐 X VPN",
     items: {
-      x_3d: { label: "3 Days", stock: 5 },
+      x_3d: { label: "3 Days", stock: 0 },
       x_7d: { label: "7 Days", stock: 5 },
-      x_1m: { label: "1 Month", stock: 5 },
-      x_6m: { label: "6 Month", stock: 5 },
-      x_1y: { label: "1 Year", stock: 5 },
-      x_2y: { label: "2 Year", stock: 5 }
+      x_1m: { label: "1 Month", stock: 0 },
+      x_6m: { label: "6 Month", stock: 0 },
+      x_1y: { label: "1 Year", stock: 0 },
+      x_2y: { label: "2 Year", stock: 0 }
     }
   },
 
   vpn_pia: {
     title: "🔐 PIA VPN",
     items: {
-      pia_3d: { label: "3 Days", stock: 5 },
-      pia_7d: { label: "7 Days", stock: 5 },
-      pia_1m: { label: "1 Month", stock: 5 },
-      pia_6m: { label: "6 Month", stock: 5 },
-      pia_1y: { label: "1 Year", stock: 5 },
-      pia_2y: { label: "2 Year", stock: 5 }
+      pia_3d: { label: "3 Days", stock: 0 },
+      pia_7d: { label: "7 Days", stock: 25 },
+      pia_1m: { label: "1 Month", stock: 25 },
+      pia_6m: { label: "6 Month", stock: 0 },
+      pia_1y: { label: "1 Year", stock: 0 },
+      pia_2y: { label: "2 Year", stock: 0 }
     }
   },
 
   vpn_bitdefender: {
     title: "🔐 Bitdefender VPN",
     items: {
-      bitdefender_3d: { label: "3 Days", stock: 5 },
+      bitdefender_3d: { label: "3 Days", stock: 0 },
       bitdefender_7d: { label: "7 Days", stock: 5 },
       bitdefender_1m: { label: "1 Month", stock: 5 },
-      bitdefender_6m: { label: "6 Month", stock: 5 },
-      bitdefender_1y: { label: "1 Year", stock: 5 },
-      bitdefender_2y: { label: "2 Year", stock: 5 }
+      bitdefender_6m: { label: "6 Month", stock: 0 },
+      bitdefender_1y: { label: "1 Year", stock: 0 },
+      bitdefender_2y: { label: "2 Year", stock: 0 }
     }
   },
 
   vpn_turbo: {
     title: "🔐 Turbo VPN",
     items: {
-      turbo_3d: { label: "3 Days", stock: 5 },
+      turbo_3d: { label: "3 Days", stock: 0 },
       turbo_7d: { label: "7 Days", stock: 5 },
-      turbo_1m: { label: "1 Month", stock: 5 },
-      turbo_6m: { label: "6 Month", stock: 5 },
-      turbo_1y: { label: "1 Year", stock: 5 },
-      turbo_2y: { label: "2 Year", stock: 5 }
+      turbo_1m: { label: "1 Month", stock: 0 },
+      turbo_6m: { label: "6 Month", stock: 0 },
+      turbo_1y: { label: "1 Year", stock: 0 },
+      turbo_2y: { label: "2 Year", stock: 0 }
     }
   },
 
   vpn_hotspot: {
     title: "🔐 Hotspot Shield VPN",
     items: {
-      hotspot_3d: { label: "3 Days", stock: 5 },
-      hotspot_7d: { label: "7 Days", stock: 5 },
+      hotspot_3d: { label: "3 Days", stock: 0 },
+      hotspot_7d: { label: "7 Days", stock: 15 },
       hotspot_1m: { label: "1 Month", stock: 5 },
-      hotspot_6m: { label: "6 Month", stock: 5 },
-      hotspot_1y: { label: "1 Year", stock: 5 },
-      hotspot_2y: { label: "2 Year", stock: 5 }
+      hotspot_6m: { label: "6 Month", stock: 0 },
+      hotspot_1y: { label: "1 Year", stock: 0 },
+      hotspot_2y: { label: "2 Year", stock: 0 }
     }
   },
 
   vpn_surfshark: {
     title: "🔐 Surfshark VPN",
     items: {
-      surfshark_3d: { label: "3 Days", stock: 5 },
-      surfshark_7d: { label: "7 Days", stock: 5 },
-      surfshark_1m: { label: "1 Month", stock: 5 },
+      surfshark_3d: { label: "3 Days", stock: 0 },
+      surfshark_7d: { label: "7 Days", stock: 25 },
+      surfshark_1m: { label: "1 Month", stock: 25 },
       surfshark_6m: { label: "6 Month", stock: 5 },
       surfshark_1y: { label: "1 Year", stock: 5 },
-      surfshark_2y: { label: "2 Year", stock: 5 }
+      surfshark_2y: { label: "2 Year", stock: 0 }
     }
   },
 
   vpn_proton: {
     title: "🔐 Proton VPN",
     items: {
-      proton_3d: { label: "3 Days", stock: 5 },
-      proton_7d: { label: "7 Days", stock: 5 },
-      proton_1m: { label: "1 Month", stock: 5 },
-      proton_6m: { label: "6 Month", stock: 5 },
-      proton_1y: { label: "1 Year", stock: 5 },
-      proton_2y: { label: "2 Year", stock: 5 }
+      proton_3d: { label: "3 Days", stock: 0 },
+      proton_7d: { label: "7 Days", stock: 25 },
+      proton_1m: { label: "1 Month", stock: 25 },
+      proton_6m: { label: "6 Month", stock: 0 },
+      proton_1y: { label: "1 Year", stock: 0 },
+      proton_2y: { label: "2 Year", stock: 0 }
     }
   },
 
   vpn_cheap: {
     title: "🔐 Cheap VPN",
     items: {
-      cheap_3d: { label: "3 Days", stock: 5 },
-      cheap_7d: { label: "7 Days", stock: 5 },
+      cheap_3d: { label: "3 Days", stock: 0 },
+      cheap_7d: { label: "7 Days", stock: 0 },
       cheap_1m: { label: "1 Month", stock: 5 },
-      cheap_6m: { label: "6 Month", stock: 5 },
-      cheap_1y: { label: "1 Year", stock: 5 },
-      cheap_2y: { label: "2 Year", stock: 5 }
+      cheap_6m: { label: "6 Month", stock: 0 },
+      cheap_1y: { label: "1 Year", stock: 0 },
+      cheap_2y: { label: "2 Year", stock: 0 }
     }
   },
 
   vpn_avast: {
     title: "🔐 Avast VPN",
     items: {
-      avast_3d: { label: "3 Days", stock: 5 },
+      avast_3d: { label: "3 Days", stock: 0 },
       avast_7d: { label: "7 Days", stock: 5 },
       avast_1m: { label: "1 Month", stock: 5 },
-      avast_6m: { label: "6 Month", stock: 5 },
-      avast_1y: { label: "1 Year", stock: 5 },
-      avast_2y: { label: "2 Year", stock: 5 }
+      avast_6m: { label: "6 Month", stock: 0 },
+      avast_1y: { label: "1 Year", stock: 0 },
+      avast_2y: { label: "2 Year", stock: 0 }
     }
   },
 
   vpn_vless: {
     title: "🔐 Vless Premium",
     items: {
-      vless_3d: { label: "3 Days", stock: 5 },
+      vless_3d: { label: "3 Days", stock: 0 },
       vless_7d: { label: "7 Days", stock: 5 },
       vless_1m: { label: "1 Month", stock: 5 },
-      vless_6m: { label: "6 Month", stock: 5 },
-      vless_1y: { label: "1 Year", stock: 5 },
-      vless_2y: { label: "2 Year", stock: 5 }
+      vless_6m: { label: "6 Month", stock: 0 },
+      vless_1y: { label: "1 Year", stock: 0 },
+      vless_2y: { label: "2 Year", stock: 0 }
     }
   },
   sub_google_ai: {
