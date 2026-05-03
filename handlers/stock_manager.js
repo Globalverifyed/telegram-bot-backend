@@ -43,7 +43,7 @@ const stockRegistry = {
     title: "🌍 9proxy IP",
     items: {
       // Discount packages
-      ip_d_25: { label: "25 IP (Discount)", stock: 5 },
+      ip_d_25: { label: "25 IP (Discount)", stock: 10 },
       ip_d_50: { label: "50 IP (Discount)", stock: 5 },
       ip_d_100: { label: "100 IP (Discount)", stock: 5 },
       ip_d_200: { label: "200 IP (Discount)", stock: 5 },
@@ -76,20 +76,20 @@ const stockRegistry = {
     title: "📦 9proxy GB",
     items: {
       // Discount packages
-      gb_d_1: { label: "1GB (Discount)", stock: 5 },
-      gb_d_2: { label: "2GB (Discount)", stock: 5 },
-      gb_d_3: { label: "3GB (Discount)", stock: 5 },
-      gb_d_5: { label: "5GB (Discount)", stock: 5 },
-      gb_d_10: { label: "10GB (Discount)", stock: 5 },
+      gb_d_1: { label: "1GB (Discount)", stock: 20 },
+      gb_d_2: { label: "2GB (Discount)", stock: 20 },
+      gb_d_3: { label: "3GB (Discount)", stock: 20 },
+      gb_d_5: { label: "5GB (Discount)", stock: 15 },
+      gb_d_10: { label: "10GB (Discount)", stock: 10 },
       gb_d_15: { label: "15GB (Discount)", stock: 5 },
       gb_d_20: { label: "20GB (Discount)", stock: 5 },
 
       // Regular packages
-      gb_r_1: { label: "1GB (Regular)", stock: 5 },
-      gb_r_2: { label: "2GB (Regular)", stock: 5 },
-      gb_r_3: { label: "3GB (Regular)", stock: 5 },
-      gb_r_5: { label: "5GB (Regular)", stock: 5 },
-      gb_r_10: { label: "10GB (Regular)", stock: 5 },
+      gb_r_1: { label: "1GB (Regular)", stock: 20 },
+      gb_r_2: { label: "2GB (Regular)", stock: 20 },
+      gb_r_3: { label: "3GB (Regular)", stock: 20 },
+      gb_r_5: { label: "5GB (Regular)", stock: 15 },
+      gb_r_10: { label: "10GB (Regular)", stock: 10 },
       gb_r_15: { label: "15GB (Regular)", stock: 5 },
       gb_r_20: { label: "20GB (Regular)", stock: 5 }
     }
