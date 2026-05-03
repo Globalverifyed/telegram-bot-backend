@@ -1,23 +1,23 @@
 const { sendOrEdit } = require("./utils");
 
 const abcDiscountPackages = [
-  { name: "1 GB", price: "$1 USDT", callback: "abc_discount_1gb" },
-  { name: "2 GB", price: "$2 USDT", callback: "abc_discount_2gb" },
-  { name: "3 GB", price: "$3 USDT", callback: "abc_discount_3gb" },
-  { name: "4 GB", price: "$4 USDT", callback: "abc_discount_4gb" },
-  { name: "5 GB", price: "$5 USDT", callback: "abc_discount_5gb" },
-  { name: "10 GB", price: "$9.5 USDT", callback: "abc_discount_10gb" }
+  { name: "1 GB", price: "$1.10 USDT", callback: "abc_discount_1gb" },
+  { name: "2 GB", price: "$2.20 USDT", callback: "abc_discount_2gb" },
+  { name: "3 GB", price: "$3.30 USDT", callback: "abc_discount_3gb" },
+  { name: "4 GB", price: "$4.40 USDT", callback: "abc_discount_4gb" },
+  { name: "5 GB", price: "$5.50 USDT", callback: "abc_discount_5gb" },
+  { name: "10 GB", price: "$10.50 USDT", callback: "abc_discount_10gb" }
 ];
 
 const abcRegularPackages = [
-  { name: "1 GB", price: "$1.10", callback: "abc_regular_1gb" },
-  { name: "2 GB", price: "$2.20", callback: "abc_regular_2gb" },
-  { name: "3 GB", price: "$3.30", callback: "abc_regular_3gb" },
-  { name: "4 GB", price: "$4.40", callback: "abc_regular_4gb" },
-  { name: "5 GB", price: "$5.50", callback: "abc_regular_5gb" },
-  { name: "10 GB", price: "$10.50", callback: "abc_regular_10gb" },
-  { name: "15 GB", price: "$16.50", callback: "abc_regular_15gb" },
-  { name: "20 GB", price: "$21.00", callback: "abc_regular_20gb" }
+  { name: "1 GB", price: "$1.25", callback: "abc_regular_1gb" },
+  { name: "2 GB", price: "$2.45", callback: "abc_regular_2gb" },
+  { name: "3 GB", price: "$3.65", callback: "abc_regular_3gb" },
+  { name: "4 GB", price: "$4.85", callback: "abc_regular_4gb" },
+  { name: "5 GB", price: "$6.10", callback: "abc_regular_5gb" },
+  { name: "10 GB", price: "$12.10", callback: "abc_regular_10gb" },
+  { name: "15 GB", price: "$18.15", callback: "abc_regular_15gb" },
+  { name: "20 GB", price: "$23.50", callback: "abc_regular_20gb" }
 ];
 
 function makePackageButtons(packages) {
