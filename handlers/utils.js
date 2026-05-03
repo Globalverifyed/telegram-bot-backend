@@ -1,19 +1,27 @@
 async function sendOrEdit(bot, queryOrChatId, text, keyboard) {
   if (typeof queryOrChatId === "object" && queryOrChatId.message) {
+    const chatId = queryOrChatId.message.chat.id;
+    const messageId = queryOrChatId.message.message_id;
+
     try {
-      await bot.editMessageText(text, {
-        chat_id: queryOrChatId.message.chat.id,
-        message_id: queryOrChatId.message.message_id,
-        reply_markup: { inline_keyboard: keyboard }
-      });
+      await bot.deleteMessage(chatId, messageId);
     } catch (err) {
-      console.log("Edit failed:", err.message);
+      console.log("Delete failed:", err.message);
     }
+
+    await bot.sendMessage(chatId, text, {
+      reply_markup: {
+        inline_keyboard: keyboard
+      }
+    });
+
     return true;
   }
 
   await bot.sendMessage(queryOrChatId, text, {
-    reply_markup: { inline_keyboard: keyboard }
+    reply_markup: {
+      inline_keyboard: keyboard
+    }
   });
 
   return true;
