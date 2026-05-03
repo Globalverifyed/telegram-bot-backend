@@ -182,17 +182,17 @@ abc_proxy: {
 proxy_seller: {
   title: "🌐 Proxy Seller",
   items: {
-    ps_d_1: { label: "1GB (Discount)", stock: 5 },
-    ps_d_2: { label: "2GB (Discount)", stock: 5 },
-    ps_d_3: { label: "3GB (Discount)", stock: 5 },
-    ps_d_4: { label: "4GB (Discount)", stock: 5 },
-    ps_d_5: { label: "5GB (Discount)", stock: 5 },
+    ps_d_1: { label: "1GB (Discount)", stock: 15 },
+    ps_d_2: { label: "2GB (Discount)", stock: 15 },
+    ps_d_3: { label: "3GB (Discount)", stock: 15 },
+    ps_d_4: { label: "4GB (Discount)", stock: 15 },
+    ps_d_5: { label: "5GB (Discount)", stock: 10 },
 
-    ps_r_1: { label: "1GB (Regular)", stock: 5 },
-    ps_r_2: { label: "2GB (Regular)", stock: 5 },
-    ps_r_3: { label: "3GB (Regular)", stock: 5 },
-    ps_r_4: { label: "4GB (Regular)", stock: 5 },
-    ps_r_5: { label: "5GB (Regular)", stock: 5 },
+    ps_r_1: { label: "1GB (Regular)", stock: 15 },
+    ps_r_2: { label: "2GB (Regular)", stock: 15 },
+    ps_r_3: { label: "3GB (Regular)", stock: 15 },
+    ps_r_4: { label: "4GB (Regular)", stock: 15 },
+    ps_r_5: { label: "5GB (Regular)", stock: 10 },
     ps_r_10: { label: "10GB (Regular)", stock: 5 },
     ps_r_15: { label: "15GB (Regular)", stock: 5 },
     ps_r_20: { label: "20GB (Regular)", stock: 5 }
