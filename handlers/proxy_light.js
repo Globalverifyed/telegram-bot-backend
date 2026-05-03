@@ -1,22 +1,22 @@
 const { sendOrEdit } = require("./utils");
 
 const proxyLightDiscountPackages = [
-  { name: "1 GB", price: "$1.5 USDT", callback: "proxy_light_discount_1gb" },
-  { name: "2 GB", price: "$3 USDT", callback: "proxy_light_discount_2gb" },
-  { name: "3 GB", price: "$4.5 USDT", callback: "proxy_light_discount_3gb" },
-  { name: "4 GB", price: "$6 USDT", callback: "proxy_light_discount_4gb" },
-  { name: "5 GB", price: "$7.5 USDT", callback: "proxy_light_discount_5gb" }
+  { name: "1 GB", price: "$3.50 USDT", callback: "proxy_light_discount_1gb" },
+  { name: "2 GB", price: "$7.00 USDT", callback: "proxy_light_discount_2gb" },
+  { name: "3 GB", price: "$10.50 USDT", callback: "proxy_light_discount_3gb" },
+  { name: "4 GB", price: "$14.00 USDT", callback: "proxy_light_discount_4gb" },
+  { name: "5 GB", price: "$17.50 USDT", callback: "proxy_light_discount_5gb" }
 ];
 
 const proxyLightRegularPackages = [
-  { name: "1 GB", price: "$1.10", callback: "proxy_light_regular_1gb" },
-  { name: "2 GB", price: "$2.20", callback: "proxy_light_regular_2gb" },
-  { name: "3 GB", price: "$3.30", callback: "proxy_light_regular_3gb" },
-  { name: "4 GB", price: "$4.40", callback: "proxy_light_regular_4gb" },
-  { name: "5 GB", price: "$5.50", callback: "proxy_light_regular_5gb" },
-  { name: "10 GB", price: "$10.50", callback: "proxy_light_regular_10gb" },
-  { name: "15 GB", price: "$16.50", callback: "proxy_light_regular_15gb" },
-  { name: "20 GB", price: "$21.00", callback: "proxy_light_regular_20gb" }
+  { name: "1 GB", price: "$4.50", callback: "proxy_light_regular_1gb" },
+  { name: "2 GB", price: "$8.50", callback: "proxy_light_regular_2gb" },
+  { name: "3 GB", price: "$13.00", callback: "proxy_light_regular_3gb" },
+  { name: "4 GB", price: "$16.50", callback: "proxy_light_regular_4gb" },
+  { name: "5 GB", price: "$19.50", callback: "proxy_light_regular_5gb" },
+  { name: "10 GB", price: "$31.50", callback: "proxy_light_regular_10gb" },
+  { name: "15 GB", price: "$46.00", callback: "proxy_light_regular_15gb" },
+  { name: "20 GB", price: "$62.00", callback: "proxy_light_regular_20gb" }
 ];
 
 function makePackageButtons(packages) {
