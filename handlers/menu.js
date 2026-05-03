@@ -1,3 +1,4 @@
+const fs = require("fs");
 const path = require("path");
 
 function getMainButtons() {
@@ -17,52 +18,38 @@ function getMainButtons() {
   ];
 }
 
-function getDescription() {
-  return `🚀 Global Verified Shop | Premium Digital Services 🔥
-
-🌐 Premium Proxy & IP
-🔐 Premium VPN
-💎 Premium Subscriptions
-📦 Digital Services
-
-✅ Fast Delivery
-✅ Trusted Service
-✅ Easy Payment
-✅ Support Available
-
-⏰ Service Time:
-11:00 AM — 04:00 AM Daily
-
-👇 Select an option below:`;
-}
-
 async function showMainMenu(bot, chatIdOrQuery) {
   const bannerPath = path.join(__dirname, "..", "assets", "banner.png");
 
+  let chatId;
+  let messageId;
+
   if (typeof chatIdOrQuery === "object" && chatIdOrQuery.message) {
-    const chatId = chatIdOrQuery.message.chat.id;
-    const messageId = chatIdOrQuery.message.message_id;
+    chatId = chatIdOrQuery.message.chat.id;
+    messageId = chatIdOrQuery.message.message_id;
 
     try {
       await bot.deleteMessage(chatId, messageId);
     } catch (err) {
       console.log("Delete menu failed:", err.message);
     }
-
-    return bot.sendPhoto(chatId, bannerPath, {
-      caption: getDescription(),
-      reply_markup: {
-        inline_keyboard: getMainButtons()
-      }
-    });
+  } else {
+    chatId = chatIdOrQuery;
   }
 
-  return bot.sendPhoto(chatIdOrQuery, bannerPath, {
-    caption: getDescription(),
+  const options = {
     reply_markup: {
       inline_keyboard: getMainButtons()
     }
-  });
+  };
+
+  // 👉 image থাকলে শুধু image + button
+  if (fs.existsSync(bannerPath)) {
+    return bot.sendPhoto(chatId, bannerPath, options);
+  }
+
+  // 👉 image না থাকলে শুধু button
+  return bot.sendMessage(chatId, "👇 Select an option:", options);
 }
 
 module.exports = { showMainMenu };
