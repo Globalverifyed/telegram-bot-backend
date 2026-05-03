@@ -197,8 +197,8 @@ const vpnProducts = {
     stockKey: "vpn_cheap",
     packages: {
       cheap_3d: { label: "3 Days", price: "Stock Out" },
-      cheap_7d: { label: "7 Days", price: "$6.00" },
-      cheap_1m: { label: "1 Month", price: "Stock Out" },
+      cheap_7d: { label: "7 Days", price: "Stock Out" },
+      cheap_1m: { label: "1 Month", price: "$6.00" },
       cheap_6m: { label: "6 Month", price: "Stock Out" },
       cheap_1y: { label: "1 Year", price: "Stock Out" },
       cheap_2y: { label: "2 Year", price: "Stock Out" }
