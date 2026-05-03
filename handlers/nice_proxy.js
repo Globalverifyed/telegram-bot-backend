@@ -32,8 +32,8 @@ const regularPackages = {
   np_r_1000: { label: "1000 IP", price: "$55.00" },
   np_r_2000: { label: "2000 IP", price: "$107.55" },
   np_r_3000: { label: "3000 IP", price: "$162.50" },
-  np_r_4000: { label: "4000 IP", price: "$80.00" },
-  np_r_5000: { label: "5000 IP", price: "$100.00" }
+  np_r_4000: { label: "4000 IP", price: "$208.00" },
+  np_r_5000: { label: "5000 IP", price: "$260.00" }
 };
 
 function buildButtons(packages) {
