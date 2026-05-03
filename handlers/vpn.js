@@ -14,12 +14,12 @@ const vpnProducts = {
     name: "CyberGhost VPN",
     stockKey: "vpn_cyberghost",
     packages: {
-      cg_3d: { label: "3 Days", price: "$1.00" },
-      cg_7d: { label: "7 Days", price: "$2.00" },
-      cg_1m: { label: "1 Month", price: "$3.00" },
-      cg_6m: { label: "6 Month", price: "$4.00" },
-      cg_1y: { label: "1 Year", price: "$5.00" },
-      cg_2y: { label: "2 Year", price: "$6.00" }
+      cg_3d: { label: "3 Days", price: "$0.20" },
+      cg_7d: { label: "7 Days", price: "Stock Out" },
+      cg_1m: { label: "1 Month", price: "Stock Out" },
+      cg_6m: { label: "6 Month", price: "$Stock Out" },
+      cg_1y: { label: "1 Year", price: "Stock Out" },
+      cg_2y: { label: "2 Year", price: "Stock Out" }
     }
   },
 
@@ -28,12 +28,12 @@ const vpnProducts = {
     name: "Panda VPN",
     stockKey: "vpn_panda",
     packages: {
-      panda_3d: { label: "3 Days", price: "$1.00" },
-      panda_7d: { label: "7 Days", price: "$2.00" },
-      panda_1m: { label: "1 Month", price: "$3.00" },
-      panda_6m: { label: "6 Month", price: "$4.00" },
-      panda_1y: { label: "1 Year", price: "$5.00" },
-      panda_2y: { label: "2 Year", price: "$6.00" }
+      panda_3d: { label: "3 Days", price: "$0.20" },
+      panda_7d: { label: "7 Days", price: "Stock Out" },
+      panda_1m: { label: "1 Month", price: "Stock Out" },
+      panda_6m: { label: "6 Month", price: "Stock Out" },
+      panda_1y: { label: "1 Year", price: "Stock Out" },
+      panda_2y: { label: "2 Year", price: "Stock Out" }
     }
   },
 
@@ -42,12 +42,12 @@ const vpnProducts = {
     name: "Express VPN",
     stockKey: "vpn_express",
     packages: {
-      express_3d: { label: "3 Days", price: "$1.00" },
-      express_7d: { label: "7 Days", price: "$2.00" },
-      express_1m: { label: "1 Month", price: "$3.00" },
-      express_6m: { label: "6 Month", price: "$4.00" },
-      express_1y: { label: "1 Year", price: "$5.00" },
-      express_2y: { label: "2 Year", price: "$6.00" }
+      express_3d: { label: "3 Days", price: "Stock Out" },
+      express_7d: { label: "7 Days", price: "$0.32" },
+      express_1m: { label: "1 Month", price: "$1.10" },
+      express_6m: { label: "6 Month", price: "Stock Out" },
+      express_1y: { label: "1 Year", price: "Stock Out" },
+      express_2y: { label: "2 Year", price: "Stock Out" }
     }
   },
 
@@ -56,12 +56,12 @@ const vpnProducts = {
     name: "HMA VPN",
     stockKey: "vpn_hma",
     packages: {
-      hma_3d: { label: "3 Days", price: "$1.00" },
-      hma_7d: { label: "7 Days", price: "$2.00" },
-      hma_1m: { label: "1 Month", price: "$3.00" },
-      hma_6m: { label: "6 Month", price: "$4.00" },
-      hma_1y: { label: "1 Year", price: "$5.00" },
-      hma_2y: { label: "2 Year", price: "$6.00" }
+      hma_3d: { label: "3 Days", price: "Stock Out" },
+      hma_7d: { label: "7 Days", price: "$0.32" },
+      hma_1m: { label: "1 Month", price: "$1.00" },
+      hma_6m: { label: "6 Month", price: "Stock Out" },
+      hma_1y: { label: "1 Year", price: "Stock Out" },
+      hma_2y: { label: "2 Year", price: "Stock Out" }
     }
   },
 
@@ -70,12 +70,12 @@ const vpnProducts = {
     name: "IPVanish VPN",
     stockKey: "vpn_ipvanish",
     packages: {
-      ipvanish_3d: { label: "3 Days", price: "$1.00" },
-      ipvanish_7d: { label: "7 Days", price: "$2.00" },
-      ipvanish_1m: { label: "1 Month", price: "$3.00" },
-      ipvanish_6m: { label: "6 Month", price: "$4.00" },
-      ipvanish_1y: { label: "1 Year", price: "$5.00" },
-      ipvanish_2y: { label: "2 Year", price: "$6.00" }
+      ipvanish_3d: { label: "3 Days", price: "Stock Out" },
+      ipvanish_7d: { label: "7 Days", price: "$0.32" },
+      ipvanish_1m: { label: "1 Month", price: "Stock Out" },
+      ipvanish_6m: { label: "6 Month", price: "Stock Out" },
+      ipvanish_1y: { label: "1 Year", price: "Stock Out" },
+      ipvanish_2y: { label: "2 Year", price: "Stock Out" }
     }
   },
 
@@ -84,12 +84,12 @@ const vpnProducts = {
     name: "Nord VPN",
     stockKey: "vpn_nord",
     packages: {
-      nord_3d: { label: "3 Days", price: "$1.00" },
-      nord_7d: { label: "7 Days", price: "$2.00" },
-      nord_1m: { label: "1 Month", price: "$3.00" },
-      nord_6m: { label: "6 Month", price: "$4.00" },
-      nord_1y: { label: "1 Year", price: "$5.00" },
-      nord_2y: { label: "2 Year", price: "$6.00" }
+      nord_3d: { label: "3 Days", price: "Stock Out" },
+      nord_7d: { label: "7 Days", price: "$0.32" },
+      nord_1m: { label: "1 Month", price: "$2.10" },
+      nord_6m: { label: "6 Month", price: "Stock Out" },
+      nord_1y: { label: "1 Year", price: "$14.00" },
+      nord_2y: { label: "2 Year", price: "$31.00" }
     }
   },
 
@@ -98,12 +98,12 @@ const vpnProducts = {
     name: "X VPN",
     stockKey: "vpn_x",
     packages: {
-      x_3d: { label: "3 Days", price: "$1.00" },
-      x_7d: { label: "7 Days", price: "$2.00" },
-      x_1m: { label: "1 Month", price: "$3.00" },
-      x_6m: { label: "6 Month", price: "$4.00" },
-      x_1y: { label: "1 Year", price: "$5.00" },
-      x_2y: { label: "2 Year", price: "$6.00" }
+      x_3d: { label: "3 Days", price: "Stock Out" },
+      x_7d: { label: "7 Days", price: "$0.32" },
+      x_1m: { label: "1 Month", price: "Stock Out" },
+      x_6m: { label: "6 Month", price: "Stock Out" },
+      x_1y: { label: "1 Year", price: "Stock Out" },
+      x_2y: { label: "2 Year", price: "Stock Out" }
     }
   },
 
@@ -112,12 +112,12 @@ const vpnProducts = {
     name: "PIA VPN",
     stockKey: "vpn_pia",
     packages: {
-      pia_3d: { label: "3 Days", price: "$1.00" },
-      pia_7d: { label: "7 Days", price: "$2.00" },
-      pia_1m: { label: "1 Month", price: "$3.00" },
-      pia_6m: { label: "6 Month", price: "$4.00" },
-      pia_1y: { label: "1 Year", price: "$5.00" },
-      pia_2y: { label: "2 Year", price: "$6.00" }
+      pia_3d: { label: "3 Days", price: "Stock Out" },
+      pia_7d: { label: "7 Days", price: "$0.32" },
+      pia_1m: { label: "1 Month", price: "$2.10" },
+      pia_6m: { label: "6 Month", price: "Stock Out" },
+      pia_1y: { label: "1 Year", price: "Stock Out" },
+      pia_2y: { label: "2 Year", price: "Stock Out" }
     }
   },
 
@@ -126,12 +126,12 @@ const vpnProducts = {
     name: "Bitdefender VPN",
     stockKey: "vpn_bitdefender",
     packages: {
-      bitdefender_3d: { label: "3 Days", price: "$1.00" },
-      bitdefender_7d: { label: "7 Days", price: "$2.00" },
-      bitdefender_1m: { label: "1 Month", price: "$3.00" },
-      bitdefender_6m: { label: "6 Month", price: "$4.00" },
-      bitdefender_1y: { label: "1 Year", price: "$5.00" },
-      bitdefender_2y: { label: "2 Year", price: "$6.00" }
+      bitdefender_3d: { label: "3 Days", price: "Stock Out" },
+      bitdefender_7d: { label: "7 Days", price: "$0.32" },
+      bitdefender_1m: { label: "1 Month", price: "$1.00" },
+      bitdefender_6m: { label: "6 Month", price: "Stock Out" },
+      bitdefender_1y: { label: "1 Year", price: "Stock Out" },
+      bitdefender_2y: { label: "2 Year", price: "Stock Out" }
     }
   },
 
@@ -140,12 +140,12 @@ const vpnProducts = {
     name: "Turbo VPN",
     stockKey: "vpn_turbo",
     packages: {
-      turbo_3d: { label: "3 Days", price: "$1.00" },
-      turbo_7d: { label: "7 Days", price: "$2.00" },
-      turbo_1m: { label: "1 Month", price: "$3.00" },
-      turbo_6m: { label: "6 Month", price: "$4.00" },
-      turbo_1y: { label: "1 Year", price: "$5.00" },
-      turbo_2y: { label: "2 Year", price: "$6.00" }
+      turbo_3d: { label: "3 Days", price: "Stock Out" },
+      turbo_7d: { label: "7 Days", price: "$0.32" },
+      turbo_1m: { label: "1 Month", price: "Stock Out" },
+      turbo_6m: { label: "6 Month", price: "Stock Out" },
+      turbo_1y: { label: "1 Year", price: "Stock Out" },
+      turbo_2y: { label: "2 Year", price: "Stock Out" }
     }
   },
 
@@ -154,12 +154,12 @@ const vpnProducts = {
     name: "Hotspot Shield VPN",
     stockKey: "vpn_hotspot",
     packages: {
-      hotspot_3d: { label: "3 Days", price: "$1.00" },
-      hotspot_7d: { label: "7 Days", price: "$2.00" },
-      hotspot_1m: { label: "1 Month", price: "$3.00" },
-      hotspot_6m: { label: "6 Month", price: "$4.00" },
-      hotspot_1y: { label: "1 Year", price: "$5.00" },
-      hotspot_2y: { label: "2 Year", price: "$6.00" }
+      hotspot_3d: { label: "3 Days", price: "Stock Out" },
+      hotspot_7d: { label: "7 Days", price: "$0.32" },
+      hotspot_1m: { label: "1 Month", price: "$2.00" },
+      hotspot_6m: { label: "6 Month", price: "Stock Out" },
+      hotspot_1y: { label: "1 Year", price: "Stock Out" },
+      hotspot_2y: { label: "2 Year", price: "Stock Out" }
     }
   },
 
@@ -168,12 +168,12 @@ const vpnProducts = {
     name: "Surfshark VPN",
     stockKey: "vpn_surfshark",
     packages: {
-      surfshark_3d: { label: "3 Days", price: "$1.00" },
-      surfshark_7d: { label: "7 Days", price: "$2.00" },
+      surfshark_3d: { label: "3 Days", price: "Stock Out" },
+      surfshark_7d: { label: "7 Days", price: "$0.32" },
       surfshark_1m: { label: "1 Month", price: "$3.00" },
-      surfshark_6m: { label: "6 Month", price: "$4.00" },
-      surfshark_1y: { label: "1 Year", price: "$5.00" },
-      surfshark_2y: { label: "2 Year", price: "$6.00" }
+      surfshark_6m: { label: "6 Month", price: "$16.00" },
+      surfshark_1y: { label: "1 Year", price: "$28.00" },
+      surfshark_2y: { label: "2 Year", price: "Stock Out" }
     }
   },
 
@@ -182,12 +182,12 @@ const vpnProducts = {
     name: "Proton VPN",
     stockKey: "vpn_proton",
     packages: {
-      proton_3d: { label: "3 Days", price: "$1.00" },
-      proton_7d: { label: "7 Days", price: "$2.00" },
-      proton_1m: { label: "1 Month", price: "$3.00" },
-      proton_6m: { label: "6 Month", price: "$4.00" },
-      proton_1y: { label: "1 Year", price: "$5.00" },
-      proton_2y: { label: "2 Year", price: "$6.00" }
+      proton_3d: { label: "3 Days", price: "Stock Out" },
+      proton_7d: { label: "7 Days", price: "$0.32" },
+      proton_1m: { label: "1 Month", price: "$2.20" },
+      proton_6m: { label: "6 Month", price: "Stock Out" },
+      proton_1y: { label: "1 Year", price: "Stock Out" },
+      proton_2y: { label: "2 Year", price: "Stock Out" }
     }
   },
 
@@ -196,12 +196,12 @@ const vpnProducts = {
     name: "Cheap VPN",
     stockKey: "vpn_cheap",
     packages: {
-      cheap_3d: { label: "3 Days", price: "$1.00" },
-      cheap_7d: { label: "7 Days", price: "$2.00" },
-      cheap_1m: { label: "1 Month", price: "$3.00" },
-      cheap_6m: { label: "6 Month", price: "$4.00" },
-      cheap_1y: { label: "1 Year", price: "$5.00" },
-      cheap_2y: { label: "2 Year", price: "$6.00" }
+      cheap_3d: { label: "3 Days", price: "Stock Out" },
+      cheap_7d: { label: "7 Days", price: "$6.00" },
+      cheap_1m: { label: "1 Month", price: "Stock Out" },
+      cheap_6m: { label: "6 Month", price: "Stock Out" },
+      cheap_1y: { label: "1 Year", price: "Stock Out" },
+      cheap_2y: { label: "2 Year", price: "Stock Out" }
     }
   },
 
@@ -210,12 +210,12 @@ const vpnProducts = {
     name: "Avast VPN",
     stockKey: "vpn_avast",
     packages: {
-      avast_3d: { label: "3 Days", price: "$1.00" },
-      avast_7d: { label: "7 Days", price: "$2.00" },
-      avast_1m: { label: "1 Month", price: "$3.00" },
-      avast_6m: { label: "6 Month", price: "$4.00" },
-      avast_1y: { label: "1 Year", price: "$5.00" },
-      avast_2y: { label: "2 Year", price: "$6.00" }
+      avast_3d: { label: "3 Days", price: "Stock Out" },
+      avast_7d: { label: "7 Days", price: "$0.32" },
+      avast_1m: { label: "1 Month", price: "$1.10" },
+      avast_6m: { label: "6 Month", price: "Stock Out" },
+      avast_1y: { label: "1 Year", price: "Stock Out" },
+      avast_2y: { label: "2 Year", price: "Stock Out" }
     }
   },
 
@@ -224,12 +224,12 @@ const vpnProducts = {
     name: "Vless Premium",
     stockKey: "vpn_vless",
     packages: {
-      vless_3d: { label: "3 Days", price: "$1.00" },
-      vless_7d: { label: "7 Days", price: "$2.00" },
-      vless_1m: { label: "1 Month", price: "$3.00" },
-      vless_6m: { label: "6 Month", price: "$4.00" },
-      vless_1y: { label: "1 Year", price: "$5.00" },
-      vless_2y: { label: "2 Year", price: "$6.00" }
+      vless_3d: { label: "3 Days", price: "Stock Out" },
+      vless_7d: { label: "7 Days", price: "$1.00" },
+      vless_1m: { label: "1 Month", price: "$3.10" },
+      vless_6m: { label: "6 Month", price: "Stock Out" },
+      vless_1y: { label: "1 Year", price: "Stock Out" },
+      vless_2y: { label: "2 Year", price: "Stock Out" }
     }
   }
 };
