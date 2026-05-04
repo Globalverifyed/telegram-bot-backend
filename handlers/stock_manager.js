@@ -276,20 +276,20 @@ nodemaven: {
 cliproxy: {
   title: "🌐 CLiProxy",
   items: {
-    cp_d_1: { label: "1GB (Discount)", stock: 5 },
-    cp_d_2: { label: "2GB (Discount)", stock: 5 },
-    cp_d_3: { label: "3GB (Discount)", stock: 5 },
-    cp_d_4: { label: "4GB (Discount)", stock: 5 },
-    cp_d_5: { label: "5GB (Discount)", stock: 5 },
+    cp_d_25: { label: "25IP (Discount)", stock: 5 },
+    cp_d_50: { label: "50IP (Discount)", stock: 5 },
+    cp_d_100: { label: "100IP (Discount)", stock: 5 },
+    cp_d_200: { label: "200IP (Discount)", stock: 5 },
+    cp_d_400: { label: "400IP (Discount)", stock: 5 },
 
-    cp_r_1: { label: "1GB (Regular)", stock: 5 },
-    cp_r_2: { label: "2GB (Regular)", stock: 5 },
-    cp_r_3: { label: "3GB (Regular)", stock: 5 },
-    cp_r_4: { label: "4GB (Regular)", stock: 5 },
-    cp_r_5: { label: "5GB (Regular)", stock: 5 },
-    cp_r_10: { label: "10GB (Regular)", stock: 5 },
-    cp_r_15: { label: "15GB (Regular)", stock: 5 },
-    cp_r_20: { label: "20GB (Regular)", stock: 5 }
+    cp_r_25: { label: "25IP (Regular)", stock: 5 },
+    cp_r_50: { label: "50IP (Regular)", stock: 5 },
+    cp_r_100: { label: "100IP (Regular)", stock: 5 },
+    cp_r_200: { label: "200IP (Regular)", stock: 5 },
+    cp_r_400: { label: "400IP (Regular)", stock: 5 },
+    cp_r_800: { label: "800IP (Regular)", stock: 5 },
+    cp_r_1000: { label: "1000IP (Regular)", stock: 5 },
+    cp_r_1200: { label: "1200IP (Regular)", stock: 5 }
   }
 },
 cherry_proxy: {
