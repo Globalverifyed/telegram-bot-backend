@@ -1,29 +1,22 @@
 const { sendOrEdit } = require("./utils");
 
 const novProxyDiscountPackages = [
-  { name: "25 IP", price: "$2.00 USDT", callback: "nov_proxy_discount_25IP" },
-  { name: "50 IP", price: "$4.00 USDT", callback: "nov_proxy_discount_50IP" },
-  { name: "100 IP", price: "$8.00 USDT", callback: "nov_proxy_discount_100IP" },
-  { name: "200 IP", price: "$16.00 USDT", callback: "nov_proxy_discount_200IP" },
-  { name: "400 IP", price: "$32.00 USDT", callback: "nov_proxy_discount_400IP" }
-  { name: "800 IP", price: "$58 USDT", callback: "nov_proxy_discount_800IP" },
-  { name: "1000 IP", price: "$70.00 USDT", callback: "nov_proxy_discount_1000IP" },
-  { name: "1200 IP", price: "$80.00 USDT", callback: "nov_proxy_discount_1200IP" },
-  { name: "1600 IP", price: "$105.00 USDT", callback: "nov_proxy_discount_1600IP" },
-  { name: "2200 IP", price: "$135.00 USDT", callback: "nov_proxy_discount_2200IP" }
+  { name: "1 GB", price: "$1.5 USDT", callback: "nov_proxy_discount_1gb" },
+  { name: "2 GB", price: "$3 USDT", callback: "nov_proxy_discount_2gb" },
+  { name: "3 GB", price: "$4.5 USDT", callback: "nov_proxy_discount_3gb" },
+  { name: "4 GB", price: "$6 USDT", callback: "nov_proxy_discount_4gb" },
+  { name: "5 GB", price: "$7.5 USDT", callback: "nov_proxy_discount_5gb" }
 ];
 
 const novProxyRegularPackages = [
-  { name: "25 IP", price: "$3.00", callback: "nov_proxy_regular_25ip" },
-  { name: "50 IP", price: "$6.00", callback: "nov_proxy_regular_50ip" },
-  { name: "100 IP", price: "$12.00", callback: "nov_proxy_regular_100ip" },
-  { name: "200 IP", price: "$22.00", callback: "nov_proxy_regular_200ip" },
-  { name: "400 IP", price: "$42.00", callback: "nov_proxy_regular_400ip" },
-  { name: "800 IP", price: "$78.00", callback: "nov_proxy_regular_800ip" },
-  { name: "1000 IP", price: "$88.00", callback: "nov_proxy_regular_1000ip" },
-  { name: "1200 IP", price: "$99.00", callback: "nov_proxy_regular_1200ip" }
-  { name: "1600 IP", price: "$125.00", callback: "nov_proxy_regular_1600ip" },
-  { name: "2200 IP", price: "$155.00", callback: "nov_proxy_regular_2200ip" }
+  { name: "1 GB", price: "$1.10", callback: "nov_proxy_regular_1gb" },
+  { name: "2 GB", price: "$2.20", callback: "nov_proxy_regular_2gb" },
+  { name: "3 GB", price: "$3.30", callback: "nov_proxy_regular_3gb" },
+  { name: "4 GB", price: "$4.40", callback: "nov_proxy_regular_4gb" },
+  { name: "5 GB", price: "$5.50", callback: "nov_proxy_regular_5gb" },
+  { name: "10 GB", price: "$10.50", callback: "nov_proxy_regular_10gb" },
+  { name: "15 GB", price: "$16.50", callback: "nov_proxy_regular_15gb" },
+  { name: "20 GB", price: "$21.00", callback: "nov_proxy_regular_20gb" }
 ];
 
 function makePackageButtons(packages) {
