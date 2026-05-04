@@ -218,22 +218,23 @@ proxy_light: {
   }
 },
 nov_proxy: {
-  title: "🌐 Nov Proxy",
+  title: "🌐 Nov Proxy (IP)",
   items: {
-    nv_d_1: { label: "1GB (Discount)", stock: 5 },
-    nv_d_2: { label: "2GB (Discount)", stock: 5 },
-    nv_d_3: { label: "3GB (Discount)", stock: 5 },
-    nv_d_4: { label: "4GB (Discount)", stock: 5 },
-    nv_d_5: { label: "5GB (Discount)", stock: 5 },
+    // Discount
+    nov_proxy_discount_25ip: { label: "25 IP", stock: 5 },
+    nov_proxy_discount_50ip: { label: "50 IP", stock: 5 },
+    nov_proxy_discount_100ip: { label: "100 IP", stock: 5 },
+    nov_proxy_discount_200ip: { label: "200 IP", stock: 5 },
+    nov_proxy_discount_300ip: { label: "300 IP", stock: 5 },
+    nov_proxy_discount_500ip: { label: "500 IP", stock: 5 },
 
-    nv_r_1: { label: "1GB (Regular)", stock: 5 },
-    nv_r_2: { label: "2GB (Regular)", stock: 5 },
-    nv_r_3: { label: "3GB (Regular)", stock: 5 },
-    nv_r_4: { label: "4GB (Regular)", stock: 5 },
-    nv_r_5: { label: "5GB (Regular)", stock: 5 },
-    nv_r_10: { label: "10GB (Regular)", stock: 5 },
-    nv_r_15: { label: "15GB (Regular)", stock: 5 },
-    nv_r_20: { label: "20GB (Regular)", stock: 5 }
+    // Regular
+    nov_proxy_regular_25ip: { label: "25 IP", stock: 5 },
+    nov_proxy_regular_50ip: { label: "50 IP", stock: 5 },
+    nov_proxy_regular_100ip: { label: "100 IP", stock: 5 },
+    nov_proxy_regular_200ip: { label: "200 IP", stock: 5 },
+    nov_proxy_regular_300ip: { label: "300 IP", stock: 5 },
+    nov_proxy_regular_500ip: { label: "500 IP", stock: 5 }
   }
 },
 iprocket_proxy: {
