@@ -3,22 +3,22 @@ const { isAvailable, reduceStock } = require("./stock_manager");
 
 /* ===================== DISCOUNT (IP) ===================== */
 const novProxyDiscountPackages = [
-  { name: "25 IP", price: "$0.79", callback: "nov_proxy_discount_25ip" },
-  { name: "50 IP", price: "$1.49", callback: "nov_proxy_discount_50ip" },
-  { name: "100 IP", price: "$2.49", callback: "nov_proxy_discount_100ip" },
-  { name: "200 IP", price: "$4.79", callback: "nov_proxy_discount_200ip" },
-  { name: "300 IP", price: "$7.10", callback: "nov_proxy_discount_300ip" },
-  { name: "500 IP", price: "$11.90", callback: "nov_proxy_discount_500ip" }
+  { name: "25 IP", price: "$2.00", callback: "nov_proxy_discount_25ip" },
+  { name: "50 IP", price: "$4.00", callback: "nov_proxy_discount_50ip" },
+  { name: "100 IP", price: "$8.00", callback: "nov_proxy_discount_100ip" },
+  { name: "200 IP", price: "$16.00", callback: "nov_proxy_discount_200ip" },
+  { name: "300 IP", price: "$24.00", callback: "nov_proxy_discount_300ip" },
+  { name: "500 IP", price: "$40.00", callback: "nov_proxy_discount_500ip" }
 ];
 
 /* ===================== REGULAR (IP) ===================== */
 const novProxyRegularPackages = [
-  { name: "25 IP", price: "$2.20", callback: "nov_proxy_regular_25ip" },
-  { name: "50 IP", price: "$3.80", callback: "nov_proxy_regular_50ip" },
-  { name: "100 IP", price: "$7.00", callback: "nov_proxy_regular_100ip" },
-  { name: "200 IP", price: "$12.00", callback: "nov_proxy_regular_200ip" },
-  { name: "300 IP", price: "$18.00", callback: "nov_proxy_regular_300ip" },
-  { name: "500 IP", price: "$28.00", callback: "nov_proxy_regular_500ip" }
+  { name: "25 IP", price: "$3.00", callback: "nov_proxy_regular_25ip" },
+  { name: "50 IP", price: "$6.00", callback: "nov_proxy_regular_50ip" },
+  { name: "100 IP", price: "$12.00", callback: "nov_proxy_regular_100ip" },
+  { name: "200 IP", price: "$22.00", callback: "nov_proxy_regular_200ip" },
+  { name: "300 IP", price: "$33.00", callback: "nov_proxy_regular_300ip" },
+  { name: "500 IP", price: "$53.00", callback: "nov_proxy_regular_500ip" }
 ];
 
 /* ===================== BUTTON BUILDER ===================== */
