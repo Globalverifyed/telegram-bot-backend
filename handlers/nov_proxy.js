@@ -1,4 +1,5 @@
 const { sendOrEdit } = require("./utils");
+const { isAvailable, reduceStock } = require("./stock_manager");
 
 /* ===================== DISCOUNT (IP) ===================== */
 const novProxyDiscountPackages = [
@@ -27,7 +28,9 @@ function makePackageButtons(packages) {
   for (let i = 0; i < packages.length; i += 2) {
     buttons.push(
       packages.slice(i, i + 2).map((pkg) => ({
-        text: `🟢 ${pkg.name} - ${pkg.price}`,
+        text: isAvailable("nov_proxy", pkg.callback)
+          ? `🟢 ${pkg.name} - ${pkg.price} ✅`
+          : `🔴 ${pkg.name} ❌ Stock Out`,
         callback_data: pkg.callback
       }))
     );
@@ -38,23 +41,24 @@ function makePackageButtons(packages) {
   return buttons;
 }
 
-/* ===================== HANDLER ===================== */
+/* ===================== MAIN HANDLER ===================== */
 async function handleNovProxy(bot, query) {
   const data = query.data;
+  const chatId = query.message.chat.id;
 
+  /* ===== Main Menu ===== */
   if (data === "novproxy") {
     await sendOrEdit(bot, query, "🌐 Nov Proxy (IP)\n\nSelect Price Type:", [
       [
         { text: "🔥 Discount Price", callback_data: "nov_proxy_discount_menu" },
         { text: "💎 Regular Price", callback_data: "nov_proxy_regular_menu" }
       ],
-      [
-        { text: "⬅️ Back", callback_data: "ip_proxy" }
-      ]
+      [{ text: "⬅️ Back", callback_data: "ip_proxy" }]
     ]);
     return true;
   }
 
+  /* ===== Discount Menu ===== */
   if (data === "nov_proxy_discount_menu") {
     await sendOrEdit(
       bot,
@@ -65,6 +69,7 @@ async function handleNovProxy(bot, query) {
     return true;
   }
 
+  /* ===== Regular Menu ===== */
   if (data === "nov_proxy_regular_menu") {
     await sendOrEdit(
       bot,
@@ -72,6 +77,31 @@ async function handleNovProxy(bot, query) {
       "💎 Regular IP Packages:",
       makePackageButtons(novProxyRegularPackages)
     );
+    return true;
+  }
+
+  /* ===== BUY HANDLE ===== */
+  if (data.startsWith("nov_proxy_")) {
+    if (!isAvailable("nov_proxy", data)) {
+      await sendOrEdit(bot, query, "❌ This package is Stock Out.", [
+        [{ text: "⬅️ Back", callback_data: "novproxy" }]
+      ]);
+      return true;
+    }
+
+    reduceStock("nov_proxy", data);
+
+    await sendOrEdit(
+      bot,
+      query,
+      `✅ Order Created Successfully!
+
+📦 Package: ${data.replace("nov_proxy_", "").toUpperCase()}
+
+💳 Please send payment proof.`,
+      [[{ text: "⬅️ Back", callback_data: "novproxy" }]]
+    );
+
     return true;
   }
 
