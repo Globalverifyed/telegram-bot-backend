@@ -1,24 +1,26 @@
 const { sendOrEdit } = require("./utils");
 
+/* ===================== DISCOUNT (IP) ===================== */
 const novProxyDiscountPackages = [
-  { name: "1 GB", price: "$1.5 USDT", callback: "nov_proxy_discount_1gb" },
-  { name: "2 GB", price: "$3 USDT", callback: "nov_proxy_discount_2gb" },
-  { name: "3 GB", price: "$4.5 USDT", callback: "nov_proxy_discount_3gb" },
-  { name: "4 GB", price: "$6 USDT", callback: "nov_proxy_discount_4gb" },
-  { name: "5 GB", price: "$7.5 USDT", callback: "nov_proxy_discount_5gb" }
+  { name: "25 IP", price: "$0.79", callback: "nov_proxy_discount_25ip" },
+  { name: "50 IP", price: "$1.49", callback: "nov_proxy_discount_50ip" },
+  { name: "100 IP", price: "$2.49", callback: "nov_proxy_discount_100ip" },
+  { name: "200 IP", price: "$4.79", callback: "nov_proxy_discount_200ip" },
+  { name: "300 IP", price: "$7.10", callback: "nov_proxy_discount_300ip" },
+  { name: "500 IP", price: "$11.90", callback: "nov_proxy_discount_500ip" }
 ];
 
+/* ===================== REGULAR (IP) ===================== */
 const novProxyRegularPackages = [
-  { name: "1 GB", price: "$1.10", callback: "nov_proxy_regular_1gb" },
-  { name: "2 GB", price: "$2.20", callback: "nov_proxy_regular_2gb" },
-  { name: "3 GB", price: "$3.30", callback: "nov_proxy_regular_3gb" },
-  { name: "4 GB", price: "$4.40", callback: "nov_proxy_regular_4gb" },
-  { name: "5 GB", price: "$5.50", callback: "nov_proxy_regular_5gb" },
-  { name: "10 GB", price: "$10.50", callback: "nov_proxy_regular_10gb" },
-  { name: "15 GB", price: "$16.50", callback: "nov_proxy_regular_15gb" },
-  { name: "20 GB", price: "$21.00", callback: "nov_proxy_regular_20gb" }
+  { name: "25 IP", price: "$2.20", callback: "nov_proxy_regular_25ip" },
+  { name: "50 IP", price: "$3.80", callback: "nov_proxy_regular_50ip" },
+  { name: "100 IP", price: "$7.00", callback: "nov_proxy_regular_100ip" },
+  { name: "200 IP", price: "$12.00", callback: "nov_proxy_regular_200ip" },
+  { name: "300 IP", price: "$18.00", callback: "nov_proxy_regular_300ip" },
+  { name: "500 IP", price: "$28.00", callback: "nov_proxy_regular_500ip" }
 ];
 
+/* ===================== BUTTON BUILDER ===================== */
 function makePackageButtons(packages) {
   const buttons = [];
 
@@ -36,11 +38,12 @@ function makePackageButtons(packages) {
   return buttons;
 }
 
+/* ===================== HANDLER ===================== */
 async function handleNovProxy(bot, query) {
   const data = query.data;
 
   if (data === "novproxy") {
-    await sendOrEdit(bot, query, "🌐 Nov Proxy\n\nPlease select price type:", [
+    await sendOrEdit(bot, query, "🌐 Nov Proxy (IP)\n\nSelect Price Type:", [
       [
         { text: "🔥 Discount Price", callback_data: "nov_proxy_discount_menu" },
         { text: "💎 Regular Price", callback_data: "nov_proxy_regular_menu" }
@@ -49,7 +52,6 @@ async function handleNovProxy(bot, query) {
         { text: "⬅️ Back", callback_data: "ip_proxy" }
       ]
     ]);
-
     return true;
   }
 
@@ -57,10 +59,9 @@ async function handleNovProxy(bot, query) {
     await sendOrEdit(
       bot,
       query,
-      "🔥 Nov Proxy Discount Price List\n\nSelect your package:",
+      "🔥 Discount IP Packages:",
       makePackageButtons(novProxyDiscountPackages)
     );
-
     return true;
   }
 
@@ -68,10 +69,9 @@ async function handleNovProxy(bot, query) {
     await sendOrEdit(
       bot,
       query,
-      "💎 Nov Proxy Regular Price List\n\nSelect your package:",
+      "💎 Regular IP Packages:",
       makePackageButtons(novProxyRegularPackages)
     );
-
     return true;
   }
 
