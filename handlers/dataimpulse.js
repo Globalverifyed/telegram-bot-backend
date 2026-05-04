@@ -5,36 +5,36 @@ const { isAvailable, reduceStock, getStock } = require("./stock_manager");
 /* ===================== DISCOUNT PACKAGES ===================== */
 
 const discountPackages = {
-  di_5: { label: "5 GB", price: "$3.5", best: false },
-  di_6: { label: "6 GB", price: "$3.8", best: false },
-  di_6_5: { label: "6.5 GB", price: "$4", best: false },
+  di_5: { label: "5 GB", price: "$3.8", best: false },
+  di_6: { label: "6 GB", price: "$4.5", best: false },
+  di_6_5: { label: "6.5 GB", price: "$5.00", best: false },
   di_7_5: {
     label: "7.5 GB",
-    price: "$5",
+    price: "$5.70",
     best: true,
     lowStock: true,
     recommended: true,
     highlight: "🔥 Best Value"
   },
-  di_8: { label: "8 GB", price: "$5.25", best: false },
-  di_8_5: { label: "8.5 GB", price: "$5.50", best: false },
-  di_10: { label: "10 GB", price: "$7", best: false },
-  di_12_5: { label: "12.5 GB", price: "$8.00", best: false },
-  di_14: { label: "14", price: "$8.00", best: true },
-  di_15: { label: "15 GB", price: "$9.5", best: false },
-  di_16: { label: "16 GB", price: "$9.4", best: false },
-  di_17_5: { label: "17.5 GB", price: "$11.00", best: false },
-  di_20: { label: "20 GB", price: "$14", best: true },
+  di_8: { label: "8 GB", price: "$6.00", best: false },
+  di_8_5: { label: "8.5 GB", price: "$6.50", best: false },
+  di_10: { label: "10 GB", price: "$7.5", best: false },
+  di_12_5: { label: "12.5 GB", price: "$9.30", best: false },
+  di_14: { label: "14", price: "$11.00", best: true },
+  di_15: { label: "15 GB", price: "$12.00", best: false },
+  di_16: { label: "16 GB", price: "$13.00", best: false },
+  di_17_5: { label: "17.5 GB", price: "$13.20", best: false },
+  di_20: { label: "20 GB", price: "$15", best: true },
   di_25: {
     label: "25 GB",
-    price: "$15.00",
+    price: "$18.50",
     best: true,
     lowStock: true,
     recommended: true,
     highlight: "💎 Most Popular"
   },
-  di_30: { label: "30 GB", price: "$16.75", best: false },
-  di_50: { label: "50 GB", price: "$29", best: false },
+  di_30: { label: "30 GB", price: "$21.00", best: false },
+  di_50: { label: "50 GB", price: "$35", best: false },
   di_100: {
     label: "100 GB",
     price: "Contact Support",
@@ -48,22 +48,22 @@ const discountPackages = {
 /* ===================== REGULAR PACKAGES ===================== */
 
 const regularPackages = {
-  r1: { label: "1 GB", price: "$1.20" },
-  r2: { label: "2 GB", price: "$2.30" },
-  r3: { label: "3 GB", price: "$3.50" },
-  r4: { label: "4 GB", price: "$4.60" },
-  r5: { label: "5 GB", price: "$5.50" },
+  r1: { label: "1 GB", price: "$1.50" },
+  r2: { label: "2 GB", price: "$3.00" },
+  r3: { label: "3 GB", price: "$4.50" },
+  r4: { label: "4 GB", price: "$5.50" },
+  r5: { label: "5 GB", price: "$6.00" },
   r7_5: {
     label: "7.5 GB",
-    price: "$8",
+    price: "$9.00",
     best: true,
     recommended: true,
     highlight: "🔥 Best Value"
   },
-  r10: { label: "10 GB", price: "$10.50" },
-  r12: { label: "12 GB", price: "$12.60" },
-  r12_5: { label: "12.5 GB", price: "$13.20" },
-  r15: { label: "15 GB", price: "$15.60" },
+  r10: { label: "10 GB", price: "$11.00" },
+  r12: { label: "12 GB", price: "$13.00" },
+  r12_5: { label: "12.5 GB", price: "$14.00" },
+  r15: { label: "15 GB", price: "$16.00" },
   r25: {
     label: "25 GB",
     price: "$26.50",
@@ -77,7 +77,7 @@ const regularPackages = {
   r80: { label: "80 GB", price: "$82" },
   r100: {
     label: "100 GB",
-    price: "$102",
+    price: "$102.00",
     best: true,
     highlight: "👑 Premium"
   }
