@@ -239,20 +239,20 @@ nov_proxy: {
 iprocket_proxy: {
   title: "🌐 IpRocket Proxy",
   items: {
-    ir_d_1: { label: "1GB (Discount)", stock: 5 },
-    ir_d_2: { label: "2GB (Discount)", stock: 5 },
-    ir_d_3: { label: "3GB (Discount)", stock: 5 },
-    ir_d_4: { label: "4GB (Discount)", stock: 5 },
-    ir_d_5: { label: "5GB (Discount)", stock: 5 },
+    ir_d_1: { label: "2GB (Discount)", stock: 5 },
+    ir_d_2: { label: "4GB (Discount)", stock: 5 },
+    ir_d_3: { label: "6GB (Discount)", stock: 5 },
+    ir_d_4: { label: "8GB (Discount)", stock: 5 },
+    ir_d_5: { label: "10GB (Discount)", stock: 5 },
 
-    ir_r_1: { label: "1GB (Regular)", stock: 5 },
-    ir_r_2: { label: "2GB (Regular)", stock: 5 },
-    ir_r_3: { label: "3GB (Regular)", stock: 5 },
-    ir_r_4: { label: "4GB (Regular)", stock: 5 },
-    ir_r_5: { label: "5GB (Regular)", stock: 5 },
-    ir_r_10: { label: "10GB (Regular)", stock: 5 },
-    ir_r_15: { label: "15GB (Regular)", stock: 5 },
-    ir_r_20: { label: "20GB (Regular)", stock: 5 }
+    ir_r_1: { label: "2GB (Regular)", stock: 5 },
+    ir_r_2: { label: "4GB (Regular)", stock: 5 },
+    ir_r_3: { label: "6GB (Regular)", stock: 5 },
+    ir_r_4: { label: "8GB (Regular)", stock: 5 },
+    ir_r_5: { label: "10GB (Regular)", stock: 5 },
+    ir_r_10: { label: "16GB (Regular)", stock: 5 },
+    ir_r_15: { label: "20GB (Regular)", stock: 5 },
+    ir_r_20: { label: "30GB (Regular)", stock: 5 }
   }
 },
 nodemaven: {
