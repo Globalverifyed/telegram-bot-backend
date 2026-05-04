@@ -6,34 +6,34 @@ const PRODUCT_KEY = "nice_proxy";
 
 /* ===== DISCOUNT PRICE ===== */
 const discountPackages = {
-  np_d_25: { label: "25 IP", price: "$0.79", recommended: true },
-  np_d_50: { label: "50 IP", price: "$1.49" },
-  np_d_100: { label: "100 IP", price: "$2.49", recommended: true },
-  np_d_200: { label: "200 IP", price: "$4.79" },
-  np_d_300: { label: "300 IP", price: "$7.10", recommended: true },
-  np_d_400: { label: "400 IP", price: "$9.47" },
-  np_d_500: { label: "500 IP", price: "$11.90", recommended: true },
-  np_d_1000: { label: "1000 IP", price: "$23.69" },
-  np_d_2000: { label: "2000 IP", price: "$46.50" },
-  np_d_3000: { label: "3000 IP", price: "$69.49" },
-  np_d_4000: { label: "4000 IP", price: "$91.49" },
-  np_d_5000: { label: "5000 IP", price: "$113.49" }
+  np_d_1: { label: "1 GB", price: "$1.00", recommended: true },
+  np_d_2: { label: "2 GB", price: "$2.00" },
+  np_d_3: { label: "3 GB", price: "$3.00", recommended: true },
+  np_d_4: { label: "4 GB", price: "$4.00" },
+  np_d_5: { label: "5 GB", price: "$5.00", recommended: true },
+  np_d_10: { label: "10 GB", price: "$10.00" },
+  np_d_15: { label: "15 GB", price: "$15.00", recommended: true },
+  np_d_20: { label: "20 GB", price: "$20.00" },
+  np_d_30: { label: "30 GB", price: "$30.00" },
+  np_d_50: { label: "50 GB", price: "$50.00" },
+  np_d_80: { label: "80 GB", price: "$80.00" },
+  np_d_100: { label: "100 GB", price: "$99.00" }
 };
 
 /* ===== REGULAR PRICE ===== */
 const regularPackages = {
-  np_r_25: { label: "25 IP", price: "$2.20", recommended: true },
-  np_r_50: { label: "50 IP", price: "$3.80" },
-  np_r_100: { label: "100 IP", price: "$7.00", recommended: true },
-  np_r_200: { label: "200 IP", price: "$12.00" },
-  np_r_300: { label: "300 IP", price: "$18.00", recommended: true },
-  np_r_400: { label: "400 IP", price: "$23.00" },
-  np_r_500: { label: "500 IP", price: "$28.00", recommended: true },
-  np_r_1000: { label: "1000 IP", price: "$55.00" },
-  np_r_2000: { label: "2000 IP", price: "$107.55" },
-  np_r_3000: { label: "3000 IP", price: "$162.50" },
-  np_r_4000: { label: "4000 IP", price: "$208.00" },
-  np_r_5000: { label: "5000 IP", price: "$260.00" }
+  np_r_1: { label: "1 GB", price: "$1.25", recommended: true },
+  np_r_2: { label: "2 GB", price: "$2.50" },
+  np_r_3: { label: "3 GB", price: "$3.75", recommended: true },
+  np_r_4: { label: "4 GB", price: "$5.00" },
+  np_r_5: { label: "5 GB", price: "$5.20", recommended: true },
+  np_r_400: { label: "10 GB", price: "$10.30" },
+  np_r_500: { label: "15 GB", price: "$15.20", recommended: true },
+  np_r_1000: { label: "20 GB", price: "$20.30" },
+  np_r_2000: { label: "30 GB", price: "$31.00" },
+  np_r_3000: { label: "50 GB", price: "$52.00" },
+  np_r_4000: { label: "80 GB", price: "$83.00" },
+  np_r_5000: { label: "100 GB", price: "$102.00" }
 };
 
 function buildButtons(packages) {
@@ -67,7 +67,7 @@ async function handleNiceProxy(bot, query) {
         { text: "🔥 Discount Price", callback_data: "nice_discount" },
         { text: "💰 Regular Price", callback_data: "nice_regular" }
       ],
-      [{ text: "⬅ Back", callback_data: "ip_proxy" }]
+      [{ text: "⬅ Back", callback_data: "GB_proxy" }]
     ]);
 
     return true;
