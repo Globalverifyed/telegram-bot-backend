@@ -220,7 +220,6 @@ proxy_light: {
 nov_proxy: {
   title: "🌐 Nov Proxy (IP)",
   items: {
-    // Discount
     nov_proxy_discount_25ip: { label: "25 IP", stock: 5 },
     nov_proxy_discount_50ip: { label: "50 IP", stock: 5 },
     nov_proxy_discount_100ip: { label: "100 IP", stock: 5 },
@@ -228,7 +227,6 @@ nov_proxy: {
     nov_proxy_discount_300ip: { label: "300 IP", stock: 5 },
     nov_proxy_discount_500ip: { label: "500 IP", stock: 5 },
 
-    // Regular
     nov_proxy_regular_25ip: { label: "25 IP", stock: 5 },
     nov_proxy_regular_50ip: { label: "50 IP", stock: 5 },
     nov_proxy_regular_100ip: { label: "100 IP", stock: 5 },
