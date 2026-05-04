@@ -27,13 +27,13 @@ const regularPackages = {
   np_r_3: { label: "3 GB", price: "$3.75", recommended: true },
   np_r_4: { label: "4 GB", price: "$5.00" },
   np_r_5: { label: "5 GB", price: "$5.20", recommended: true },
-  np_r_400: { label: "10 GB", price: "$10.30" },
-  np_r_500: { label: "15 GB", price: "$15.20", recommended: true },
-  np_r_1000: { label: "20 GB", price: "$20.30" },
-  np_r_2000: { label: "30 GB", price: "$31.00" },
-  np_r_3000: { label: "50 GB", price: "$52.00" },
-  np_r_4000: { label: "80 GB", price: "$83.00" },
-  np_r_5000: { label: "100 GB", price: "$102.00" }
+  np_r_10: { label: "10 GB", price: "$10.30" },
+  np_r_15: { label: "15 GB", price: "$15.20", recommended: true },
+  np_r_20: { label: "20 GB", price: "$20.30" },
+  np_r_30: { label: "30 GB", price: "$31.00" },
+  np_r_50: { label: "50 GB", price: "$52.00" },
+  np_r_80: { label: "80 GB", price: "$83.00" },
+  np_r_100: { label: "100 GB", price: "$102.00" }
 };
 
 function buildButtons(packages) {
