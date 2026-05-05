@@ -96,7 +96,8 @@ Payment complete হলে screenshot পাঠাও।`
 💵 Rate: 1$ = ৳127
 
 📞 Nagad Number:
-01611237099
+01611237099 Agent
+01911237099 Parsonal
 
 Payment complete হলে screenshot পাঠাও।`
     );
