@@ -158,3 +158,6 @@ http
   .listen(PORT, () => {
     console.log("Server running on port", PORT);
   });
+  bot.on("channel_post", (msg) => {
+  console.log("CHANNEL ID:", msg.chat.id);
+});
