@@ -59,57 +59,69 @@ const bot = new TelegramBot(process.env.BOT_TOKEN, {
   polling: true
 });
 
-// 🔹 START
+// ===================== HELP FUNCTION =====================
+async function checkAccess(update) {
+  return await forceJoin(bot, update);
+}
+
+// ===================== START =====================
 bot.onText(/\/start/, async (msg) => {
-  const allowed = await forceJoin(bot, msg);
+  const allowed = await checkAccess(msg);
   if (!allowed) return;
 
   showMainMenu(bot, msg.chat.id);
 });
 
-// 🔹 ADMIN
+// ===================== ADMIN =====================
 bot.onText(/\/admin/, async (msg) => {
   await handleAdmin(bot, msg);
 });
 
-// 🔹 TEST
+// ===================== TEST =====================
 bot.onText(/\/testadmin/, (msg) => {
   bot.sendMessage(process.env.ADMIN_CHAT_ID, "Admin test message ✅");
 });
 
-// 🔹 PHOTO (PAYMENT)
+// ===================== PHOTO PAYMENT =====================
 bot.on("photo", async (msg) => {
   await handlePaymentScreenshot(bot, msg);
 });
 
-// 🔹 MESSAGE
+// ===================== MESSAGE =====================
 bot.on("message", async (msg) => {
   if (msg.text && msg.text.startsWith("/")) return;
-  if (await handleAdminDeliveryMessage(bot, msg)) return;
+
+  await handleAdminDeliveryMessage(bot, msg);
 });
 
-// 🔥🔥🔥 MAIN CALLBACK (FULL FIXED)
+// ===================== CALLBACK =====================
 bot.on("callback_query", async (query) => {
   console.log("CLICK:", query.data);
 
   // 🔹 JOIN CHECK BUTTON
   if (query.data === "check_join") {
-    const allowed = await forceJoin(bot, query);
+    const allowed = await checkAccess(query);
+
     if (allowed) {
-      return showMainMenu(bot, query);
+      await bot.answerCallbackQuery(query.id);
+
+      return showMainMenu(bot, query.message.chat.id);
     }
     return;
   }
 
-  // 🔹 FORCE JOIN BLOCK
-  const allowed = await forceJoin(bot, query);
+  // 🔹 FORCE JOIN CHECK (IMPORTANT FIX)
+  const allowed = await checkAccess(query);
+
   if (!allowed) return;
 
-  // 🔹 ADMIN FIRST
+  await bot.answerCallbackQuery(query.id);
+
+  // 🔹 ADMIN
   if (await handleAdminStock(bot, query)) return;
   if (await handleAdminButtons(bot, query)) return;
 
-  // 🔹 MAIN MENU HANDLERS
+  // 🔹 MAIN FEATURES
   if (await handleSupport(bot, query)) return;
   if (await handleIPProxy(bot, query)) return;
   if (await handleDataImpulse(bot, query)) return;
@@ -129,7 +141,7 @@ bot.on("callback_query", async (query) => {
   if (await handleVPN(bot, query)) return;
   if (await handleSubscription(bot, query)) return;
 
-  // 🔹 PRODUCT OPTIONS
+  // 🔹 PRODUCTS
   if (await handleProductOptions(bot, query)) return;
 
   // 🔹 PAYMENT
@@ -140,24 +152,24 @@ bot.on("callback_query", async (query) => {
   console.log("Unhandled callback:", query.data);
 });
 
-// 🔹 ERROR
+// ===================== ERRORS =====================
 bot.on("polling_error", (error) => {
   console.log("POLLING ERROR:", error.message);
 });
 
-console.log("Bot running...");
-
-// 🔹 KEEP ALIVE SERVER
-const PORT = process.env.PORT || 10000;
-
-http
-  .createServer((req, res) => {
-    res.writeHead(200, { "Content-Type": "text/plain" });
-    res.end("Bot is running");
-  })
-  .listen(PORT, () => {
-    console.log("Server running on port", PORT);
-  });
-  bot.on("channel_post", (msg) => {
+// ===================== CHANNEL DEBUG =====================
+bot.on("channel_post", (msg) => {
   console.log("CHANNEL ID:", msg.chat.id);
 });
+
+// ===================== SERVER =====================
+const PORT = process.env.PORT || 10000;
+
+http.createServer((req, res) => {
+  res.writeHead(200, { "Content-Type": "text/plain" });
+  res.end("Bot is running");
+}).listen(PORT, () => {
+  console.log("Server running on port", PORT);
+});
+
+console.log("Bot running...");
