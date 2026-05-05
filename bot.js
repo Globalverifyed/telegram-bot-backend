@@ -13,8 +13,10 @@ process.on("unhandledRejection", (err) => {
 const TelegramBot = require("node-telegram-bot-api");
 const http = require("http");
 
+// 🔹 IMPORTS
 const { forceJoin } = require("./handlers/forceJoin");
 const { showMainMenu } = require("./handlers/menu");
+
 const { handleSupport } = require("./handlers/support");
 const { handleIPProxy } = require("./handlers/ip_proxy");
 const { handleDataImpulse } = require("./handlers/dataimpulse");
@@ -31,10 +33,10 @@ const { handleNodemaven } = require("./handlers/nodemaven");
 const { handleCliProxy } = require("./handlers/cliproxy");
 const { handleCherryProxy } = require("./handlers/cherry_proxy");
 const { handleDigiProxy } = require("./handlers/digi_proxy");
+
 const { handleVPN } = require("./handlers/vpn");
 const { handleSubscription } = require("./handlers/subscription");
 const { handleProductOptions } = require("./handlers/product_options");
-
 
 const { handleAdmin, handleAdminButtons } = require("./handlers/admin");
 const { handleAdminStock } = require("./handlers/admin_stock");
@@ -47,6 +49,7 @@ const {
   handleAdminDeliveryMessage
 } = require("./handlers/payment");
 
+// 🔹 BOT INIT
 if (!process.env.BOT_TOKEN) {
   console.log("❌ BOT_TOKEN missing in .env");
   process.exit(1);
@@ -56,6 +59,7 @@ const bot = new TelegramBot(process.env.BOT_TOKEN, {
   polling: true
 });
 
+// 🔹 START
 bot.onText(/\/start/, async (msg) => {
   const allowed = await forceJoin(bot, msg);
   if (!allowed) return;
@@ -63,26 +67,32 @@ bot.onText(/\/start/, async (msg) => {
   showMainMenu(bot, msg.chat.id);
 });
 
+// 🔹 ADMIN
 bot.onText(/\/admin/, async (msg) => {
   await handleAdmin(bot, msg);
 });
 
+// 🔹 TEST
 bot.onText(/\/testadmin/, (msg) => {
   bot.sendMessage(process.env.ADMIN_CHAT_ID, "Admin test message ✅");
 });
 
+// 🔹 PHOTO (PAYMENT)
 bot.on("photo", async (msg) => {
   await handlePaymentScreenshot(bot, msg);
 });
 
+// 🔹 MESSAGE
 bot.on("message", async (msg) => {
   if (msg.text && msg.text.startsWith("/")) return;
   if (await handleAdminDeliveryMessage(bot, msg)) return;
 });
 
+// 🔥🔥🔥 MAIN CALLBACK (FULL FIXED)
 bot.on("callback_query", async (query) => {
+  console.log("CLICK:", query.data);
 
-  // 🔹 Join check button
+  // 🔹 JOIN CHECK BUTTON
   if (query.data === "check_join") {
     const allowed = await forceJoin(bot, query);
     if (allowed) {
@@ -91,26 +101,15 @@ bot.on("callback_query", async (query) => {
     return;
   }
 
-  // 🔹 Force join for all clicks
+  // 🔹 FORCE JOIN BLOCK
   const allowed = await forceJoin(bot, query);
   if (!allowed) return;
 
-  // 🔹 তোমার সব handler এখানে থাকবে
-  if (await handleVPN(bot, query)) return;
-  if (await handleNovProxy(bot, query)) return;
-  if (await handleSubscription(bot, query)) return;
-
-  // 🔹 fallback (optional)
-  console.log("Unhandled callback:", query.data);
-});
-
-  console.log("CLICK:", query.data);
-
-  // ADMIN FIRST
+  // 🔹 ADMIN FIRST
   if (await handleAdminStock(bot, query)) return;
   if (await handleAdminButtons(bot, query)) return;
 
-  // MAIN MENU
+  // 🔹 MAIN MENU HANDLERS
   if (await handleSupport(bot, query)) return;
   if (await handleIPProxy(bot, query)) return;
   if (await handleDataImpulse(bot, query)) return;
@@ -130,21 +129,25 @@ bot.on("callback_query", async (query) => {
   if (await handleVPN(bot, query)) return;
   if (await handleSubscription(bot, query)) return;
 
-  // PRODUCT OPTIONS
+  // 🔹 PRODUCT OPTIONS
   if (await handleProductOptions(bot, query)) return;
 
-  // PAYMENT
+  // 🔹 PAYMENT
   if (await handlePaymentMethod(bot, query)) return;
   if (await handlePaymentDone(bot, query)) return;
   if (await handleDeliveryButton(bot, query)) return;
+
+  console.log("Unhandled callback:", query.data);
 });
 
+// 🔹 ERROR
 bot.on("polling_error", (error) => {
   console.log("POLLING ERROR:", error.message);
 });
 
 console.log("Bot running...");
 
+// 🔹 KEEP ALIVE SERVER
 const PORT = process.env.PORT || 10000;
 
 http
