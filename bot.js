@@ -13,6 +13,7 @@ process.on("unhandledRejection", (err) => {
 const TelegramBot = require("node-telegram-bot-api");
 const http = require("http");
 
+const { forceJoin } = require("./handlers/forceJoin");
 const { showMainMenu } = require("./handlers/menu");
 const { handleSupport } = require("./handlers/support");
 const { handleIPProxy } = require("./handlers/ip_proxy");
@@ -33,7 +34,7 @@ const { handleDigiProxy } = require("./handlers/digi_proxy");
 const { handleVPN } = require("./handlers/vpn");
 const { handleSubscription } = require("./handlers/subscription");
 const { handleProductOptions } = require("./handlers/product_options");
-const { forceJoin } = require("./handlers/forceJoin");
+
 
 const { handleAdmin, handleAdminButtons } = require("./handlers/admin");
 const { handleAdminStock } = require("./handlers/admin_stock");
@@ -55,7 +56,10 @@ const bot = new TelegramBot(process.env.BOT_TOKEN, {
   polling: true
 });
 
-bot.onText(/\/start/, (msg) => {
+bot.onText(/\/start/, async (msg) => {
+  const allowed = await forceJoin(bot, msg);
+  if (!allowed) return;
+
   showMainMenu(bot, msg.chat.id);
 });
 
