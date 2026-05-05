@@ -33,6 +33,7 @@ const { handleDigiProxy } = require("./handlers/digi_proxy");
 const { handleVPN } = require("./handlers/vpn");
 const { handleSubscription } = require("./handlers/subscription");
 const { handleProductOptions } = require("./handlers/product_options");
+const { forceJoin } = require("./handlers/forceJoin");
 
 const { handleAdmin, handleAdminButtons } = require("./handlers/admin");
 const { handleAdminStock } = require("./handlers/admin_stock");
@@ -76,7 +77,28 @@ bot.on("message", async (msg) => {
 });
 
 bot.on("callback_query", async (query) => {
-  bot.answerCallbackQuery(query.id).catch(() => {});
+
+  // 🔹 Join check button
+  if (query.data === "check_join") {
+    const allowed = await forceJoin(bot, query);
+    if (allowed) {
+      return showMainMenu(bot, query);
+    }
+    return;
+  }
+
+  // 🔹 Force join for all clicks
+  const allowed = await forceJoin(bot, query);
+  if (!allowed) return;
+
+  // 🔹 তোমার সব handler এখানে থাকবে
+  if (await handleVPN(bot, query)) return;
+  if (await handleNovProxy(bot, query)) return;
+  if (await handleSubscription(bot, query)) return;
+
+  // 🔹 fallback (optional)
+  console.log("Unhandled callback:", query.data);
+});
 
   console.log("CLICK:", query.data);
 
