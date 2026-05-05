@@ -1,22 +1,22 @@
 const { sendOrEdit } = require("./utils");
 
 const cherryDiscountPackages = [
-  { name: "1 GB", price: "$1.5 USDT", callback: "cherry_discount_1gb" },
-  { name: "2 GB", price: "$3 USDT", callback: "cherry_discount_2gb" },
-  { name: "3 GB", price: "$4.5 USDT", callback: "cherry_discount_3gb" },
-  { name: "4 GB", price: "$6 USDT", callback: "cherry_discount_4gb" },
-  { name: "5 GB", price: "$7.5 USDT", callback: "cherry_discount_5gb" }
+  { name: "1 GB", price: "$3.00 USDT", callback: "cherry_discount_1gb" },
+  { name: "2 GB", price: "$6.00 USDT", callback: "cherry_discount_2gb" },
+  { name: "3 GB", price: "$8.50 USDT", callback: "cherry_discount_3gb" },
+  { name: "4 GB", price: "$11.50 USDT", callback: "cherry_discount_4gb" },
+  { name: "5 GB", price: "$14.50 USDT", callback: "cherry_discount_5gb" }
 ];
 
 const cherryRegularPackages = [
-  { name: "1 GB", price: "$1.10", callback: "cherry_regular_1gb" },
-  { name: "2 GB", price: "$2.20", callback: "cherry_regular_2gb" },
-  { name: "3 GB", price: "$3.30", callback: "cherry_regular_3gb" },
-  { name: "4 GB", price: "$4.40", callback: "cherry_regular_4gb" },
-  { name: "5 GB", price: "$5.50", callback: "cherry_regular_5gb" },
-  { name: "10 GB", price: "$10.50", callback: "cherry_regular_10gb" },
-  { name: "15 GB", price: "$16.50", callback: "cherry_regular_15gb" },
-  { name: "20 GB", price: "$21.00", callback: "cherry_regular_20gb" }
+  { name: "1 GB", price: "$3.50", callback: "cherry_regular_1gb" },
+  { name: "2 GB", price: "$7.00", callback: "cherry_regular_2gb" },
+  { name: "3 GB", price: "$10.50", callback: "cherry_regular_3gb" },
+  { name: "4 GB", price: "$13.50", callback: "cherry_regular_4gb" },
+  { name: "5 GB", price: "$16.50", callback: "cherry_regular_5gb" },
+  { name: "10 GB", price: "$32.00", callback: "cherry_regular_10gb" },
+  { name: "15 GB", price: "$49.00", callback: "cherry_regular_15gb" },
+  { name: "20 GB", price: "$62.00", callback: "cherry_regular_20gb" }
 ];
 
 function makeButtons(packages) {
