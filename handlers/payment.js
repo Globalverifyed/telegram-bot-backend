@@ -97,7 +97,8 @@ Payment complete হলে screenshot পাঠাও।`
 
 📞 Nagad Number:
 01611237099 Agent
-01911237099 Parsonal
+(Parsonal numbar Only for payment below 50 taka)
+01911237099 Parsonal 
 
 Payment complete হলে screenshot পাঠাও।`
     );
