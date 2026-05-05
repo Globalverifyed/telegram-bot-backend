@@ -1,3 +1,4 @@
 module.exports = {
-  CHANNEL_USERNAME: "https://t.me/+uix8wBPJfkdmZmU1" // এখানে তোমার channel username দাও
+  CHANNEL_ID: -1003704005774, 
+  CHANNEL_LINK: "https://t.me/+9Q4OivE77oc1YmU1"
 };
