@@ -4,26 +4,25 @@ async function checkJoin(bot, userId) {
   try {
     const member = await bot.getChatMember(CHANNEL_ID, userId);
 
-    return (
-      member.status === "member" ||
-      member.status === "administrator" ||
-      member.status === "creator"
-    );
+    return ["member", "administrator", "creator"].includes(member.status);
   } catch (err) {
     console.log("Join check error:", err.message);
     return false;
   }
 }
 
-async function forceJoin(bot, queryOrMsg) {
+async function forceJoin(bot, update) {
   let chatId, userId;
 
-  if (queryOrMsg.message) {
-    chatId = queryOrMsg.message.chat.id;
-    userId = queryOrMsg.from.id;
+  // message or callback_query handle
+  if (update.message) {
+    chatId = update.message.chat.id;
+    userId = update.message.from.id;
+  } else if (update.callback_query) {
+    chatId = update.callback_query.message.chat.id;
+    userId = update.callback_query.from.id;
   } else {
-    chatId = queryOrMsg.chat.id;
-    userId = queryOrMsg.from.id;
+    return false;
   }
 
   const joined = await checkJoin(bot, userId);
@@ -31,9 +30,7 @@ async function forceJoin(bot, queryOrMsg) {
   if (!joined) {
     await bot.sendMessage(
       chatId,
-      `🚫 You must join our channel to use this bot!
-
-👉 Join from button below 👇`,
+      `🚫 Bot use করতে হলে আগে আমাদের channel join করতে হবে!\n\n👉 নিচের button থেকে join করুন 👇`,
       {
         reply_markup: {
           inline_keyboard: [
