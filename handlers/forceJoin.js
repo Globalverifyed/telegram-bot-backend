@@ -1,5 +1,6 @@
 // src/handlers/forceJoin.js
-const { CHANNEL_ID, CHANNEL_LINK, ADMIN_CHAT_ID } = require("../../config");
+const path = require("path");
+const { CHANNEL_ID, CHANNEL_LINK, ADMIN_CHAT_ID } = require(path.resolve(__dirname, "../../config"));
 
 async function checkJoin(bot, userId) {
   try {
@@ -14,17 +15,13 @@ async function checkJoin(bot, userId) {
 async function forceJoin(bot, update) {
   let chatId, userId;
 
-  // Message Handle
   if (update.message) {
     chatId = update.message.chat.id;
     userId = update.message.from.id;
-  }
-  // Callback Query Handle
-  else if (update.callback_query) {
+  } else if (update.callback_query) {
     chatId = update.callback_query.message.chat.id;
     userId = update.callback_query.from.id;
-  }
-  else {
+  } else {
     return false;
   }
 
@@ -37,12 +34,8 @@ async function forceJoin(bot, update) {
       {
         reply_markup: {
           inline_keyboard: [
-            [
-              { text: "📢 Join Channel", url: CHANNEL_LINK }
-            ],
-            [
-              { text: "✅ I Joined", callback_data: "check_join" }
-            ]
+            [{ text: "📢 Join Channel", url: CHANNEL_LINK }],
+            [{ text: "✅ I Joined", callback_data: "check_join" }]
           ]
         }
       }
