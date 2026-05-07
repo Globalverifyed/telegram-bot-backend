@@ -6,9 +6,7 @@ async function checkJoin(bot, userId) {
   try {
     const member = await bot.getChatMember(CHANNEL_ID, userId);
 
-    return ["member", "administrator", "creator"].includes(
-      member.status
-    );
+    return ["member", "administrator", "creator"].includes(member.status);
   } catch (err) {
     console.log("Join check error:", err.message);
     return false;
@@ -23,13 +21,11 @@ async function forceJoin(bot, update) {
     chatId = update.message.chat.id;
     userId = update.message.from.id;
   }
-
   // Callback Query Handle
   else if (update.callback_query) {
     chatId = update.callback_query.message.chat.id;
     userId = update.callback_query.from.id;
   }
-
   else {
     return false;
   }
@@ -39,7 +35,7 @@ async function forceJoin(bot, update) {
   if (!joined) {
     await bot.sendMessage(
       chatId,
-      `🚫 Bot ব্যবহার করতে হলে আগে আমাদের Channel Join করতে হবে!\n\n👇 নিচের Button এ ক্লিক করুন`,
+      "🚫 Bot ব্যবহার করতে হলে আগে আমাদের Channel Join করতে হবে!\n\n👇 নিচের Button এ ক্লিক করুন",
       {
         reply_markup: {
           inline_keyboard: [
