@@ -1,5 +1,5 @@
-// handlers/forceJoin.js
-const { CHANNEL_ID, CHANNEL_LINK } = require("../config");
+// src/handlers/forceJoin.js
+const { CHANNEL_ID, CHANNEL_LINK, ADMIN_CHAT_ID } = require("../../config");
 
 async function checkJoin(bot, userId) {
   try {
