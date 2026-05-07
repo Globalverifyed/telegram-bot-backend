@@ -61,15 +61,26 @@ const bot = new TelegramBot(process.env.BOT_TOKEN, {
 
 // ===================== HELP FUNCTION =====================
 async function checkAccess(update) {
-  return await forceJoin(bot, update);
+  try {
+    return await forceJoin(bot, update);
+  } catch (err) {
+    console.log("CheckAccess error:", err);
+    return false;
+  }
 }
 
 // ===================== START =====================
 bot.onText(/\/start/, async (msg) => {
-  const allowed = await checkAccess(msg);
-  if (!allowed) return;
+  const chatId = msg.chat.id;
 
-  showMainMenu(bot, msg.chat.id);
+  console.log("START command triggered by:", msg.chat.username || chatId);
+
+  const allowed = await checkAccess(msg);
+  if (!allowed) {
+    return bot.sendMessage(chatId, "❌ Please join our channel first to use the bot!");
+  }
+
+  showMainMenu(bot, chatId);
 });
 
 // ===================== ADMIN =====================
@@ -104,15 +115,13 @@ bot.on("callback_query", async (query) => {
 
     if (allowed) {
       await bot.answerCallbackQuery(query.id);
-
       return showMainMenu(bot, query.message.chat.id);
     }
-    return;
+    return bot.answerCallbackQuery(query.id, { text: "❌ Please join first!" });
   }
 
-  // 🔹 FORCE JOIN CHECK (IMPORTANT FIX)
+  // 🔹 FORCE JOIN CHECK
   const allowed = await checkAccess(query);
-
   if (!allowed) return;
 
   await bot.answerCallbackQuery(query.id);
