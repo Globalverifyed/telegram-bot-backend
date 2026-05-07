@@ -1,3 +1,4 @@
+// src/bot.js
 require("dotenv").config();
 console.log("STARTING BOT...");
 
@@ -8,8 +9,8 @@ const path = require("path");
 // 🔹 IMPORT CONFIG
 const { CHANNEL_LINK, ADMIN_CHAT_ID } = require(path.resolve(__dirname, "../config"));
 
-// 🔹 IMPORT HANDLERS
-const { forceJoin } = require("./handlers/forceJoin");
+// 🔹 IMPORT HANDLERS (const style আগের মতোই)
+const { forceJoin } = require("./handlers/forceJoin"); // <- path fixed
 const { showMainMenu } = require("./handlers/menu");
 const { handleSupport, handleIPProxy, handleDataImpulse, handleProxyIP, handleProxyGB,
         handleSwiftProxy, handleNiceProxy, handleABCProxy, handleProxySeller, handleProxyLight,
@@ -59,7 +60,7 @@ bot.onText(/\/start/, async (msg) => {
   showMainMenu(bot, chatId);
 });
 
-// ===================== CALLBACK =====================
+// ===================== CALLBACK QUERY =====================
 bot.on("callback_query", async (query) => {
   const allowed = await checkAccess(query);
   if (!allowed) return;
@@ -74,9 +75,11 @@ bot.on("callback_query", async (query) => {
     return bot.answerCallbackQuery(query.id, { text: "❌ Please join first!" });
   }
 
-  // Admin + Features
+  // ADMIN
   if (await handleAdminStock(bot, query)) return;
   if (await handleAdminButtons(bot, query)) return;
+
+  // MAIN FEATURES
   if (await handleSupport(bot, query)) return;
   if (await handleIPProxy(bot, query)) return;
   if (await handleDataImpulse(bot, query)) return;
@@ -95,17 +98,23 @@ bot.on("callback_query", async (query) => {
   if (await handleDigiProxy(bot, query)) return;
   if (await handleVPN(bot, query)) return;
   if (await handleSubscription(bot, query)) return;
+
+  // PRODUCTS
   if (await handleProductOptions(bot, query)) return;
+
+  // PAYMENT
   if (await handlePaymentMethod(bot, query)) return;
   if (await handlePaymentDone(bot, query)) return;
   if (await handleDeliveryButton(bot, query)) return;
+
+  console.log("Unhandled callback:", query.data);
 });
 
-// ===================== ADMIN =====================
+// ===================== ADMIN COMMANDS =====================
 bot.onText(/\/admin/, async (msg) => { await handleAdmin(bot, msg); });
 bot.onText(/\/testadmin/, (msg) => { bot.sendMessage(ADMIN_CHAT_ID, "Admin test message ✅"); });
 
-// ===================== PHOTO =====================
+// ===================== PHOTO PAYMENT =====================
 bot.on("photo", async (msg) => { await handlePaymentScreenshot(bot, msg); });
 
 // ===================== MESSAGE =====================
@@ -116,6 +125,9 @@ bot.on("message", async (msg) => {
 
 // ===================== ERRORS =====================
 bot.on("polling_error", (err) => console.log("POLLING ERROR:", err.message));
+
+// ===================== CHANNEL DEBUG =====================
+bot.on("channel_post", (msg) => { console.log("CHANNEL ID:", msg.chat.id); });
 
 // ===================== SERVER =====================
 http.createServer((req, res) => {
