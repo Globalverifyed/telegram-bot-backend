@@ -72,40 +72,34 @@ async function checkAccess(update) {
 // ===================== START =====================
 bot.onText(/\/start/, async (msg) => {
   const chatId = msg.chat.id;
-
   console.log("START command triggered by:", msg.chat.username || chatId);
 
   const allowed = await checkAccess(msg);
+
   if (!allowed) {
-    return bot.sendMessage(chatId, "❌ Please join our channel first to use the bot!");
+    // Send welcome + join channel inline button
+    const joinLink = "https://t.me/+9Q4OivE77oc1YmU1"; // Your channel link
+    const opts = {
+      reply_markup: {
+        inline_keyboard: [
+          [{ text: "🔗 Join Channel", url: joinLink }],
+          [{ text: "✅ Check Again", callback_data: "check_join" }]
+        ]
+      }
+    };
+
+    return bot.sendMessage(
+      chatId,
+      "👋 Welcome! Please join our channel first to use this bot.",
+      opts
+    );
   }
 
+  // Show main menu
   showMainMenu(bot, chatId);
 });
 
-// ===================== ADMIN =====================
-bot.onText(/\/admin/, async (msg) => {
-  await handleAdmin(bot, msg);
-});
-
-// ===================== TEST =====================
-bot.onText(/\/testadmin/, (msg) => {
-  bot.sendMessage(process.env.ADMIN_CHAT_ID, "Admin test message ✅");
-});
-
-// ===================== PHOTO PAYMENT =====================
-bot.on("photo", async (msg) => {
-  await handlePaymentScreenshot(bot, msg);
-});
-
-// ===================== MESSAGE =====================
-bot.on("message", async (msg) => {
-  if (msg.text && msg.text.startsWith("/")) return;
-
-  await handleAdminDeliveryMessage(bot, msg);
-});
-
-// ===================== CALLBACK =====================
+// ===================== CALLBACK QUERY =====================
 bot.on("callback_query", async (query) => {
   console.log("CLICK:", query.data);
 
@@ -117,10 +111,10 @@ bot.on("callback_query", async (query) => {
       await bot.answerCallbackQuery(query.id);
       return showMainMenu(bot, query.message.chat.id);
     }
+
     return bot.answerCallbackQuery(query.id, { text: "❌ Please join first!" });
   }
 
-  // 🔹 FORCE JOIN CHECK
   const allowed = await checkAccess(query);
   if (!allowed) return;
 
@@ -159,6 +153,27 @@ bot.on("callback_query", async (query) => {
   if (await handleDeliveryButton(bot, query)) return;
 
   console.log("Unhandled callback:", query.data);
+});
+
+// ===================== ADMIN COMMAND =====================
+bot.onText(/\/admin/, async (msg) => {
+  await handleAdmin(bot, msg);
+});
+
+// ===================== TEST =====================
+bot.onText(/\/testadmin/, (msg) => {
+  bot.sendMessage(process.env.ADMIN_CHAT_ID, "Admin test message ✅");
+});
+
+// ===================== PHOTO PAYMENT =====================
+bot.on("photo", async (msg) => {
+  await handlePaymentScreenshot(bot, msg);
+});
+
+// ===================== MESSAGE =====================
+bot.on("message", async (msg) => {
+  if (msg.text && msg.text.startsWith("/")) return;
+  await handleAdminDeliveryMessage(bot, msg);
 });
 
 // ===================== ERRORS =====================
