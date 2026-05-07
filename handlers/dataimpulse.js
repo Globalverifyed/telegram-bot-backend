@@ -17,10 +17,10 @@ const discountPackages = {
     highlight: "🔥 Best Value"
   },
   di_8: { label: "8 GB", price: "$6.00", best: true },
-  di_8_5: { label: "9 GB", price: "$7.00", best: true },
+  di_9: { label: "9 GB", price: "$7.00", best: true },
   di_10: { label: "10 GB", price: "$7.5", best: false },
   di_12_5: { label: "12.5 GB", price: "$9.30", best: false },
-  di_14: { label: "14", price: "$11.00", best: true },
+  di_14: { label: "14 GB", price: "$11.00", best: true },
   di_15: { label: "15 GB", price: "$12.00", best: false },
   di_16: { label: "16 GB", price: "$13.00", best: false },
   di_17_5: { label: "17.5 GB", price: "$13.20", best: false },
