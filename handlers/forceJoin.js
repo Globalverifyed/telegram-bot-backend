@@ -1,11 +1,9 @@
 // handlers/forceJoin.js
-
-const { CHANNEL_ID, CHANNEL_LINK } = require("./config");
+const { CHANNEL_ID, CHANNEL_LINK } = require("../config");
 
 async function checkJoin(bot, userId) {
   try {
     const member = await bot.getChatMember(CHANNEL_ID, userId);
-
     return ["member", "administrator", "creator"].includes(member.status);
   } catch (err) {
     console.log("Join check error:", err.message);
@@ -40,22 +38,15 @@ async function forceJoin(bot, update) {
         reply_markup: {
           inline_keyboard: [
             [
-              {
-                text: "📢 Join Channel",
-                url: CHANNEL_LINK
-              }
+              { text: "📢 Join Channel", url: CHANNEL_LINK }
             ],
             [
-              {
-                text: "✅ I Joined",
-                callback_data: "check_join"
-              }
+              { text: "✅ I Joined", callback_data: "check_join" }
             ]
           ]
         }
       }
     );
-
     return false;
   }
 
