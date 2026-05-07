@@ -1,4 +1,3 @@
-// src/handlers/forceJoin.js
 const path = require("path");
 const { CHANNEL_ID, CHANNEL_LINK, ADMIN_CHAT_ID } = require(path.resolve(__dirname, "../../config"));
 
