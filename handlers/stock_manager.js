@@ -5,7 +5,7 @@ const stockRegistry = {
       // Discount packages
       di_5: { label: "5 GB (Discount)", stock: 0 },
       di_6: { label: "6 GB (Discount)", stock: 0 },
-      di_6_5: { label: "6.5 GB (Discount)", stock: 1 },
+      di_6_5: { label: "6.5 GB (Discount)", stock: 0 },
       di_7_5: { label: "7.5 GB (Discount)", stock: 0 },
       di_8: { label: "8 GB (Discount)", stock: 1 },
       di_8_5: { label: "8.5 GB (Discount)", stock: 0 },
