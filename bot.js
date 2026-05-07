@@ -1,48 +1,23 @@
-// src/bot.js
 require("dotenv").config();
 console.log("STARTING BOT...");
 
 const TelegramBot = require("node-telegram-bot-api");
 const http = require("http");
+const path = require("path");
 
-// 🔹 IMPORTS
+// 🔹 IMPORT CONFIG
+const { CHANNEL_LINK, ADMIN_CHAT_ID } = require(path.resolve(__dirname, "../config"));
+
+// 🔹 IMPORT HANDLERS
 const { forceJoin } = require("./handlers/forceJoin");
 const { showMainMenu } = require("./handlers/menu");
-
-const { handleSupport } = require("./handlers/support");
-const { handleIPProxy } = require("./handlers/ip_proxy");
-const { handleDataImpulse } = require("./handlers/dataimpulse");
-const { handleProxyIP } = require("./handlers/9proxy_ip");
-const { handleProxyGB } = require("./handlers/9proxy_gb");
-const { handleSwiftProxy } = require("./handlers/swift_proxy");
-const { handleNiceProxy } = require("./handlers/nice_proxy");
-const { handleABCProxy } = require("./handlers/abc_proxy");
-const { handleProxySeller } = require("./handlers/proxy_seller");
-const { handleProxyLight } = require("./handlers/proxy_light");
-const { handleNovProxy } = require("./handlers/nov_proxy");
-const { handleIpRocketProxy } = require("./handlers/iprocket_proxy");
-const { handleNodemaven } = require("./handlers/nodemaven");
-const { handleCliProxy } = require("./handlers/cliproxy");
-const { handleCherryProxy } = require("./handlers/cherry_proxy");
-const { handleDigiProxy } = require("./handlers/digi_proxy");
-
-const { handleVPN } = require("./handlers/vpn");
-const { handleSubscription } = require("./handlers/subscription");
-const { handleProductOptions } = require("./handlers/product_options");
-
+const { handleSupport, handleIPProxy, handleDataImpulse, handleProxyIP, handleProxyGB,
+        handleSwiftProxy, handleNiceProxy, handleABCProxy, handleProxySeller, handleProxyLight,
+        handleNovProxy, handleIpRocketProxy, handleNodemaven, handleCliProxy, handleCherryProxy,
+        handleDigiProxy, handleVPN, handleSubscription, handleProductOptions } = require("./handlers/index");
 const { handleAdmin, handleAdminButtons } = require("./handlers/admin");
 const { handleAdminStock } = require("./handlers/admin_stock");
-
-const {
-  handlePaymentMethod,
-  handlePaymentScreenshot,
-  handlePaymentDone,
-  handleDeliveryButton,
-  handleAdminDeliveryMessage
-} = require("./handlers/payment");
-
-// 🔹 CONFIG
-const { CHANNEL_LINK, ADMIN_CHAT_ID } = require("../config"); // <- path fixed
+const { handlePaymentMethod, handlePaymentScreenshot, handlePaymentDone, handleDeliveryButton, handleAdminDeliveryMessage } = require("./handlers/payment");
 
 // 🔹 BOT INIT
 if (!process.env.BOT_TOKEN) {
@@ -65,13 +40,11 @@ async function checkAccess(update) {
 // ===================== START =====================
 bot.onText(/\/start/, async (msg) => {
   const chatId = msg.chat.id;
-
   console.log("START command triggered by:", msg.chat.username || chatId);
 
   const allowed = await checkAccess(msg);
 
   if (!allowed) {
-    // Show welcome message + join button + check again
     const opts = {
       reply_markup: {
         inline_keyboard: [
@@ -80,63 +53,30 @@ bot.onText(/\/start/, async (msg) => {
         ]
       }
     };
-    return bot.sendMessage(
-      chatId,
-      "👋 Welcome! Please join our channel first to use this bot.",
-      opts
-    );
+    return bot.sendMessage(chatId, "👋 Welcome! Please join our channel first to use this bot.", opts);
   }
 
-  // Show main menu
   showMainMenu(bot, chatId);
-});
-
-// ===================== ADMIN =====================
-bot.onText(/\/admin/, async (msg) => {
-  await handleAdmin(bot, msg);
-});
-
-// ===================== TEST =====================
-bot.onText(/\/testadmin/, (msg) => {
-  bot.sendMessage(ADMIN_CHAT_ID, "Admin test message ✅");
-});
-
-// ===================== PHOTO PAYMENT =====================
-bot.on("photo", async (msg) => {
-  await handlePaymentScreenshot(bot, msg);
-});
-
-// ===================== MESSAGE =====================
-bot.on("message", async (msg) => {
-  if (msg.text && msg.text.startsWith("/")) return;
-  await handleAdminDeliveryMessage(bot, msg);
 });
 
 // ===================== CALLBACK =====================
 bot.on("callback_query", async (query) => {
-  console.log("CLICK:", query.data);
+  const allowed = await checkAccess(query);
+  if (!allowed) return;
 
-  // 🔹 JOIN CHECK BUTTON
+  await bot.answerCallbackQuery(query.id);
+
   if (query.data === "check_join") {
-    const allowed = await checkAccess(query);
-
-    if (allowed) {
+    if (await checkAccess(query)) {
       await bot.answerCallbackQuery(query.id);
       return showMainMenu(bot, query.message.chat.id);
     }
     return bot.answerCallbackQuery(query.id, { text: "❌ Please join first!" });
   }
 
-  const allowed = await checkAccess(query);
-  if (!allowed) return;
-
-  await bot.answerCallbackQuery(query.id);
-
-  // 🔹 ADMIN
+  // Admin + Features
   if (await handleAdminStock(bot, query)) return;
   if (await handleAdminButtons(bot, query)) return;
-
-  // 🔹 MAIN FEATURES
   if (await handleSupport(bot, query)) return;
   if (await handleIPProxy(bot, query)) return;
   if (await handleDataImpulse(bot, query)) return;
@@ -155,36 +95,32 @@ bot.on("callback_query", async (query) => {
   if (await handleDigiProxy(bot, query)) return;
   if (await handleVPN(bot, query)) return;
   if (await handleSubscription(bot, query)) return;
-
-  // 🔹 PRODUCTS
   if (await handleProductOptions(bot, query)) return;
-
-  // 🔹 PAYMENT
   if (await handlePaymentMethod(bot, query)) return;
   if (await handlePaymentDone(bot, query)) return;
   if (await handleDeliveryButton(bot, query)) return;
+});
 
-  console.log("Unhandled callback:", query.data);
+// ===================== ADMIN =====================
+bot.onText(/\/admin/, async (msg) => { await handleAdmin(bot, msg); });
+bot.onText(/\/testadmin/, (msg) => { bot.sendMessage(ADMIN_CHAT_ID, "Admin test message ✅"); });
+
+// ===================== PHOTO =====================
+bot.on("photo", async (msg) => { await handlePaymentScreenshot(bot, msg); });
+
+// ===================== MESSAGE =====================
+bot.on("message", async (msg) => {
+  if (msg.text && msg.text.startsWith("/")) return;
+  await handleAdminDeliveryMessage(bot, msg);
 });
 
 // ===================== ERRORS =====================
-bot.on("polling_error", (error) => {
-  console.log("POLLING ERROR:", error.message);
-});
-
-// ===================== CHANNEL DEBUG =====================
-bot.on("channel_post", (msg) => {
-  console.log("CHANNEL ID:", msg.chat.id);
-});
+bot.on("polling_error", (err) => console.log("POLLING ERROR:", err.message));
 
 // ===================== SERVER =====================
-const PORT = process.env.PORT || 10000;
-
 http.createServer((req, res) => {
   res.writeHead(200, { "Content-Type": "text/plain" });
   res.end("Bot is running");
-}).listen(PORT, () => {
-  console.log("Server running on port", PORT);
-});
+}).listen(process.env.PORT || 10000, () => console.log("Server running..."));
 
 console.log("Bot running...");
