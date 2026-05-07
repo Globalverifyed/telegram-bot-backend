@@ -1,14 +1,6 @@
+// src/bot.js
 require("dotenv").config();
-
 console.log("STARTING BOT...");
-
-process.on("uncaughtException", (err) => {
-  console.log("UNCAUGHT ERROR:", err);
-});
-
-process.on("unhandledRejection", (err) => {
-  console.log("UNHANDLED ERROR:", err);
-});
 
 const TelegramBot = require("node-telegram-bot-api");
 const http = require("http");
@@ -49,7 +41,8 @@ const {
   handleAdminDeliveryMessage
 } = require("./handlers/payment");
 
-const { CHANNEL_LINK, ADMIN_CHAT_ID } = require("./config");
+// 🔹 CONFIG
+const { CHANNEL_LINK, ADMIN_CHAT_ID } = require("../config"); // <- path fixed
 
 // 🔹 BOT INIT
 if (!process.env.BOT_TOKEN) {
@@ -57,9 +50,7 @@ if (!process.env.BOT_TOKEN) {
   process.exit(1);
 }
 
-const bot = new TelegramBot(process.env.BOT_TOKEN, {
-  polling: true
-});
+const bot = new TelegramBot(process.env.BOT_TOKEN, { polling: true });
 
 // ===================== HELP FUNCTION =====================
 async function checkAccess(update) {
@@ -80,6 +71,7 @@ bot.onText(/\/start/, async (msg) => {
   const allowed = await checkAccess(msg);
 
   if (!allowed) {
+    // Show welcome message + join button + check again
     const opts = {
       reply_markup: {
         inline_keyboard: [
@@ -88,7 +80,11 @@ bot.onText(/\/start/, async (msg) => {
         ]
       }
     };
-    return bot.sendMessage(chatId, "👋 Welcome! Please join our channel first to use this bot.", opts);
+    return bot.sendMessage(
+      chatId,
+      "👋 Welcome! Please join our channel first to use this bot.",
+      opts
+    );
   }
 
   // Show main menu
@@ -113,7 +109,6 @@ bot.on("photo", async (msg) => {
 // ===================== MESSAGE =====================
 bot.on("message", async (msg) => {
   if (msg.text && msg.text.startsWith("/")) return;
-
   await handleAdminDeliveryMessage(bot, msg);
 });
 
@@ -127,10 +122,8 @@ bot.on("callback_query", async (query) => {
 
     if (allowed) {
       await bot.answerCallbackQuery(query.id);
-
       return showMainMenu(bot, query.message.chat.id);
     }
-
     return bot.answerCallbackQuery(query.id, { text: "❌ Please join first!" });
   }
 
