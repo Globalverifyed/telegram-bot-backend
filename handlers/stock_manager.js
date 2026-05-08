@@ -16,7 +16,7 @@ const stockRegistry = {
       di_15: { label: "15 GB (Discount)", stock: 0 },
       di_16: { label: "16 GB (Discount)", stock: 0 },
       di_17_5: { label: "17.5 GB (Discount)", stock: 0 },
-      di_20: { label: "20 GB (Discount)", stock: 2 },
+      di_20: { label: "20 GB (Discount)", stock: 1 },
       di_25: { label: "25 GB (Discount)", stock: 0 },
       di_30: { label: "30 GB (Discount)", stock: 0 },
       di_50: { label: "50 GB (Discount)", stock: 0 },
