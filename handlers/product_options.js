@@ -55,7 +55,7 @@ abc_discount_10gb: { productKey: "abc_proxy", itemKey: "abc_d_10", name: "ABC Pr
   abc_regular_5gb: { productKey: "abc_proxy", itemKey: "abc_r_5", name: "ABC Proxy", package: "5GB Regular", price: "$9.50", back: "abc_regular_menu" },
   abc_regular_10gb: { productKey: "abc_proxy", itemKey: "abc_r_10", name: "ABC Proxy", package: "10GB Regular", price: "$16.50", back: "abc_regular_menu" },
   abc_regular_15gb: { productKey: "abc_proxy", itemKey: "abc_r_15", name: "ABC Proxy", package: "15GB Regular", price: "$23.15", back: "abc_regular_menu" },
-  abc_regular_20gb: { productKey: "abc_proxy", itemKey: "abc_r_20", name: "ABC Proxy", package: "20GB Regular", price: "$30.50", back: "abc_regular_menu" },
+  abc_regular_20gb: { productKey: "abc_proxy", itemKey: "abc_r_20", name: "ABC Proxy", package: "20GB Regular", price: "$30.00", back: "abc_regular_menu" },
 
   // =========================
   // PROXY SELLER
