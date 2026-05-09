@@ -9,7 +9,7 @@ const http = require("http");
 const { ADMIN_CHAT_ID } = require("./config");
 
 // 🔹 IMPORT HANDLERS
-const { forceJoin } = require("./handlers/forceJoin");
+const { forceJoin } = require("./handlers/forcejoin");
 const { showMainMenu } = require("./handlers/menu");
 
 const {
