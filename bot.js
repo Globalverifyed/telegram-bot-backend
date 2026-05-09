@@ -4,21 +4,46 @@ console.log("STARTING BOT...");
 
 const TelegramBot = require("node-telegram-bot-api");
 const http = require("http");
-const path = require("path");
 
 // 🔹 IMPORT CONFIG
-const { CHANNEL_LINK, ADMIN_CHAT_ID } = require("./config");
+const { ADMIN_CHAT_ID } = require("./config");
 
-// 🔹 IMPORT HANDLERS (const style আগের মতোই)
+// 🔹 IMPORT HANDLERS
 const { forceJoin } = require("./handlers/forceJoin");
 const { showMainMenu } = require("./handlers/menu");
-const { handleSupport, handleIPProxy, handleDataImpulse, handleProxyIP, handleProxyGB,
-        handleSwiftProxy, handleNiceProxy, handleABCProxy, handleProxySeller, handleProxyLight,
-        handleNovProxy, handleIpRocketProxy, handleNodemaven, handleCliProxy, handleCherryProxy,
-        handleDigiProxy, handleVPN, handleSubscription, handleProductOptions } = require("./handlers/index");
+
+const {
+  handleSupport,
+  handleIPProxy,
+  handleDataImpulse,
+  handleProxyIP,
+  handleProxyGB,
+  handleSwiftProxy,
+  handleNiceProxy,
+  handleABCProxy,
+  handleProxySeller,
+  handleProxyLight,
+  handleNovProxy,
+  handleIpRocketProxy,
+  handleNodemaven,
+  handleCliProxy,
+  handleCherryProxy,
+  handleDigiProxy,
+  handleVPN,
+  handleSubscription,
+  handleProductOptions
+} = require("./handlers/index");
+
 const { handleAdmin, handleAdminButtons } = require("./handlers/admin");
 const { handleAdminStock } = require("./handlers/admin_stock");
-const { handlePaymentMethod, handlePaymentScreenshot, handlePaymentDone, handleDeliveryButton, handleAdminDeliveryMessage } = require("./handlers/payment");
+
+const {
+  handlePaymentMethod,
+  handlePaymentScreenshot,
+  handlePaymentDone,
+  handleDeliveryButton,
+  handleAdminDeliveryMessage
+} = require("./handlers/payment");
 
 // 🔹 BOT INIT
 if (!process.env.BOT_TOKEN) {
@@ -33,7 +58,7 @@ async function checkAccess(update) {
   try {
     return await forceJoin(bot, update);
   } catch (err) {
-    console.log("CheckAccess error:", err);
+    console.log("CheckAccess error:", err.message);
     return false;
   }
 }
@@ -44,20 +69,9 @@ bot.onText(/\/start/, async (msg) => {
   console.log("START command triggered by:", msg.chat.username || chatId);
 
   const allowed = await checkAccess(msg);
+  if (!allowed) return;
 
-  if (!allowed) {
-    const opts = {
-      reply_markup: {
-        inline_keyboard: [
-          [{ text: "📢 Join Channel", url: CHANNEL_LINK }],
-          [{ text: "✅ Check Again", callback_data: "check_join" }]
-        ]
-      }
-    };
-    return bot.sendMessage(chatId, "👋 Welcome! Please join our channel first to use this bot.", opts);
-  }
-
-  showMainMenu(bot, chatId);
+  await showMainMenu(bot, chatId);
 });
 
 // ===================== CALLBACK QUERY =====================
@@ -66,8 +80,6 @@ bot.on("callback_query", async (query) => {
   if (!allowed) return;
 
   await bot.answerCallbackQuery(query.id);
-
-  
 
   // ADMIN
   if (await handleAdminStock(bot, query)) return;
@@ -105,11 +117,18 @@ bot.on("callback_query", async (query) => {
 });
 
 // ===================== ADMIN COMMANDS =====================
-bot.onText(/\/admin/, async (msg) => { await handleAdmin(bot, msg); });
-bot.onText(/\/testadmin/, (msg) => { bot.sendMessage(ADMIN_CHAT_ID, "Admin test message ✅"); });
+bot.onText(/\/admin/, async (msg) => {
+  await handleAdmin(bot, msg);
+});
+
+bot.onText(/\/testadmin/, async (msg) => {
+  await bot.sendMessage(ADMIN_CHAT_ID, "Admin test message ✅");
+});
 
 // ===================== PHOTO PAYMENT =====================
-bot.on("photo", async (msg) => { await handlePaymentScreenshot(bot, msg); });
+bot.on("photo", async (msg) => {
+  await handlePaymentScreenshot(bot, msg);
+});
 
 // ===================== MESSAGE =====================
 bot.on("message", async (msg) => {
@@ -118,15 +137,23 @@ bot.on("message", async (msg) => {
 });
 
 // ===================== ERRORS =====================
-bot.on("polling_error", (err) => console.log("POLLING ERROR:", err.message));
+bot.on("polling_error", (err) => {
+  console.log("POLLING ERROR:", err.message);
+});
 
 // ===================== CHANNEL DEBUG =====================
-bot.on("channel_post", (msg) => { console.log("CHANNEL ID:", msg.chat.id); });
+bot.on("channel_post", (msg) => {
+  console.log("CHANNEL ID:", msg.chat.id);
+});
 
 // ===================== SERVER =====================
-http.createServer((req, res) => {
-  res.writeHead(200, { "Content-Type": "text/plain" });
-  res.end("Bot is running");
-}).listen(process.env.PORT || 10000, () => console.log("Server running..."));
+http
+  .createServer((req, res) => {
+    res.writeHead(200, { "Content-Type": "text/plain" });
+    res.end("Bot is running");
+  })
+  .listen(process.env.PORT || 10000, () => {
+    console.log("Server running...");
+  });
 
 console.log("Bot running...");
