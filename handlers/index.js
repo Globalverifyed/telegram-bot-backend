@@ -2,7 +2,7 @@ function safeRequire(path) {
   try {
     return require(path);
   } catch (err) {
-    console.log(Handler load failed: ${path}, err.message);
+    console.log(`Handler load failed: ${path}`, err.message);
     return {};
   }
 }
