@@ -1,6 +1,6 @@
 const { showPaymentMethods } = require("./payment");
 const { sendOrEdit } = require("./utils");
-const { isAvailable, reduceStock, getStock } = require("./stock_manager");
+const { isAvailable, getStock } = require("./stock_manager");
 
 /* ===================== DISCOUNT PACKAGES ===================== */
 
@@ -209,9 +209,9 @@ Please choose another available package.`,
       return true;
     }
 
-    reduceStock(PRODUCT_KEY, data);
-
     await showPaymentMethods(bot, chatId, {
+      productKey: PRODUCT_KEY,
+      itemKey: data,
       name: "DataImpulse",
       package: pkg.label,
       price: pkg.price,
