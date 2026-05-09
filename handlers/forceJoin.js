@@ -3,7 +3,6 @@ const { CHANNEL_ID, CHANNEL_LINK } = require("../config");
 async function checkJoin(bot, userId) {
   try {
     const member = await bot.getChatMember(CHANNEL_ID, userId);
-
     return ["member", "administrator", "creator"].includes(member.status);
   } catch (err) {
     console.log("Join check error:", err.message);
@@ -12,43 +11,28 @@ async function checkJoin(bot, userId) {
 }
 
 async function forceJoin(bot, update) {
-  let chatId, userId;
+  const msg = update.message  update.callback_query?.message;
+  const from = update.from  update.callback_query?.from;
 
-  if (update.message) {
-    chatId = update.message.chat.id;
-    userId = update.message.from.id;
-  } else if (update.callback_query) {
-    chatId = update.callback_query.message.chat.id;
-    userId = update.callback_query.from.id;
-  } else {
-    return false;
-  }
+  if (!msg || !from) return false;
+
+  const chatId = msg.chat.id;
+  const userId = from.id;
 
   const joined = await checkJoin(bot, userId);
 
   if (!joined) {
-    await bot.sendMessage(
-      chatId,
-      `🚫 আপনি এখনো আমাদের Channel Join করেননি।
-
-Bot ব্যবহার করতে হলে আগে Channel Join করুন।
-
-Join করার পর আবার /start দিন।`,
-      {
-        reply_markup: {
-          inline_keyboard: [
-            [{ text: "📢 Join Channel", url: CHANNEL_LINK }]
-          ]
-        }
+    await bot.sendMessage(chatId, "🚫 আগে আমাদের Channel Join করুন।\n\nJoin করার পর আবার /start দিন।", {
+      reply_markup: {
+        inline_keyboard: [
+          [{ text: "📢 Join Channel", url: CHANNEL_LINK }]
+        ]
       }
-    );
-
+    });
     return false;
   }
 
   return true;
 }
 
-module.exports = {
-  forceJoin
-};
+module.exports = { forceJoin, checkJoin };
