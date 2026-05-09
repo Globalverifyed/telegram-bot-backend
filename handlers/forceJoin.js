@@ -28,20 +28,27 @@ async function forceJoin(bot, update) {
   if (!joined) {
     await bot.sendMessage(
       chatId,
-      "🚫 Bot ব্যবহার করতে হলে আগে আমাদের Channel Join করতে হবে!\n\n👇 নিচের Button এ ক্লিক করুন",
+      `🚫 আপনি এখনো আমাদের Channel Join করেননি।
+
+Bot ব্যবহার করতে হলে আগে Channel Join করুন।
+
+Channel Join করার পর bot-এ ফিরে এসে /start দিন।`,
       {
         reply_markup: {
           inline_keyboard: [
-            [{ text: "📢 Join Channel", url: CHANNEL_LINK }],
-            [{ text: "✅ I Joined", callback_data: "check_join" }]
+            [{ text: "📢 Join Channel", url: CHANNEL_LINK }]
           ]
         }
       }
     );
+
     return false;
   }
 
   return true;
 }
 
-module.exports = { forceJoin };
+module.exports = {
+  forceJoin,
+  checkJoin
+};
