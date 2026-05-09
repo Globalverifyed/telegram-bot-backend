@@ -2,7 +2,7 @@ module.exports = {
   ...require("./support"),
   ...require("./ip_proxy"),
   ...require("./dataimpulse"),
-  ...require("./9proxy_ip"),
+  ...require("./proxy_ip"),
   ...require("./9proxy_gb"),
   ...require("./swift_proxy"),
   ...require("./nice_proxy"),
