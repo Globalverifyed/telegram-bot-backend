@@ -3,6 +3,7 @@ const { CHANNEL_ID, CHANNEL_LINK } = require("../config");
 async function checkJoin(bot, userId) {
   try {
     const member = await bot.getChatMember(CHANNEL_ID, userId);
+
     return ["member", "administrator", "creator"].includes(member.status);
   } catch (err) {
     console.log("Join check error:", err.message);
@@ -32,7 +33,7 @@ async function forceJoin(bot, update) {
 
 Bot ব্যবহার করতে হলে আগে Channel Join করুন।
 
-Channel Join করার পর bot-এ ফিরে এসে /start দিন।`,
+Join করার পর আবার /start দিন।`,
       {
         reply_markup: {
           inline_keyboard: [
@@ -49,6 +50,5 @@ Channel Join করার পর bot-এ ফিরে এসে /start দিন
 }
 
 module.exports = {
-  forceJoin,
-  checkJoin
+  forceJoin
 };
