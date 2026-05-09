@@ -1,14 +1,12 @@
-// src/bot.js
+// bot.js
 require("dotenv").config();
 console.log("STARTING BOT...");
 
 const TelegramBot = require("node-telegram-bot-api");
 const http = require("http");
 
-// 🔹 IMPORT CONFIG
 const { ADMIN_CHAT_ID } = require("./config");
 
-// 🔹 IMPORT HANDLERS
 const { forceJoin } = require("./handlers/forcejoin");
 const { showMainMenu } = require("./handlers/menu");
 
@@ -45,15 +43,13 @@ const {
   handleAdminDeliveryMessage
 } = require("./handlers/payment");
 
-// 🔹 BOT INIT
 if (!process.env.BOT_TOKEN) {
-  console.log("❌ BOT_TOKEN missing in .env");
+  console.log("❌ BOT_TOKEN missing in .env / Render Environment");
   process.exit(1);
 }
 
 const bot = new TelegramBot(process.env.BOT_TOKEN, { polling: true });
 
-// ===================== HELP FUNCTION =====================
 async function checkAccess(update) {
   try {
     return await forceJoin(bot, update);
@@ -63,90 +59,83 @@ async function checkAccess(update) {
   }
 }
 
-// ===================== START =====================
 bot.onText(/\/start/, async (msg) => {
   const chatId = msg.chat.id;
-  console.log("START command triggered by:", msg.chat.username || chatId);
+  console.log("START command triggered by:", msg.from?.username || chatId);
 
   const allowed = await checkAccess(msg);
   if (!allowed) return;
 
-  await showMainMenu(bot, chatId);
+  return showMainMenu(bot, chatId);
 });
 
-// ===================== CALLBACK QUERY =====================
 bot.on("callback_query", async (query) => {
-  const allowed = await checkAccess(query);
-  if (!allowed) return;
+  try {
+    const allowed = await checkAccess(query);
+    if (!allowed) return;
 
-  await bot.answerCallbackQuery(query.id);
+    await bot.answerCallbackQuery(query.id).catch(() => {});
 
-  // ADMIN
-  if (await handleAdminStock(bot, query)) return;
-  if (await handleAdminButtons(bot, query)) return;
+    if (await handleAdminStock(bot, query)) return;
+    if (await handleAdminButtons(bot, query)) return;
 
-  // MAIN FEATURES
-  if (await handleSupport(bot, query)) return;
-  if (await handleIPProxy(bot, query)) return;
-  if (await handleDataImpulse(bot, query)) return;
-  if (await handleProxyIP(bot, query)) return;
-  if (await handleProxyGB(bot, query)) return;
-  if (await handleSwiftProxy(bot, query)) return;
-  if (await handleNiceProxy(bot, query)) return;
-  if (await handleABCProxy(bot, query)) return;
-  if (await handleProxySeller(bot, query)) return;
-  if (await handleProxyLight(bot, query)) return;
-  if (await handleNovProxy(bot, query)) return;
-  if (await handleIpRocketProxy(bot, query)) return;
-  if (await handleNodemaven(bot, query)) return;
-  if (await handleCliProxy(bot, query)) return;
-  if (await handleCherryProxy(bot, query)) return;
-  if (await handleDigiProxy(bot, query)) return;
-  if (await handleVPN(bot, query)) return;
-  if (await handleSubscription(bot, query)) return;
+    if (await handleSupport(bot, query)) return;
+    if (await handleIPProxy(bot, query)) return;
+    if (await handleDataImpulse(bot, query)) return;
+    if (await handleProxyIP(bot, query)) return;
+    if (await handleProxyGB(bot, query)) return;
+    if (await handleSwiftProxy(bot, query)) return;
+    if (await handleNiceProxy(bot, query)) return;
+    if (await handleABCProxy(bot, query)) return;
+    if (await handleProxySeller(bot, query)) return;
+    if (await handleProxyLight(bot, query)) return;
+    if (await handleNovProxy(bot, query)) return;
+    if (await handleIpRocketProxy(bot, query)) return;
+    if (await handleNodemaven(bot, query)) return;
+    if (await handleCliProxy(bot, query)) return;
+    if (await handleCherryProxy(bot, query)) return;
+    if (await handleDigiProxy(bot, query)) return;
+    if (await handleVPN(bot, query)) return;
+    if (await handleSubscription(bot, query)) return;
 
-  // PRODUCTS
-  if (await handleProductOptions(bot, query)) return;
+    if (await handleProductOptions(bot, query)) return;
 
-  // PAYMENT
-  if (await handlePaymentMethod(bot, query)) return;
-  if (await handlePaymentDone(bot, query)) return;
-  if (await handleDeliveryButton(bot, query)) return;
+    if (await handlePaymentMethod(bot, query)) return;
+    if (await handlePaymentDone(bot, query)) return;
+    if (await handleDeliveryButton(bot, query)) return;
 
-  console.log("Unhandled callback:", query.data);
+    console.log("Unhandled callback:", query.data);
+  } catch (err) {
+    console.log("Callback error:", err.message);
+  }
 });
 
-// ===================== ADMIN COMMANDS =====================
 bot.onText(/\/admin/, async (msg) => {
   await handleAdmin(bot, msg);
 });
 
 bot.onText(/\/testadmin/, async (msg) => {
+  if (!ADMIN_CHAT_ID) return bot.sendMessage(msg.chat.id, "❌ ADMIN_CHAT_ID missing.");
   await bot.sendMessage(ADMIN_CHAT_ID, "Admin test message ✅");
 });
 
-// ===================== PHOTO PAYMENT =====================
 bot.on("photo", async (msg) => {
   await handlePaymentScreenshot(bot, msg);
 });
 
-// ===================== MESSAGE =====================
 bot.on("message", async (msg) => {
   if (msg.text && msg.text.startsWith("/")) return;
   await handleAdminDeliveryMessage(bot, msg);
 });
 
-// ===================== ERRORS =====================
 bot.on("polling_error", (err) => {
   console.log("POLLING ERROR:", err.message);
 });
 
-// ===================== CHANNEL DEBUG =====================
 bot.on("channel_post", (msg) => {
   console.log("CHANNEL ID:", msg.chat.id);
 });
 
-// ===================== SERVER =====================
 http
   .createServer((req, res) => {
     res.writeHead(200, { "Content-Type": "text/plain" });
