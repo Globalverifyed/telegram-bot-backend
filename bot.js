@@ -67,13 +67,7 @@ bot.on("callback_query", async (query) => {
 
   await bot.answerCallbackQuery(query.id);
 
-  if (query.data === "check_join") {
-    if (await checkAccess(query)) {
-      await bot.answerCallbackQuery(query.id);
-      return showMainMenu(bot, query.message.chat.id);
-    }
-    return bot.answerCallbackQuery(query.id, { text: "❌ Please join first!" });
-  }
+  
 
   // ADMIN
   if (await handleAdminStock(bot, query)) return;
