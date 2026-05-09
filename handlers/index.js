@@ -1,21 +1,30 @@
+function safeRequire(path) {
+  try {
+    return require(path);
+  } catch (err) {
+    console.log(Handler load failed: ${path}, err.message);
+    return {};
+  }
+}
+
 module.exports = {
-  ...require("./support"),
-  ...require("./ip_proxy"),
-  ...require("./dataimpulse"),
-  ...require("./proxy_ip"),
-  ...require("./9proxy_gb"),
-  ...require("./swift_proxy"),
-  ...require("./nice_proxy"),
-  ...require("./abc_proxy"),
-  ...require("./proxy_seller"),
-  ...require("./proxy_light"),
-  ...require("./nov_proxy"),
-  ...require("./iprocket_proxy"),
-  ...require("./nodemaven"),
-  ...require("./cliproxy"),
-  ...require("./cherry_proxy"),
-  ...require("./digi_proxy"),
-  ...require("./vpn"),
-  ...require("./subscription"),
-  ...require("./product_options")
+  ...safeRequire("./support"),
+  ...safeRequire("./ip_proxy"),
+  ...safeRequire("./dataimpulse"),
+  ...safeRequire("./9proxy_ip"),
+  ...safeRequire("./9proxy_gb"),
+  ...safeRequire("./swift_proxy"),
+  ...safeRequire("./nice_proxy"),
+  ...safeRequire("./abc_proxy"),
+  ...safeRequire("./proxy_seller"),
+  ...safeRequire("./proxy_light"),
+  ...safeRequire("./nov_proxy"),
+  ...safeRequire("./iprocket_proxy"),
+  ...safeRequire("./nodemaven"),
+  ...safeRequire("./cliproxy"),
+  ...safeRequire("./cherry_proxy"),
+  ...safeRequire("./digi_proxy"),
+  ...safeRequire("./vpn"),
+  ...safeRequire("./subscription"),
+  ...safeRequire("./product_options")
 };
