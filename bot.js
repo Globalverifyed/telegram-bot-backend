@@ -7,7 +7,7 @@ const http = require("http");
 
 const { ADMIN_CHAT_ID } = require("./config");
 
-const { forceJoin } = require("./handlers/forcejoin");
+const { forceJoin } = require("./handlers/force_join");
 const { showMainMenu } = require("./handlers/menu");
 
 const {
