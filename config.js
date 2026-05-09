@@ -8,8 +8,14 @@ const ADMIN_CHAT_IDS = (process.env.ADMIN_CHAT_IDS || process.env.ADMIN_CHAT_ID 
 
 module.exports = {
   CHANNEL_ID: Number(process.env.CHANNEL_ID || -1003704005774),
-  CHANNEL_LINK: process.env.CHANNEL_URL || "",
+
+  CHANNEL_LINK:
+    process.env.CHANNEL_LINK ||
+    process.env.CHANNEL_URL ||
+    "https://t.me/your_channel_username",
+
   SUPPORT_URL: process.env.SUPPORT_URL || "",
+
   ADMIN_CHAT_ID: ADMIN_CHAT_IDS[0] || process.env.ADMIN_CHAT_ID || "",
   ADMIN_CHAT_IDS
 };
