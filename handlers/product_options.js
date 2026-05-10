@@ -168,38 +168,38 @@ abc_discount_10gb: { productKey: "abc_proxy", itemKey: "abc_d_10", name: "ABC Pr
   // =========================
   // CHERRY PROXY
   // =========================
-  cherry_discount_1gb: { productKey: "cherry_proxy", itemKey: "ch_d_1", name: "CHerry Proxy", package: "1GB Discount", price: "$1.5", back: "cherry_discount_menu" },
-  cherry_discount_2gb: { productKey: "cherry_proxy", itemKey: "ch_d_2", name: "CHerry Proxy", package: "2GB Discount", price: "$3", back: "cherry_discount_menu" },
-  cherry_discount_3gb: { productKey: "cherry_proxy", itemKey: "ch_d_3", name: "CHerry Proxy", package: "3GB Discount", price: "$4.5", back: "cherry_discount_menu" },
-  cherry_discount_4gb: { productKey: "cherry_proxy", itemKey: "ch_d_4", name: "CHerry Proxy", package: "4GB Discount", price: "$6", back: "cherry_discount_menu" },
-  cherry_discount_5gb: { productKey: "cherry_proxy", itemKey: "ch_d_5", name: "CHerry Proxy", package: "5GB Discount", price: "$7.5", back: "cherry_discount_menu" },
+  cherry_discount_1gb: { productKey: "cherry_proxy", itemKey: "ch_d_1", name: "CHerry Proxy", package: "1GB Discount", price: "$3.00", back: "cherry_discount_menu" },
+  cherry_discount_2gb: { productKey: "cherry_proxy", itemKey: "ch_d_2", name: "CHerry Proxy", package: "2GB Discount", price: "$6.00", back: "cherry_discount_menu" },
+  cherry_discount_3gb: { productKey: "cherry_proxy", itemKey: "ch_d_3", name: "CHerry Proxy", package: "3GB Discount", price: "$8.50", back: "cherry_discount_menu" },
+  cherry_discount_4gb: { productKey: "cherry_proxy", itemKey: "ch_d_4", name: "CHerry Proxy", package: "4GB Discount", price: "$11.50", back: "cherry_discount_menu" },
+  cherry_discount_5gb: { productKey: "cherry_proxy", itemKey: "ch_d_5", name: "CHerry Proxy", package: "5GB Discount", price: "$14.50", back: "cherry_discount_menu" },
 
-  cherry_regular_1gb: { productKey: "cherry_proxy", itemKey: "ch_r_1", name: "CHerry Proxy", package: "1GB Regular", price: "$1.10", back: "cherry_regular_menu" },
-  cherry_regular_2gb: { productKey: "cherry_proxy", itemKey: "ch_r_2", name: "CHerry Proxy", package: "2GB Regular", price: "$2.20", back: "cherry_regular_menu" },
-  cherry_regular_3gb: { productKey: "cherry_proxy", itemKey: "ch_r_3", name: "CHerry Proxy", package: "3GB Regular", price: "$3.30", back: "cherry_regular_menu" },
-  cherry_regular_4gb: { productKey: "cherry_proxy", itemKey: "ch_r_4", name: "CHerry Proxy", package: "4GB Regular", price: "$4.40", back: "cherry_regular_menu" },
-  cherry_regular_5gb: { productKey: "cherry_proxy", itemKey: "ch_r_5", name: "CHerry Proxy", package: "5GB Regular", price: "$5.50", back: "cherry_regular_menu" },
-  cherry_regular_10gb: { productKey: "cherry_proxy", itemKey: "ch_r_10", name: "CHerry Proxy", package: "10GB Regular", price: "$10.50", back: "cherry_regular_menu" },
-  cherry_regular_15gb: { productKey: "cherry_proxy", itemKey: "ch_r_15", name: "CHerry Proxy", package: "15GB Regular", price: "$16.50", back: "cherry_regular_menu" },
-  cherry_regular_20gb: { productKey: "cherry_proxy", itemKey: "ch_r_20", name: "CHerry Proxy", package: "20GB Regular", price: "$21.00", back: "cherry_regular_menu" },
+  cherry_regular_1gb: { productKey: "cherry_proxy", itemKey: "ch_r_1", name: "CHerry Proxy", package: "1GB Regular", price: "$3.50", back: "cherry_regular_menu" },
+  cherry_regular_2gb: { productKey: "cherry_proxy", itemKey: "ch_r_2", name: "CHerry Proxy", package: "2GB Regular", price: "$7.00", back: "cherry_regular_menu" },
+  cherry_regular_3gb: { productKey: "cherry_proxy", itemKey: "ch_r_3", name: "CHerry Proxy", package: "3GB Regular", price: "$10.50", back: "cherry_regular_menu" },
+  cherry_regular_4gb: { productKey: "cherry_proxy", itemKey: "ch_r_4", name: "CHerry Proxy", package: "4GB Regular", price: "$13.50", back: "cherry_regular_menu" },
+  cherry_regular_5gb: { productKey: "cherry_proxy", itemKey: "ch_r_5", name: "CHerry Proxy", package: "5GB Regular", price: "$16.50", back: "cherry_regular_menu" },
+  cherry_regular_10gb: { productKey: "cherry_proxy", itemKey: "ch_r_10", name: "CHerry Proxy", package: "10GB Regular", price: "$32.00", back: "cherry_regular_menu" },
+  cherry_regular_15gb: { productKey: "cherry_proxy", itemKey: "ch_r_15", name: "CHerry Proxy", package: "15GB Regular", price: "$49.00", back: "cherry_regular_menu" },
+  cherry_regular_20gb: { productKey: "cherry_proxy", itemKey: "ch_r_20", name: "CHerry Proxy", package: "20GB Regular", price: "$62.00", back: "cherry_regular_menu" },
 
   // =========================
   // DIGI PROXY
   // =========================
-  digi_discount_1gb: { productKey: "digi_proxy", itemKey: "dg_d_1", name: "Digi Proxy", package: "1GB Discount", price: "$1.5", back: "digi_discount_menu" },
-  digi_discount_2gb: { productKey: "digi_proxy", itemKey: "dg_d_2", name: "Digi Proxy", package: "2GB Discount", price: "$3", back: "digi_discount_menu" },
-  digi_discount_3gb: { productKey: "digi_proxy", itemKey: "dg_d_3", name: "Digi Proxy", package: "3GB Discount", price: "$4.5", back: "digi_discount_menu" },
-  digi_discount_4gb: { productKey: "digi_proxy", itemKey: "dg_d_4", name: "Digi Proxy", package: "4GB Discount", price: "$6", back: "digi_discount_menu" },
-  digi_discount_5gb: { productKey: "digi_proxy", itemKey: "dg_d_5", name: "Digi Proxy", package: "5GB Discount", price: "$7.5", back: "digi_discount_menu" },
+  digi_discount_1gb: { productKey: "digi_proxy", itemKey: "dg_d_1", name: "Digi Proxy", package: "1GB Discount", price: "$3.00", back: "digi_discount_menu" },
+  digi_discount_2gb: { productKey: "digi_proxy", itemKey: "dg_d_2", name: "Digi Proxy", package: "2GB Discount", price: "$6.00", back: "digi_discount_menu" },
+  digi_discount_3gb: { productKey: "digi_proxy", itemKey: "dg_d_3", name: "Digi Proxy", package: "3GB Discount", price: "$8.50", back: "digi_discount_menu" },
+  digi_discount_4gb: { productKey: "digi_proxy", itemKey: "dg_d_4", name: "Digi Proxy", package: "4GB Discount", price: "$11.50", back: "digi_discount_menu" },
+  digi_discount_5gb: { productKey: "digi_proxy", itemKey: "dg_d_5", name: "Digi Proxy", package: "5GB Discount", price: "$14.50", back: "digi_discount_menu" },
 
-  digi_regular_1gb: { productKey: "digi_proxy", itemKey: "dg_r_1", name: "Digi Proxy", package: "1GB Regular", price: "$1.10", back: "digi_regular_menu" },
-  digi_regular_2gb: { productKey: "digi_proxy", itemKey: "dg_r_2", name: "Digi Proxy", package: "2GB Regular", price: "$2.20", back: "digi_regular_menu" },
-  digi_regular_3gb: { productKey: "digi_proxy", itemKey: "dg_r_3", name: "Digi Proxy", package: "3GB Regular", price: "$3.30", back: "digi_regular_menu" },
-  digi_regular_4gb: { productKey: "digi_proxy", itemKey: "dg_r_4", name: "Digi Proxy", package: "4GB Regular", price: "$4.40", back: "digi_regular_menu" },
-  digi_regular_5gb: { productKey: "digi_proxy", itemKey: "dg_r_5", name: "Digi Proxy", package: "5GB Regular", price: "$5.50", back: "digi_regular_menu" },
-  digi_regular_10gb: { productKey: "digi_proxy", itemKey: "dg_r_10", name: "Digi Proxy", package: "10GB Regular", price: "$10.50", back: "digi_regular_menu" },
-  digi_regular_15gb: { productKey: "digi_proxy", itemKey: "dg_r_15", name: "Digi Proxy", package: "15GB Regular", price: "$16.50", back: "digi_regular_menu" },
-  digi_regular_20gb: { productKey: "digi_proxy", itemKey: "dg_r_20", name: "Digi Proxy", package: "20GB Regular", price: "$21.00", back: "digi_regular_menu" }
+  digi_regular_1gb: { productKey: "digi_proxy", itemKey: "dg_r_1", name: "Digi Proxy", package: "1GB Regular", price: "$3.50", back: "digi_regular_menu" },
+  digi_regular_2gb: { productKey: "digi_proxy", itemKey: "dg_r_2", name: "Digi Proxy", package: "2GB Regular", price: "$7.00", back: "digi_regular_menu" },
+  digi_regular_3gb: { productKey: "digi_proxy", itemKey: "dg_r_3", name: "Digi Proxy", package: "3GB Regular", price: "$10.50", back: "digi_regular_menu" },
+  digi_regular_4gb: { productKey: "digi_proxy", itemKey: "dg_r_4", name: "Digi Proxy", package: "4GB Regular", price: "$13.50", back: "digi_regular_menu" },
+  digi_regular_5gb: { productKey: "digi_proxy", itemKey: "dg_r_5", name: "Digi Proxy", package: "5GB Regular", price: "$16.50", back: "digi_regular_menu" },
+  digi_regular_10gb: { productKey: "digi_proxy", itemKey: "dg_r_10", name: "Digi Proxy", package: "10GB Regular", price: "$32.00", back: "digi_regular_menu" },
+  digi_regular_15gb: { productKey: "digi_proxy", itemKey: "dg_r_15", name: "Digi Proxy", package: "15GB Regular", price: "$49.00", back: "digi_regular_menu" },
+  digi_regular_20gb: { productKey: "digi_proxy", itemKey: "dg_r_20", name: "Digi Proxy", package: "20GB Regular", price: "$62.00", back: "digi_regular_menu" }
 };
 
 async function showProductOptions(bot, query, order) {
