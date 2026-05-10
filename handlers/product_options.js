@@ -150,20 +150,20 @@ abc_discount_10gb: { productKey: "abc_proxy", itemKey: "abc_d_10", name: "ABC Pr
   // =========================
   // CLIPROXY
   // =========================
-  cliproxy_discount_1gb: { productKey: "cliproxy", itemKey: "cp_d_1", name: "CLiProxy", package: "1GB Discount", price: "$1.5", back: "cliproxy_discount_menu" },
-  cliproxy_discount_2gb: { productKey: "cliproxy", itemKey: "cp_d_2", name: "CLiProxy", package: "2GB Discount", price: "$3", back: "cliproxy_discount_menu" },
-  cliproxy_discount_3gb: { productKey: "cliproxy", itemKey: "cp_d_3", name: "CLiProxy", package: "3GB Discount", price: "$4.5", back: "cliproxy_discount_menu" },
-  cliproxy_discount_4gb: { productKey: "cliproxy", itemKey: "cp_d_4", name: "CLiProxy", package: "4GB Discount", price: "$6", back: "cliproxy_discount_menu" },
-  cliproxy_discount_5gb: { productKey: "cliproxy", itemKey: "cp_d_5", name: "CLiProxy", package: "5GB Discount", price: "$7.5", back: "cliproxy_discount_menu" },
+  cliproxy_discount_25ip: { productKey: "cliproxy", itemKey: "cp_d_25", name: "CLiProxy", package: "25 IP Discount", price: "$2.00", back: "cliproxy_discount_menu" },
+  cliproxy_discount_50ip: { productKey: "cliproxy", itemKey: "cp_d_50", name: "CLiProxy", package: "50 IP Discount", price: "$4.00", back: "cliproxy_discount_menu" },
+  cliproxy_discount_100ip: { productKey: "cliproxy", itemKey: "cp_d_100", name: "CLiProxy", package: "100 IP Discount", price: "$8.00", back: "cliproxy_discount_menu" },
+  cliproxy_discount_200ip: { productKey: "cliproxy", itemKey: "cp_d_200", name: "CLiProxy", package: "200 IP Discount", price: "$16.00", back: "cliproxy_discount_menu" },
+  cliproxy_discount_400ip: { productKey: "cliproxy", itemKey: "cp_d_400", name: "CLiProxy", package: "400 IP Discount", price: "$32.00", back: "cliproxy_discount_menu" },
 
-  cliproxy_regular_1gb: { productKey: "cliproxy", itemKey: "cp_r_1", name: "CLiProxy", package: "1GB Regular", price: "$1.10", back: "cliproxy_regular_menu" },
-  cliproxy_regular_2gb: { productKey: "cliproxy", itemKey: "cp_r_2", name: "CLiProxy", package: "2GB Regular", price: "$2.20", back: "cliproxy_regular_menu" },
-  cliproxy_regular_3gb: { productKey: "cliproxy", itemKey: "cp_r_3", name: "CLiProxy", package: "3GB Regular", price: "$3.30", back: "cliproxy_regular_menu" },
-  cliproxy_regular_4gb: { productKey: "cliproxy", itemKey: "cp_r_4", name: "CLiProxy", package: "4GB Regular", price: "$4.40", back: "cliproxy_regular_menu" },
-  cliproxy_regular_5gb: { productKey: "cliproxy", itemKey: "cp_r_5", name: "CLiProxy", package: "5GB Regular", price: "$5.50", back: "cliproxy_regular_menu" },
-  cliproxy_regular_10gb: { productKey: "cliproxy", itemKey: "cp_r_10", name: "CLiProxy", package: "10GB Regular", price: "$10.50", back: "cliproxy_regular_menu" },
-  cliproxy_regular_15gb: { productKey: "cliproxy", itemKey: "cp_r_15", name: "CLiProxy", package: "15GB Regular", price: "$16.50", back: "cliproxy_regular_menu" },
-  cliproxy_regular_20gb: { productKey: "cliproxy", itemKey: "cp_r_20", name: "CLiProxy", package: "20GB Regular", price: "$21.00", back: "cliproxy_regular_menu" },
+  cliproxy_regular_25ip: { productKey: "cliproxy", itemKey: "cp_r_25", name: "CLiProxy", package: "25 IP Regular", price: "$3.00", back: "cliproxy_regular_menu" },
+  cliproxy_regular_50ip: { productKey: "cliproxy", itemKey: "cp_r_50", name: "CLiProxy", package: "50 IP Regular", price: "$6.00", back: "cliproxy_regular_menu" },
+  cliproxy_regular_100ip: { productKey: "cliproxy", itemKey: "cp_r_100", name: "CLiProxy", package: "100 IP Regular", price: "$12.00", back: "cliproxy_regular_menu" },
+  cliproxy_regular_200ip: { productKey: "cliproxy", itemKey: "cp_r_200", name: "CLiProxy", package: "200 IP Regular", price: "$22.00", back: "cliproxy_regular_menu" },
+  cliproxy_regular_400ip: { productKey: "cliproxy", itemKey: "cp_r_400", name: "CLiProxy", package: "400 IP Regular", price: "$42.00", back: "cliproxy_regular_menu" },
+  cliproxy_regular_800ip: { productKey: "cliproxy", itemKey: "cp_r_800", name: "CLiProxy", package: "800 IP Regular", price: "$78.00", back: "cliproxy_regular_menu" },
+  cliproxy_regular_1000ip: { productKey: "cliproxy", itemKey: "cp_r_1000", name: "CLiProxy", package: "1000 IP Regular", price: "88.00", back: "cliproxy_regular_menu" },
+  cliproxy_regular_1200ip: { productKey: "cliproxy", itemKey: "cp_r_1200", name: "CLiProxy", package: "1200 IP Regular", price: "$99.00", back: "cliproxy_regular_menu" },
 
   // =========================
   // CHERRY PROXY
