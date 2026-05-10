@@ -4,19 +4,19 @@ const nodemavenDiscountPackages = [
   { name: "1 GB", price: "$4.20 USDT", callback: "nodemaven_discount_1gb" },
   { name: "2 GB", price: "$8.40 USDT", callback: "nodemaven_discount_2gb" },
   { name: "3 GB", price: "$12.50 USDT", callback: "nodemaven_discount_3gb" },
-  { name: "4 GB", price: "$16.00 USDT", callback: "nodemaven_discount_4gb" },
+  { name: "4 GB", price: "$16.50 USDT", callback: "nodemaven_discount_4gb" },
   { name: "5 GB", price: "$20.00 USDT", callback: "nodemaven_discount_5gb" }
 ];
 
 const nodemavenRegularPackages = [
-  { name: "1 GB", price: "$4.50", callback: "nodemaven_regular_1gb" },
-  { name: "2 GB", price: "$9.00", callback: "nodemaven_regular_2gb" },
-  { name: "3 GB", price: "$13.50", callback: "nodemaven_regular_3gb" },
-  { name: "4 GB", price: "$17.50", callback: "nodemaven_regular_4gb" },
-  { name: "5 GB", price: "$21.00", callback: "nodemaven_regular_5gb" },
-  { name: "10 GB", price: "$41.00", callback: "nodemaven_regular_10gb" },
-  { name: "15 GB", price: "$62.00", callback: "nodemaven_regular_15gb" },
-  { name: "20 GB", price: "$82.00", callback: "nodemaven_regular_20gb" }
+  { name: "1 GB", price: "$5.50", callback: "nodemaven_regular_1gb" },
+  { name: "2 GB", price: "$10.50", callback: "nodemaven_regular_2gb" },
+  { name: "3 GB", price: "$15.50", callback: "nodemaven_regular_3gb" },
+  { name: "4 GB", price: "$20.50", callback: "nodemaven_regular_4gb" },
+  { name: "5 GB", price: "$25.50", callback: "nodemaven_regular_5gb" },
+  { name: "10 GB", price: "$48.00", callback: "nodemaven_regular_10gb" },
+  { name: "15 GB", price: "$73.00", callback: "nodemaven_regular_15gb" },
+  { name: "20 GB", price: "$95.00", callback: "nodemaven_regular_20gb" }
 ];
 
 function makePackageButtons(packages) {
