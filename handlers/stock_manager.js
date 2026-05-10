@@ -360,8 +360,8 @@ vpn_cyberghost: {
   vpn_express: {
     title: "🔐 Express VPN",
     items: {
-      express_3d: { label: "3 Days", stock: 0 },
-      express_7d: { label: "7 Days", stock: 25 },
+      express_3d: { label: "3 Days", stock: 25},
+      express_7d: { label: "7 Days", stock: 0 },
       express_1m: { label: "1 Month", stock: 25 },
       express_6m: { label: "6 Month", stock: 0 },
       express_1y: { label: "1 Year", stock: 0 },
