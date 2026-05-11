@@ -49,8 +49,11 @@ if (!process.env.BOT_TOKEN) {
   process.exit(1);
 }
 
-const bot = new TelegramBot(process.env.BOT_TOKEN, { polling: true });
+const bot = new TelegramBot(process.env.BOT_TOKEN, {
+  polling: true
+});
 
+// ================= ACCESS CHECK =================
 async function checkAccess(update) {
   try {
     return await forceJoin(bot, update);
@@ -60,28 +63,45 @@ async function checkAccess(update) {
   }
 }
 
+// ================= START =================
 bot.onText(/\/start/, async (msg) => {
-  const chatId = msg.chat.id;
-  console.log("START command triggered by:", msg.from?.username || chatId);
+  try {
+    const chatId = msg.chat.id;
 
-  const allowed = await checkAccess(msg);
-if (!allowed) return;
+    console.log(
+      "START command triggered by:",
+      msg.from?.username || chatId
+    );
 
-await trackUser(msg.from);
+    const allowed = await checkAccess(msg);
 
-return showMainMenu(bot, chatId);
+    if (!allowed) return;
+
+    // TRACK USER
+    await trackUser(msg.from);
+
+    // SHOW MENU
+    await showMainMenu(bot, chatId);
+
+  } catch (err) {
+    console.log("/start error:", err.message);
+  }
 });
 
+// ================= CALLBACK =================
 bot.on("callback_query", async (query) => {
   try {
     const allowed = await checkAccess(query);
+
     if (!allowed) return;
 
     await bot.answerCallbackQuery(query.id).catch(() => {});
 
+    // ADMIN
     if (await handleAdminStock(bot, query)) return;
     if (await handleAdminButtons(bot, query)) return;
 
+    // FEATURES
     if (await handleSupport(bot, query)) return;
     if (await handleIPProxy(bot, query)) return;
     if (await handleDataImpulse(bot, query)) return;
@@ -101,47 +121,87 @@ bot.on("callback_query", async (query) => {
     if (await handleVPN(bot, query)) return;
     if (await handleSubscription(bot, query)) return;
 
+    // PRODUCTS
     if (await handleProductOptions(bot, query)) return;
 
+    // PAYMENT
     if (await handlePaymentMethod(bot, query)) return;
     if (await handlePaymentDone(bot, query)) return;
     if (await handleDeliveryButton(bot, query)) return;
 
     console.log("Unhandled callback:", query.data);
+
   } catch (err) {
     console.log("Callback error:", err.message);
   }
 });
 
+// ================= ADMIN =================
 bot.onText(/\/admin/, async (msg) => {
-  await handleAdmin(bot, msg);
+  try {
+    await handleAdmin(bot, msg);
+  } catch (err) {
+    console.log("/admin error:", err.message);
+  }
 });
 
 bot.onText(/\/testadmin/, async (msg) => {
-  if (!ADMIN_CHAT_ID) return bot.sendMessage(msg.chat.id, "❌ ADMIN_CHAT_ID missing.");
-  await bot.sendMessage(ADMIN_CHAT_ID, "Admin test message ✅");
+  try {
+    if (!ADMIN_CHAT_ID) {
+      return bot.sendMessage(
+        msg.chat.id,
+        "❌ ADMIN_CHAT_ID missing."
+      );
+    }
+
+    await bot.sendMessage(
+      ADMIN_CHAT_ID,
+      "Admin test message ✅"
+    );
+
+  } catch (err) {
+    console.log("/testadmin error:", err.message);
+  }
 });
 
+// ================= PHOTO =================
 bot.on("photo", async (msg) => {
-  await handlePaymentScreenshot(bot, msg);
+  try {
+    await handlePaymentScreenshot(bot, msg);
+  } catch (err) {
+    console.log("Photo handler error:", err.message);
+  }
 });
 
+// ================= MESSAGE =================
 bot.on("message", async (msg) => {
-  if (msg.text && msg.text.startsWith("/")) return;
-  await handleAdminDeliveryMessage(bot, msg);
+  try {
+    if (msg.text && msg.text.startsWith("/")) return;
+
+    await handleAdminDeliveryMessage(bot, msg);
+
+  } catch (err) {
+    console.log("Message handler error:", err.message);
+  }
 });
 
+// ================= ERRORS =================
 bot.on("polling_error", (err) => {
   console.log("POLLING ERROR:", err.message);
 });
 
+// ================= CHANNEL DEBUG =================
 bot.on("channel_post", (msg) => {
   console.log("CHANNEL ID:", msg.chat.id);
 });
 
+// ================= SERVER =================
 http
   .createServer((req, res) => {
-    res.writeHead(200, { "Content-Type": "text/plain" });
+    res.writeHead(200, {
+      "Content-Type": "text/plain"
+    });
+
     res.end("Bot is running");
   })
   .listen(process.env.PORT || 10000, () => {
