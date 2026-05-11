@@ -65,9 +65,11 @@ bot.onText(/\/start/, async (msg) => {
   console.log("START command triggered by:", msg.from?.username || chatId);
 
   const allowed = await checkAccess(msg);
-  if (!allowed) return;
+if (!allowed) return;
 
-  return showMainMenu(bot, chatId);
+await trackUser(msg.from);
+
+return showMainMenu(bot, chatId);
 });
 
 bot.on("callback_query", async (query) => {
