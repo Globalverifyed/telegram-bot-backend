@@ -42,9 +42,9 @@ const vpnProducts = {
     name: "Express VPN",
     stockKey: "vpn_express",
     packages: {
-      express_3d: { label: "3 Days", price: "$0.32" },
+      express_3d: { label: "3 Days", price: "$0.27" },
       express_7d: { label: "7 Days", price: "Stock Out" },
-      express_1m: { label: "1 Month", price: "$2.10" },
+      express_1m: { label: "1 Month", price: "$1.25" },
       express_6m: { label: "6 Month", price: "Stock Out" },
       express_1y: { label: "1 Year", price: "Stock Out" },
       express_2y: { label: "2 Year", price: "Stock Out" }
@@ -58,7 +58,7 @@ const vpnProducts = {
     packages: {
       hma_3d: { label: "3 Days", price: "Stock Out" },
       hma_7d: { label: "7 Days", price: "$0.32" },
-      hma_1m: { label: "1 Month", price: "$1.00" },
+      hma_1m: { label: "1 Month", price: "$1.10" },
       hma_6m: { label: "6 Month", price: "Stock Out" },
       hma_1y: { label: "1 Year", price: "Stock Out" },
       hma_2y: { label: "2 Year", price: "Stock Out" }
