@@ -1,7 +1,7 @@
 const { reduceStock } = require("./stock_manager");
 const { ADMIN_CHAT_IDS } = require("../config");
 const { formatPrice, getPriceNumber } = require("./utils");
-const { trackOrder } = require("./sheet_tracker");
+const { trackOrder, updateOrderDelivered } = require("./sheet_tracker");
 
 let orders = {};
 let deliveryMode = {};
@@ -397,7 +397,7 @@ ${msg.text}`
 
   order.status = "delivered";
   order.deliveredAt = new Date().toISOString();
-
+  await updateOrderDelivered(order);
   deliveredOrders[orderId] = order;
 
   delete pendingOrders[orderId];

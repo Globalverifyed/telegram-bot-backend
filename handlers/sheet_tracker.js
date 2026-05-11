@@ -2,44 +2,66 @@ const axios = require("axios");
 
 const GOOGLE_SCRIPT_URL = process.env.GOOGLE_SCRIPT_URL;
 
-async function trackUser(user) {
+async function sendToSheet(payload) {
   try {
-    await axios.post(GOOGLE_SCRIPT_URL, {
-      type: "user",
-      userId: user.id,
-      username: user.username || "No Username",
-      name: user.first_name || "No Name",
-      firstVisit: new Date().toLocaleString(),
-      lastVisit: new Date().toLocaleString(),
-      totalVisits: 1,
-      totalOrders: 0
-    });
+    if (!GOOGLE_SCRIPT_URL) {
+      console.log("GOOGLE_SCRIPT_URL missing");
+      return;
+    }
+
+    await axios.post(GOOGLE_SCRIPT_URL, payload);
   } catch (err) {
-    console.log("User tracking error:", err.message);
+    console.log("Sheet tracking error:", err.message);
   }
 }
 
+async function trackUser(user) {
+  await sendToSheet({
+    type: "user",
+    userId: user.id,
+    username: user.username ? "@" + user.username : "No Username",
+    name: `${user.first_name || ""} ${user.last_name || ""}`.trim() || "No Name",
+    firstVisit: new Date().toLocaleString(),
+    lastVisit: new Date().toLocaleString(),
+    totalVisits: 1,
+    totalOrders: 0
+  });
+}
+
 async function trackOrder(order) {
-  try {
-    await axios.post(GOOGLE_SCRIPT_URL, {
-      type: "order",
-      orderId: order.orderId,
-      userId: order.userId,
-      username: order.username,
-      name: order.name,
-      product: order.product,
-      package: order.package,
-      price: order.price,
-      paymentStatus: order.paymentStatus,
-      deliveryStatus: order.deliveryStatus,
-      date: new Date().toLocaleString()
-    });
-  } catch (err) {
-    console.log("Order tracking error:", err.message);
-  }
+  await sendToSheet({
+    type: "order",
+    orderId: order.orderId,
+    userId: order.userId,
+    username: order.username,
+    name: order.name,
+    product: order.product,
+    package: order.package,
+    price: order.price,
+    paymentStatus: order.paymentStatus,
+    deliveryStatus: order.deliveryStatus,
+    date: new Date().toLocaleString()
+  });
+}
+
+async function updateOrderDelivered(order) {
+  await sendToSheet({
+    type: "order",
+    orderId: order.orderId,
+    userId: order.userId,
+    username: order.username,
+    name: order.customerName || order.name || "No Name",
+    product: order.name,
+    package: order.package,
+    price: order.price,
+    paymentStatus: "Paid",
+    deliveryStatus: "Delivered",
+    date: new Date().toLocaleString()
+  });
 }
 
 module.exports = {
   trackUser,
-  trackOrder
+  trackOrder,
+  updateOrderDelivered
 };
