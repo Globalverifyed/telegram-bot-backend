@@ -5,6 +5,7 @@ const { trackOrder } = require("./sheet_tracker");
 
 let orders = {};
 let deliveryMode = {};
+let waitingAccountDetails = {};
 
 const pendingOrders = {};
 const deliveredOrders = {};
@@ -52,6 +53,64 @@ async function sendOrderToAdmins(bot, photoFileId, caption, orderId) {
       console.log(`Admin notify failed for ${adminId}:`, err.message);
     }
   }
+}
+
+async function startAccountDetailsFlow(bot, chatId, order) {
+  waitingAccountDetails[chatId] = order;
+
+  if (order.accountDetailsMode === "old_account") {
+    await bot.sendMessage(
+      chatId,
+      `👴 OLD Account Selected
+
+Please send your account details in this format:
+
+Email: yourmail@gmail.com
+Password: yourpassword
+
+তারপর payment method দেখানো হবে।`
+    );
+    return true;
+  }
+
+  if (order.accountDetailsMode === "new_account_own") {
+    await bot.sendMessage(
+      chatId,
+      `🆕 New Account Selected
+
+Please send your account details in this format:
+
+Email: yourmail@gmail.com
+Password: yourpassword
+
+তারপর payment method দেখানো হবে।`
+    );
+    return true;
+  }
+
+  return false;
+}
+
+async function handleAccountDetailsMessage(bot, msg) {
+  const chatId = msg.chat.id;
+
+  if (!waitingAccountDetails[chatId]) return false;
+  if (!msg.text) return false;
+
+  const order = waitingAccountDetails[chatId];
+
+  order.accountDetails = msg.text.trim();
+
+  delete waitingAccountDetails[chatId];
+
+  await bot.sendMessage(
+    chatId,
+    "✅ Account details received. Now select your payment method."
+  );
+
+  await showPaymentMethods(bot, chatId, order);
+
+  return true;
 }
 
 async function showPaymentMethods(bot, chatId, data) {
@@ -214,6 +273,8 @@ async function handlePaymentDone(bot, query) {
 📦 Product: ${order.name}
 📊 Package: ${order.package}
 🧾 Type: ${order.accountType || "N/A"}
+📩 Account Details:
+${order.accountDetails || "No Details"}
 💰 Price: ${formatPrice(order.price)}
 💰 Nagad Amount: ${convertDollarToTaka(order.price)}
 
@@ -267,6 +328,8 @@ async function handleDeliveryButton(bot, query) {
 📦 Product: ${order.name}
 📊 Package: ${order.package}
 🧾 Type: ${order.accountType || "N/A"}
+📩 Account Details:
+${order.accountDetails || "No Details"}
 💰 Price: ${formatPrice(order.price)}
 
 👤 Customer: ${order.customerName || "No Name"}
@@ -357,6 +420,8 @@ ${msg.text}`
 
 module.exports = {
   showPaymentMethods,
+  startAccountDetailsFlow,
+  handleAccountDetailsMessage,
   handlePaymentMethod,
   handlePaymentScreenshot,
   handlePaymentDone,

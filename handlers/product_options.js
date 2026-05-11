@@ -1,4 +1,4 @@
-const { showPaymentMethods } = require("./payment");
+const { showPaymentMethods, startAccountDetailsFlow } = require("./payment");
 const { sendOrEdit, formatPrice } = require("./utils");
 const { isAvailable, getStock } = require("./stock_manager");
 
@@ -260,6 +260,43 @@ async function handleProductOptions(bot, query) {
     return true;
   }
 
+  // New account customer will provide details
+  if (data === "new_account_own_details") {
+    const order = pendingOrders[chatId];
+
+    if (!order) {
+      await bot.sendMessage(chatId, "⚠️ Please select product/package first.");
+      return true;
+    }
+
+    await startAccountDetailsFlow(bot, chatId, {
+      ...order,
+      accountDetailsRequired: true,
+      accountDetailsMode: "new_account_own"
+    });
+
+    delete pendingOrders[chatId];
+    return true;
+  }
+
+  // New account from admin, no email/password needed from customer
+  if (data === "new_account_from_admin") {
+    const order = pendingOrders[chatId];
+
+    if (!order) {
+      await bot.sendMessage(chatId, "⚠️ Please select product/package first.");
+      return true;
+    }
+
+    await showPaymentMethods(bot, chatId, {
+      ...order,
+      accountDetails: "Customer wants account from admin"
+    });
+
+    delete pendingOrders[chatId];
+    return true;
+  }
+
   // account type handle only for 9proxy IP / GB
   if (!accountTypes[data]) return false;
 
@@ -270,9 +307,55 @@ async function handleProductOptions(bot, query) {
     return true;
   }
 
+  const selectedAccountType = accountTypes[data];
+
+  // OLD Account হলে customer-এর email/password লাগবে
+  if (data === "old_account") {
+    await startAccountDetailsFlow(bot, chatId, {
+      ...order,
+      accountType: selectedAccountType,
+      accountDetailsRequired: true,
+      accountDetailsMode: "old_account"
+    });
+
+    delete pendingOrders[chatId];
+    return true;
+  }
+
+  // New Account হলে customer choose করবে নিজের account দিবে নাকি admin থেকে নিবে
+  if (data === "new_account") {
+    pendingOrders[chatId] = {
+      ...order,
+      accountType: selectedAccountType
+    };
+
+    await bot.sendMessage(
+      chatId,
+      `🆕 New Account Option
+
+আপনি কোনভাবে নিতে চান?
+
+1️⃣ নিজের Email/Password দিবেন
+2️⃣ আমাদের কাছ থেকে account নিবেন`,
+      {
+        reply_markup: {
+          inline_keyboard: [
+            [{ text: "📩 I will provide Email/Password", callback_data: "new_account_own_details" }],
+            [{ text: "🛒 I need account from admin", callback_data: "new_account_from_admin" }],
+            [{ text: "⬅️ Back", callback_data: order.back }]
+          ]
+        }
+      }
+    );
+
+    return true;
+  }
+
+  // Redeem Code হলে সরাসরি payment method এ যাবে
   await showPaymentMethods(bot, chatId, {
     ...order,
-    accountType: accountTypes[data]
+    accountType: selectedAccountType,
+    accountDetails: "Redeem Code"
   });
 
   delete pendingOrders[chatId];

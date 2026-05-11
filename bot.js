@@ -41,7 +41,8 @@ const {
   handlePaymentScreenshot,
   handlePaymentDone,
   handleDeliveryButton,
-  handleAdminDeliveryMessage
+  handleAdminDeliveryMessage,
+  handleAccountDetailsMessage
 } = require("./handlers/payment");
 
 if (!process.env.BOT_TOKEN) {
@@ -177,6 +178,8 @@ bot.on("photo", async (msg) => {
 bot.on("message", async (msg) => {
   try {
     if (msg.text && msg.text.startsWith("/")) return;
+
+    if (await handleAccountDetailsMessage(bot, msg)) return;
 
     await handleAdminDeliveryMessage(bot, msg);
 
