@@ -202,7 +202,17 @@ async function handlePaymentDone(bot, query) {
   }
 
   pendingOrders[chatId] = order;
-
+  await trackOrder({
+  orderId: Date.now().toString(),
+  userId: userId,
+  username: username,
+  name: name,
+  product: order.name,
+  package: order.package,
+  price: formatPrice(order.price),
+  paymentStatus: "Paid",
+  deliveryStatus: "Pending"
+});
   const adminCaption =
 `🛒 New Order Received!
 
