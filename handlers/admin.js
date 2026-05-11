@@ -1,5 +1,9 @@
 const { pendingOrders = {}, deliveredOrders = {} } = require("./payment");
-const { isAdmin } = require("./admin_access");
+const { ADMIN_CHAT_IDS } = require("../config");
+
+function isAdmin(userId) {
+  return ADMIN_CHAT_IDS.map(String).includes(String(userId));
+}
 
 function getPriceNumber(price) {
   const num = parseFloat(String(price).replace(/[^0-9.]/g, ""));
@@ -18,12 +22,8 @@ async function showAdminDashboard(bot, chatId) {
           { text: "💰 Today Sales", callback_data: "admin_sales" },
           { text: "👥 Customers", callback_data: "admin_customers" }
         ],
-        [
-          { text: "📊 Stock Dashboard", callback_data: "admin_stock" }
-        ],
-        [
-          { text: "⚙ Settings", callback_data: "admin_settings" }
-        ]
+        [{ text: "📊 Stock Dashboard", callback_data: "admin_stock" }],
+        [{ text: "⚙ Settings", callback_data: "admin_settings" }]
       ]
     }
   });
@@ -31,8 +31,9 @@ async function showAdminDashboard(bot, chatId) {
 
 async function handleAdmin(bot, msg) {
   const chatId = msg.chat.id;
+  const userId = msg.from.id;
 
-  if (!isAdmin(msg.from.id)) {
+  if (!isAdmin(userId)) {
     await bot.sendMessage(chatId, "❌ You are not admin.");
     return true;
   }
@@ -44,8 +45,9 @@ async function handleAdmin(bot, msg) {
 async function handleAdminButtons(bot, query) {
   const chatId = query.message.chat.id;
   const data = query.data;
+  const userId = query.from.id;
 
-  if (!isAdmin(query.from.id)) return false;
+  if (!isAdmin(userId)) return false;
 
   if (data === "admin_back") {
     await showAdminDashboard(bot, chatId);
@@ -61,10 +63,13 @@ async function handleAdminButtons(bot, query) {
     }
 
     for (const order of orders) {
+      const orderId = order.orderId || order.customerChatId;
+
       await bot.sendMessage(
         chatId,
         `📦 Pending Order
 
+🧾 Order ID: ${orderId}
 🛒 Product: ${order.name}
 📊 Package: ${order.package}
 🧾 Type: ${order.accountType || "N/A"}
@@ -79,7 +84,7 @@ async function handleAdminButtons(bot, query) {
               [
                 {
                   text: "🚚 Deliver This Order",
-                  callback_data: `delivery_${order.customerChatId}`
+                  callback_data: `delivery_${orderId}`
                 }
               ]
             ]
@@ -104,6 +109,7 @@ async function handleAdminButtons(bot, query) {
         chatId,
         `✅ Delivered Order
 
+🧾 Order ID: ${order.orderId || "N/A"}
 🛒 Product: ${order.name}
 📊 Package: ${order.package}
 🧾 Type: ${order.accountType || "N/A"}
@@ -150,6 +156,7 @@ async function handleAdminButtons(bot, query) {
 
     allOrders.forEach((order) => {
       const id = order.userId || order.customerChatId;
+
       customers[id] = {
         name: order.customerName || "No Name",
         username: order.username || "No Username",
@@ -158,7 +165,10 @@ async function handleAdminButtons(bot, query) {
     });
 
     const text = Object.values(customers)
-      .map((c, index) => `${index + 1}. 👤 ${c.name}\n🔗 ${c.username}\n🆔 ${c.id}`)
+      .map(
+        (c, index) =>
+          `${index + 1}. 👤 ${c.name}\n🔗 ${c.username}\n🆔 ${c.id}`
+      )
       .join("\n\n");
 
     await bot.sendMessage(chatId, `👥 Customers List\n\n${text}`);
@@ -185,5 +195,6 @@ async function handleAdminButtons(bot, query) {
 
 module.exports = {
   handleAdmin,
-  handleAdminButtons
+  handleAdminButtons,
+  isAdmin
 };
