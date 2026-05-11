@@ -2,6 +2,7 @@ const { reduceStock } = require("./stock_manager");
 const { ADMIN_CHAT_IDS } = require("../config");
 const { formatPrice, getPriceNumber } = require("./utils");
 const { trackOrder } = require("./sheet_tracker");
+
 let orders = {};
 let deliveryMode = {};
 
@@ -10,29 +11,30 @@ const deliveredOrders = {};
 
 const USD_TO_BDT = 127;
 
+function createOrderId(chatId) {
+  return `${chatId}_${Date.now()}_${Math.floor(Math.random() * 10000)}`;
+}
+
 function convertDollarToTaka(price) {
   const dollar = getPriceNumber(price);
-
-  if (!dollar) {
-    return "Contact Support";
-  }
-
+  if (!dollar) return "Contact Support";
   return `৳${Math.round(dollar * USD_TO_BDT)}`;
 }
 
 function getAdminIds() {
-  const ids = ADMIN_CHAT_IDS.length > 0
-    ? ADMIN_CHAT_IDS
-    : [process.env.ADMIN_CHAT_ID].filter(Boolean);
+  const ids =
+    ADMIN_CHAT_IDS.length > 0
+      ? ADMIN_CHAT_IDS
+      : [process.env.ADMIN_CHAT_ID].filter(Boolean);
 
   return [...new Set(ids.map(String).filter(Boolean))];
 }
 
-async function sendOrderToAdmins(bot, photoFileId, caption, customerChatId) {
+async function sendOrderToAdmins(bot, photoFileId, caption, orderId) {
   const adminIds = getAdminIds();
 
   if (adminIds.length === 0) {
-    console.log("No admin ID configured. Set ADMIN_CHAT_IDS or ADMIN_CHAT_ID in .env");
+    console.log("No admin ID configured.");
     return;
   }
 
@@ -42,7 +44,7 @@ async function sendOrderToAdmins(bot, photoFileId, caption, customerChatId) {
         caption,
         reply_markup: {
           inline_keyboard: [
-            [{ text: "✅ Delivery Done", callback_data: `delivery_${customerChatId}` }]
+            [{ text: "✅ Delivery Done", callback_data: `delivery_${orderId}` }]
           ]
         }
       });
@@ -52,7 +54,6 @@ async function sendOrderToAdmins(bot, photoFileId, caption, customerChatId) {
   }
 }
 
-// ================= SHOW PAYMENT METHODS =================
 async function showPaymentMethods(bot, chatId, data) {
   orders[chatId] = {
     ...data,
@@ -91,7 +92,6 @@ async function showPaymentMethods(bot, chatId, data) {
   );
 }
 
-// ================= PAYMENT METHOD =================
 async function handlePaymentMethod(bot, query) {
   const chatId = query.message.chat.id;
   const data = query.data;
@@ -114,7 +114,6 @@ async function handlePaymentMethod(bot, query) {
 
 Payment complete হলে screenshot পাঠাও।`
     );
-
     return true;
   }
 
@@ -131,42 +130,34 @@ Payment complete হলে screenshot পাঠাও।`
 
 📞 Nagad Number:
 01611237099 Agent
-(Parsonal numbar Only for payment below 50 taka)
-01911237099 Parsonal 
+01911237099 Personal
 
 Payment complete হলে screenshot পাঠাও।`
     );
-
     return true;
   }
 
   return false;
 }
 
-// ================= SCREENSHOT RECEIVE =================
 async function handlePaymentScreenshot(bot, msg) {
   const chatId = msg.chat.id;
 
   if (!orders[chatId]) return false;
   if (!msg.photo) return false;
 
-  const photo = msg.photo[msg.photo.length - 1].file_id;
-
-  orders[chatId].screenshotFileId = photo;
+  orders[chatId].screenshotFileId = msg.photo[msg.photo.length - 1].file_id;
   orders[chatId].status = "screenshot_received";
 
   await bot.sendMessage(chatId, "📸 Screenshot received. Now click Payment Done.", {
     reply_markup: {
-      inline_keyboard: [
-        [{ text: "✅ Payment Done", callback_data: "payment_done" }]
-      ]
+      inline_keyboard: [[{ text: "✅ Payment Done", callback_data: "payment_done" }]]
     }
   });
 
   return true;
 }
 
-// ================= PAYMENT DONE =================
 async function handlePaymentDone(bot, query) {
   const chatId = query.message.chat.id;
   const user = query.from;
@@ -185,37 +176,41 @@ async function handlePaymentDone(bot, query) {
     return true;
   }
 
+  const orderId = createOrderId(chatId);
   const name = `${user.first_name || ""} ${user.last_name || ""}`.trim() || "No Name";
   const username = user.username ? "@" + user.username : "No Username";
   const userId = user.id;
 
+  order.orderId = orderId;
   order.customerName = name;
   order.username = username;
   order.userId = userId;
   order.status = "pending";
   order.createdAt = new Date().toISOString();
 
-  // Stock reduce only once
   if (order.productKey && order.itemKey && !order.stockReduced) {
     reduceStock(order.productKey, order.itemKey);
     order.stockReduced = true;
   }
 
-  pendingOrders[chatId] = order;
+  pendingOrders[orderId] = order;
+
   await trackOrder({
-  orderId: Date.now().toString(),
-  userId: userId,
-  username: username,
-  name: name,
-  product: order.name,
-  package: order.package,
-  price: formatPrice(order.price),
-  paymentStatus: "Paid",
-  deliveryStatus: "Pending"
-});
+    orderId,
+    userId,
+    username,
+    name,
+    product: order.name,
+    package: order.package,
+    price: formatPrice(order.price),
+    paymentStatus: "Paid",
+    deliveryStatus: "Pending"
+  });
+
   const adminCaption =
 `🛒 New Order Received!
 
+🧾 Order ID: ${orderId}
 📦 Product: ${order.name}
 📊 Package: ${order.package}
 🧾 Type: ${order.accountType || "N/A"}
@@ -227,21 +222,14 @@ async function handlePaymentDone(bot, query) {
 🆔 ID: ${userId}
 💬 Customer Chat ID: ${chatId}`;
 
-  await sendOrderToAdmins(bot, order.screenshotFileId, adminCaption, chatId);
+  await sendOrderToAdmins(bot, order.screenshotFileId, adminCaption, orderId);
+
+  delete orders[chatId];
 
   await bot.sendMessage(
     chatId,
     `😊 Your order has been received.
 Delivery may take 5 minutes to 1 hour.
-
-If you do not receive your service within this time, please send us a message.
-
-@Globalverifyed_support
-
-😀 আপনার অর্ডারটি গ্রহণ করা হয়েছে।
-ডেলিভারি হতে ৫ মিনিট থেকে ১ ঘন্টা সময় লাগতে পারে।
-
-এই সময়ের মধ্যে সেবা না পেলে অনুগ্রহ করে আমাদের মেসেজ দিন।
 
 @Globalverifyed_support`
   );
@@ -249,15 +237,14 @@ If you do not receive your service within this time, please send us a message.
   return true;
 }
 
-// ================= ADMIN DELIVERY BUTTON =================
 async function handleDeliveryButton(bot, query) {
   const data = query.data;
   const adminId = query.from.id;
 
   if (!data.startsWith("delivery_")) return false;
 
-  const customerChatId = data.replace("delivery_", "");
-  const order = pendingOrders[customerChatId] || orders[customerChatId];
+  const orderId = data.replace("delivery_", "");
+  const order = pendingOrders[orderId];
 
   if (!order) {
     await bot.sendMessage(adminId, "❌ Order not found or already delivered.");
@@ -265,7 +252,8 @@ async function handleDeliveryButton(bot, query) {
   }
 
   deliveryMode[adminId] = {
-    customerChatId,
+    orderId,
+    customerChatId: order.customerChatId,
     order,
     adminOrderChatId: query.message.chat.id,
     adminOrderMessageId: query.message.message_id
@@ -275,31 +263,29 @@ async function handleDeliveryButton(bot, query) {
     adminId,
     `✅ Delivery mode active.
 
-Now send the product/data for:
-
+🧾 Order ID: ${orderId}
 📦 Product: ${order.name}
 📊 Package: ${order.package}
 🧾 Type: ${order.accountType || "N/A"}
 💰 Price: ${formatPrice(order.price)}
-💰 Nagad Amount: ${convertDollarToTaka(order.price)}
 
 👤 Customer: ${order.customerName || "No Name"}
 🔗 Username: ${order.username || "No Username"}
-🆔 ID: ${order.userId || customerChatId}
+🆔 ID: ${order.userId || order.customerChatId}
 
-আপনি এখন যেটা পাঠাবেন, সেটা শুধু এই customer-এর কাছেই যাবে।`
+আপনি এখন যেটা পাঠাবেন, সেটা শুধু এই order-এর customer-এর কাছেই যাবে।`
   );
 
   return true;
 }
 
-// ================= ADMIN SEND DELIVERY DATA =================
 async function handleAdminDeliveryMessage(bot, msg) {
   const adminId = msg.from.id;
 
   if (!deliveryMode[adminId]) return false;
 
   const {
+    orderId,
     customerChatId,
     order,
     adminOrderChatId,
@@ -311,6 +297,7 @@ async function handleAdminDeliveryMessage(bot, msg) {
       customerChatId,
       `🎉 Delivery Received!
 
+🧾 Order ID: ${orderId}
 📦 Product: ${order.name}
 📊 Package: ${order.package}
 🧾 Type: ${order.accountType || "N/A"}
@@ -325,6 +312,7 @@ ${msg.text}`
       caption:
 `🎉 Delivery Received!
 
+🧾 Order ID: ${orderId}
 📦 Product: ${order.name}
 📊 Package: ${order.package}
 🧾 Type: ${order.accountType || "N/A"}`
@@ -334,6 +322,7 @@ ${msg.text}`
       caption:
 `🎉 Delivery Received!
 
+🧾 Order ID: ${orderId}
 📦 Product: ${order.name}
 📊 Package: ${order.package}
 🧾 Type: ${order.accountType || "N/A"}`
@@ -346,17 +335,14 @@ ${msg.text}`
   order.status = "delivered";
   order.deliveredAt = new Date().toISOString();
 
-  deliveredOrders[customerChatId] = order;
+  deliveredOrders[orderId] = order;
 
-  delete pendingOrders[customerChatId];
-  delete orders[customerChatId];
+  delete pendingOrders[orderId];
   delete deliveryMode[adminId];
 
   await bot.editMessageReplyMarkup(
     {
-      inline_keyboard: [
-        [{ text: "✅ Delivery Success", callback_data: "delivery_success" }]
-      ]
+      inline_keyboard: [[{ text: "✅ Delivery Success", callback_data: "delivery_success" }]]
     },
     {
       chat_id: adminOrderChatId,
