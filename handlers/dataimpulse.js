@@ -7,10 +7,10 @@ const { isAvailable, getStock } = require("./stock_manager");
 const discountPackages = {
   di_5: { label: "5 GB", price: "$3.8", best: false },
   di_6: { label: "6 GB", price: "$4.5", best: false },
-  di_6_5: { label: "6.5 GB", price: "$5.00", best: false },
-  di_7_5: {
-    label: "7.5 GB",
-    price: "$5.70",
+  di_8_5: { label: "8.5 GB", price: "$6.50", best: true },
+  di_10_5: {
+    label: "10.5 GB",
+    price: "$7.50",
     best: true,
     lowStock: true,
     recommended: true,
@@ -18,16 +18,16 @@ const discountPackages = {
   },
   di_8: { label: "8 GB", price: "$6.00", best: true },
   di_9: { label: "9 GB", price: "$7.00", best: true },
-  di_10: { label: "10 GB", price: "$7.5", best: false },
-  di_12_5: { label: "12.5 GB", price: "$9.30", best: false },
+  di_10: { label: "10 GB", price: "$7.20", best: true },
+  di_12_5: { label: "12.5 GB", price: "$9.30", best: true },
   di_14: { label: "14 GB", price: "$11.00", best: true },
   di_15: { label: "15 GB", price: "$12.00", best: false },
   di_16: { label: "16 GB", price: "$13.00", best: false },
   di_17_5: { label: "17.5 GB", price: "$13.20", best: false },
-  di_20: { label: "20 GB", price: "$15", best: true },
-  di_25: {
-    label: "25 GB",
-    price: "$18.50",
+  di_25: { label: "25 GB", price: "$18.50", best: true },
+  di_20: {
+    label: "20 GB",
+    price: "$15.00",
     best: true,
     lowStock: true,
     recommended: true,
