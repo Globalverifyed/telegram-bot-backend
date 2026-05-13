@@ -7,7 +7,7 @@ const { isAvailable, getStock } = require("./stock_manager");
 const discountPackages = {
   di_5: { label: "5 GB", price: "$3.8", best: false },
   di_6: { label: "6 GB", price: "$4.5", best: false },
-  di_8_5: { label: "8.5 GB", price: "$6.50", best: true },
+  di_7_5: { label: "7.5 GB", price: "$5.70", best: true },
   di_10_5: {
     label: "10.5 GB",
     price: "$7.50",
