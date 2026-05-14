@@ -121,6 +121,7 @@ bot.on("callback_query", async (query) => {
     if (await handleDigiProxy(bot, query)) return;
     if (await handleVPN(bot, query)) return;
     if (await handleSubscription(bot, query)) return;
+    if (await handleOthers(bot, query)) return;
 
     // PRODUCTS
     if (await handleProductOptions(bot, query)) return;
