@@ -25,12 +25,7 @@ async function handleSupport(bot, query) {
     return true;
   }
 
-  if (data === "others") {
-    await sendOrEdit(bot, query, "📦 Others section coming soon.", [
-      [{ text: "⬅ Back", callback_data: "back_main" }]
-    ]);
-    return true;
-  }
+  
 
   return false;
 }
