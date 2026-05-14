@@ -103,6 +103,7 @@ bot.on("callback_query", async (query) => {
     if (await handleAdminButtons(bot, query)) return;
 
     // FEATURES
+    if (await handleOthers(bot, query)) return;
     if (await handleSupport(bot, query)) return;
     if (await handleIPProxy(bot, query)) return;
     if (await handleDataImpulse(bot, query)) return;
@@ -121,7 +122,7 @@ bot.on("callback_query", async (query) => {
     if (await handleDigiProxy(bot, query)) return;
     if (await handleVPN(bot, query)) return;
     if (await handleSubscription(bot, query)) return;
-    if (await handleOthers(bot, query)) return;
+    
 
     // PRODUCTS
     if (await handleProductOptions(bot, query)) return;
