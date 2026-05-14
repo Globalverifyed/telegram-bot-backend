@@ -3,14 +3,14 @@ const stockRegistry = {
     title: "⚡ DataImpulse",
     items: {
       // Discount packages
-      di_5: { label: "5 GB (Discount)", stock: 2 },
-      di_6: { label: "6 GB (Discount)", stock: 1 },
+      di_5: { label: "5 GB (Discount)", stock: 0},
+      di_6: { label: "6 GB (Discount)", stock: 0 },
       di_6_5: { label: "6.5 GB (Discount)", stock: 0 },
       di_7_5: { label: "7.5 GB (Discount)", stock: 0 },
       di_8: { label: "8 GB (Discount)", stock: 0 },
       di_8_5: { label: "8.5 GB (Discount)", stock: 0 },
       di_9: { label: "9 GB (Discount)", stock: 0 },
-      di_10: { label: "10 GB (Discount)", stock: 1 },
+      di_10: { label: "10 GB (Discount)", stock: 0 },
       di_10_5: { label: "10.5 GB (Discount)", stock: 0 },
       di_12_5: { label: "12.5 GB (Discount)", stock: 0 },
       di_14: { label: "14 GB (Discount)", stock: 0 },
