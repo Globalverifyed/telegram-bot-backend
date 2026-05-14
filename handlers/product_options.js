@@ -11,10 +11,103 @@ const accountTypes = {
 };
 
 function needsAccountType(order) {
-  return order.productKey === "proxy_ip" || order.productKey === "proxy_gb";
+  return [
+    "proxy_ip",
+    "proxy_gb",
+    "google_voice",
+    "textnow",
+    "textfree",
+    "textplus",
+    "texttone",
+    "sideline"
+  ].includes(order.productKey);
 }
 
 const proxyProducts = {
+  // =========================
+// OTHERS PRODUCTS
+// =========================
+
+google_ai_pro: {
+  productKey: "google_ai_pro",
+  itemKey: "gaip_1",
+  name: "Google AI Pro",
+  package: "1 Year",
+  price: "$20.00",
+  back: "others"
+},
+
+chatgpt_go: {
+  productKey: "chatgpt_go",
+  itemKey: "cgo_1",
+  name: "ChatGPT Go",
+  package: "1 Year",
+  price: "$18.00",
+  back: "others"
+},
+
+chatgpt_plus: {
+  productKey: "chatgpt_plus",
+  itemKey: "cgp_1",
+  name: "ChatGPT Plus",
+  package: "1 Month",
+  price: "$8.00",
+  back: "others"
+},
+
+google_voice: {
+  productKey: "google_voice",
+  itemKey: "gv_1",
+  name: "Google Voice",
+  package: "1 Account",
+  price: "$3.00",
+  back: "others"
+},
+
+textnow: {
+  productKey: "textnow",
+  itemKey: "tn_1",
+  name: "TextNow",
+  package: "1 Account",
+  price: "$2.00",
+  back: "others"
+},
+
+textfree: {
+  productKey: "textfree",
+  itemKey: "tf_1",
+  name: "TextFree",
+  package: "1 Account",
+  price: "$2.00",
+  back: "others"
+},
+
+textplus: {
+  productKey: "textplus",
+  itemKey: "tp_1",
+  name: "TextPlus",
+  package: "1 Account",
+  price: "$2.00",
+  back: "others"
+},
+
+texttone: {
+  productKey: "texttone",
+  itemKey: "tt_1",
+  name: "TextTone",
+  package: "1 Account",
+  price: "$2.00",
+  back: "others"
+},
+
+sideline: {
+  productKey: "sideline",
+  itemKey: "sl_1",
+  name: "Sideline",
+  package: "1 Account",
+  price: "$2.50",
+  back: "others"
+},
 // =========================
   // 🌍 9PROXY IP
   // Account type লাগবে: OLD / New / Redeem
