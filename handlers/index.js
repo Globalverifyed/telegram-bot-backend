@@ -26,5 +26,6 @@ module.exports = {
   ...safeRequire("./digi_proxy"),
   ...safeRequire("./vpn"),
   ...safeRequire("./subscription"),
-  ...safeRequire("./product_options")
+  ...safeRequire("./product_options"),
+  ...safeRequire("./others")
 };
