@@ -13,6 +13,7 @@ const { trackUser, trackOrder } = require("./handlers/sheet_tracker");
 
 const {
   handleSupport,
+  handleOthers,
   handleIPProxy,
   handleDataImpulse,
   handleProxyIP,
