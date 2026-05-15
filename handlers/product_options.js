@@ -7,7 +7,9 @@ const pendingOrders = {};
 const accountTypes = {
   old_account: "OLD Account",
   new_account: "New Account",
-  redeem_code: "Redeem Code"
+  redeem_code: "Redeem Code",
+  web_login: "Web Login",
+  phone_login: "Phone Login"
 };
 
 function needsAccountType(order) {
@@ -292,7 +294,67 @@ abc_discount_10gb: { productKey: "abc_proxy", itemKey: "abc_d_10", name: "ABC Pr
   digi_regular_5gb: { productKey: "digi_proxy", itemKey: "dg_r_5", name: "Digi Proxy", package: "5GB Regular", price: "$16.50", back: "digi_regular_menu" },
   digi_regular_10gb: { productKey: "digi_proxy", itemKey: "dg_r_10", name: "Digi Proxy", package: "10GB Regular", price: "$32.00", back: "digi_regular_menu" },
   digi_regular_15gb: { productKey: "digi_proxy", itemKey: "dg_r_15", name: "Digi Proxy", package: "15GB Regular", price: "$49.00", back: "digi_regular_menu" },
-  digi_regular_20gb: { productKey: "digi_proxy", itemKey: "dg_r_20", name: "Digi Proxy", package: "20GB Regular", price: "$62.00", back: "digi_regular_menu" }
+  digi_regular_20gb: { productKey: "digi_proxy", itemKey: "dg_r_20", name: "Digi Proxy", package: "20GB Regular", price: "$62.00", back: "digi_regular_menu" },
+
+  // =========================
+  // 📦 OTHERS PRODUCTS
+  // =========================
+
+  google_ai_pro_1m: { productKey: "google_ai_pro", itemKey: "gaip_1m", name: "Google AI Pro (Gemini)", package: "1 Month", price: "$6", back: "others" },
+
+  chatgpt_go_10m: { productKey: "chatgpt_go", itemKey: "cg_10m", name: "ChatGPT Go", package: "10 Month", price: "$8.50", back: "others" },
+
+  chatgpt_plus_1m: { productKey: "chatgpt_plus", itemKey: "cgp_1m", name: "ChatGPT Plus", package: "1 Month", price: "$5.50", back: "others" },
+
+  capcut_pro_1m: { productKey: "capcut_pro", itemKey: "ccp_1m", name: "Capcut Pro", package: "1 Month", price: "$1.80", back: "others" },
+
+  telegram_premium_1m: { productKey: "telegram_premium", itemKey: "tg_1m", name: "Telegram Premium", package: "1 Month", price: "$12", back: "others", forceStockOut: true },
+  telegram_premium_3m: { productKey: "telegram_premium", itemKey: "tg_3m", name: "Telegram Premium", package: "3 Month", price: "$16", back: "others" },
+  telegram_premium_6m: { productKey: "telegram_premium", itemKey: "tg_6m", name: "Telegram Premium", package: "6 Month", price: "$22", back: "others" },
+  telegram_premium_12m: { productKey: "telegram_premium", itemKey: "tg_12m", name: "Telegram Premium", package: "12 Month", price: "$36", back: "others" },
+
+  canva_pro_1m: { productKey: "canva_pro", itemKey: "cv_1m", name: "Canva Pro", package: "1 Month", price: "$0.30", back: "others" },
+  canva_pro_3m: { productKey: "canva_pro", itemKey: "cv_3m", name: "Canva Pro", package: "3 Month", price: "$0.50", back: "others" },
+  canva_pro_6m: { productKey: "canva_pro", itemKey: "cv_6m", name: "Canva Pro", package: "6 Month", price: "$1", back: "others" },
+  canva_pro_12m: { productKey: "canva_pro", itemKey: "cv_12m", name: "Canva Pro", package: "12 Month", price: "$2", back: "others" },
+
+  amazon_prime_1m: { productKey: "amazon_prime", itemKey: "ap_1m", name: "Amazon Prime Video", package: "1 Month", price: "$5", back: "others" },
+
+  disney_plus_1m: { productKey: "disney_plus", itemKey: "dp_1m", name: "Disney Plus", package: "1 Month", price: "$5", back: "others" },
+
+  netflix_1m: { productKey: "netflix_premium", itemKey: "nf_1m", name: "Netflix Premium Personal", package: "1 Month", price: "$6.50", back: "others" },
+  netflix_3m: { productKey: "netflix_premium", itemKey: "nf_3m", name: "Netflix Premium Personal", package: "3 Month", price: "$15", back: "others" },
+  netflix_6m: { productKey: "netflix_premium", itemKey: "nf_6m", name: "Netflix Premium Personal", package: "6 Month", price: "$25", back: "others" },
+
+  veo_3: { productKey: "veo_3", itemKey: "veo_contact", name: "VEO 3", package: "Contact Support", price: "Contact Support", back: "others" },
+
+  spotify_premium: { productKey: "spotify_premium", itemKey: "sp_contact", name: "Spotify Premium", package: "Contact Support", price: "Contact Support", back: "others" },
+
+  outlook_old_25: { productKey: "outlook_old", itemKey: "outlook_ps25", name: "Outlook Mail Old", package: "PS25", price: "$1.99", back: "others" },
+  outlook_old_50: { productKey: "outlook_old", itemKey: "outlook_ps50", name: "Outlook Mail Old", package: "PS50", price: "$3.49", back: "others" },
+
+  hotmail_25: { productKey: "hotmail", itemKey: "hotmail_ps25", name: "Hotmail", package: "PS25", price: "$1.99", back: "others" },
+  hotmail_50: { productKey: "hotmail", itemKey: "hotmail_ps50", name: "Hotmail", package: "PS50", price: "$3.49", back: "others" },
+
+  edu_us_10: { productKey: "edu_us", itemKey: "edu_us_10", name: "EDU Mail (.us)", package: "10 Mail", price: "$1.99", back: "others" },
+  edu_us_25: { productKey: "edu_us", itemKey: "edu_us_25", name: "EDU Mail (.us)", package: "25 Mail", price: "$4.90", back: "others" },
+
+  edu_us_org_10: { productKey: "edu_us_org", itemKey: "edu_org_10", name: "EDU Mail (.US.ORG)", package: "10 Mail", price: "$1.99", back: "others" },
+  edu_us_org_25: { productKey: "edu_us_org", itemKey: "edu_org_25", name: "EDU Mail (.US.ORG)", package: "25 Mail", price: "$4.90", back: "others" },
+
+  google_voice: { productKey: "google_voice", itemKey: "gv_1", name: "Google Voice Account", package: "1 Account", price: "$3", back: "others" },
+
+  textnow: { productKey: "textnow", itemKey: "tn_1", name: "TextNow (TN)", package: "1 Account", price: "$2", back: "others" },
+  textfree: { productKey: "textfree", itemKey: "tf_1", name: "TextFree (TF)", package: "1 Account", price: "$2", back: "others" },
+  textplus: { productKey: "textplus", itemKey: "tp_1", name: "TextPlus", package: "1 Account", price: "$2", back: "others" },
+  texttone: { productKey: "texttone", itemKey: "tt_1", name: "TextTone (TT)", package: "1 Account", price: "$2", back: "others" },
+  sideline: { productKey: "sideline", itemKey: "sl_1", name: "Sideline (SL)", package: "1 Account", price: "$2", back: "others" },
+
+  hitmess: { productKey: "hitmess", itemKey: "hm_new", name: "Hitmess", package: "New Account", price: "$25", back: "others", accountType: "New Account" },
+
+  iplum_premium: { productKey: "iplum_premium", itemKey: "iplum_new", name: "IPLUM Account Premium", package: "New Account", price: "$25", back: "others", accountType: "New Account" },
+
+  magic_app: { productKey: "magic_app", itemKey: "magic_new", name: "Magic App", package: "New Account", price: "$25", back: "others", accountType: "New Account" }
 };
 
 async function showProductOptions(bot, query, order) {
