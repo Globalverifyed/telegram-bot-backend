@@ -26,90 +26,6 @@ function needsAccountType(order) {
 }
 
 const proxyProducts = {
-  // =========================
-// OTHERS PRODUCTS
-// =========================
-
-google_ai_pro: {
-  productKey: "google_ai_pro",
-  itemKey: "gaip_1",
-  name: "Google AI Pro",
-  package: "1 Year",
-  price: "$20.00",
-  back: "others"
-},
-
-chatgpt_go: {
-  productKey: "chatgpt_go",
-  itemKey: "cgo_1",
-  name: "ChatGPT Go",
-  package: "1 Year",
-  price: "$18.00",
-  back: "others"
-},
-
-chatgpt_plus: {
-  productKey: "chatgpt_plus",
-  itemKey: "cgp_1",
-  name: "ChatGPT Plus",
-  package: "1 Month",
-  price: "$8.00",
-  back: "others"
-},
-
-google_voice: {
-  productKey: "google_voice",
-  itemKey: "gv_1",
-  name: "Google Voice",
-  package: "1 Account",
-  price: "$3.00",
-  back: "others"
-},
-
-textnow: {
-  productKey: "textnow",
-  itemKey: "tn_1",
-  name: "TextNow",
-  package: "1 Account",
-  price: "$2.00",
-  back: "others"
-},
-
-textfree: {
-  productKey: "textfree",
-  itemKey: "tf_1",
-  name: "TextFree",
-  package: "1 Account",
-  price: "$2.00",
-  back: "others"
-},
-
-textplus: {
-  productKey: "textplus",
-  itemKey: "tp_1",
-  name: "TextPlus",
-  package: "1 Account",
-  price: "$2.00",
-  back: "others"
-},
-
-texttone: {
-  productKey: "texttone",
-  itemKey: "tt_1",
-  name: "TextTone",
-  package: "1 Account",
-  price: "$2.00",
-  back: "others"
-},
-
-sideline: {
-  productKey: "sideline",
-  itemKey: "sl_1",
-  name: "Sideline",
-  package: "1 Account",
-  price: "$2.50",
-  back: "others"
-},
 // =========================
   // 🌍 9PROXY IP
   // Account type লাগবে: OLD / New / Redeem
@@ -357,11 +273,193 @@ abc_discount_10gb: { productKey: "abc_proxy", itemKey: "abc_d_10", name: "ABC Pr
   magic_app: { productKey: "magic_app", itemKey: "magic_new", name: "Magic App", package: "New Account", price: "$25", back: "others", accountType: "New Account" }
 };
 
+function isOthersProduct(order) {
+  return [
+    "google_ai_pro",
+    "chatgpt_go",
+    "chatgpt_plus",
+    "capcut_pro",
+    "telegram_premium",
+    "canva_pro",
+    "amazon_prime",
+    "disney_plus",
+    "netflix_premium",
+    "veo_3",
+    "spotify_premium",
+    "outlook_old",
+    "hotmail",
+    "edu_us",
+    "edu_us_org",
+    "google_voice",
+    "textnow",
+    "textfree",
+    "textplus",
+    "texttone",
+    "sideline",
+    "hitmess",
+    "iplum_premium",
+    "magic_app"
+  ].includes(order.productKey);
+}
+
+const otherProductGroups = {
+  google_ai_pro: ["google_ai_pro_1m"],
+  chatgpt_go: ["chatgpt_go_10m"],
+  chatgpt_plus: ["chatgpt_plus_1m"],
+  capcut_pro: ["capcut_pro_1m"],
+
+  telegram_premium: [
+    "telegram_premium_1m",
+    "telegram_premium_3m",
+    "telegram_premium_6m",
+    "telegram_premium_12m"
+  ],
+
+  canva_pro: [
+    "canva_pro_1m",
+    "canva_pro_3m",
+    "canva_pro_6m",
+    "canva_pro_12m"
+  ],
+
+  amazon_prime: ["amazon_prime_1m"],
+  disney_plus: ["disney_plus_1m"],
+
+  netflix_premium: [
+    "netflix_1m",
+    "netflix_3m",
+    "netflix_6m"
+  ],
+
+  veo_3: ["veo_3"],
+  spotify_premium: ["spotify_premium"],
+
+  outlook_old: [
+    "outlook_old_25",
+    "outlook_old_50"
+  ],
+
+  hotmail: [
+    "hotmail_25",
+    "hotmail_50"
+  ],
+
+  edu_us: [
+    "edu_us_10",
+    "edu_us_25"
+  ],
+
+  edu_us_org: [
+    "edu_us_org_10",
+    "edu_us_org_25"
+  ],
+
+  google_voice: ["google_voice"],
+  textnow: ["textnow"],
+  textfree: ["textfree"],
+  textplus: ["textplus"],
+  texttone: ["texttone"],
+  sideline: ["sideline"],
+
+  hitmess: ["hitmess"],
+  iplum_premium: ["iplum_premium"],
+  magic_app: ["magic_app"]
+};
+
+function buildPackageButtons(packageKeys) {
+  const rows = [];
+  const buttons = packageKeys.map((key) => {
+    const item = proxyProducts[key];
+
+    const stockText = item.forceStockOut ? " - Stock Out" : "";
+    const priceText = item.price ? ` - ${item.price}` : "";
+
+    return {
+      text: `${item.package}${priceText}${stockText}`,
+      callback_data: key
+    };
+  });
+
+  for (let i = 0; i < buttons.length; i += 2) {
+    rows.push(buttons.slice(i, i + 2));
+  }
+
+  rows.push([{ text: "⬅️ Back", callback_data: "others" }]);
+
+  return rows;
+}
+
+async function showOtherProductPackageMenu(bot, query, groupKey) {
+  const packageKeys = otherProductGroups[groupKey];
+
+  if (!packageKeys) return false;
+
+  const firstProduct = proxyProducts[packageKeys[0]];
+
+  await sendOrEdit(
+    bot,
+    query,
+    `📦 ${firstProduct.name}
+
+Select package:`,
+    buildPackageButtons(packageKeys)
+  );
+
+  return true;
+}
+
+function getStockText(order) {
+  if (order.forceStockOut) return "Out of Stock";
+
+  if (isOthersProduct(order)) {
+    return "Available";
+  }
+
+  const stockCount = getStock(order.productKey, order.itemKey);
+  return `${stockCount} Available`;
+}
+
+function buildAccountTypeButtons(order) {
+  if (order.productKey === "google_voice") {
+    return [
+      [
+        { text: "👴 OLD Account - $6", callback_data: "old_account" },
+        { text: "🆕 New Account - $3", callback_data: "new_account" }
+      ],
+      [{ text: "⬅️ Back", callback_data: order.back }]
+    ];
+  }
+
+  if (["textnow", "textfree", "textplus", "texttone", "sideline"].includes(order.productKey)) {
+    return [
+      [
+        { text: "🌐 Web Login - $2", callback_data: "web_login" },
+        { text: "📱 Phone Login - $1", callback_data: "phone_login" }
+      ],
+      [{ text: "⬅️ Back", callback_data: order.back }]
+    ];
+  }
+
+  return [
+    [
+      { text: "👴 OLD Account", callback_data: "old_account" },
+      { text: "🆕 New Account", callback_data: "new_account" }
+    ],
+    [{ text: "🎟️ Redeem Code", callback_data: "redeem_code" }],
+    [{ text: "⬅️ Back", callback_data: order.back }]
+  ];
+}
+
 async function showProductOptions(bot, query, order) {
   const chatId = query.message.chat.id;
-  const stockCount = getStock(order.productKey, order.itemKey);
 
-  // শুধু 9proxy IP / 9proxy GB এর জন্য account type দেখাবে
+  if (order.forceStockOut) {
+    await sendOrEdit(bot, query, "❌ Out of Stock!", [
+      [{ text: "⬅️ Back", callback_data: order.back }]
+    ]);
+    return;
+  }
+
   if (needsAccountType(order)) {
     pendingOrders[chatId] = order;
 
@@ -373,45 +471,18 @@ async function showProductOptions(bot, query, order) {
 📦 Product: ${order.name}
 📊 Package: ${order.package}
 💰 Price: ${formatPrice(order.price)}
-📦 Stock: ${stockCount} Available
+📦 Stock: ${getStockText(order)}
 
 Select account type:`,
-      order.productKey === "google_voice"
-  ? [
-      [
-        { text: "👴 OLD Account", callback_data: "old_account" },
-        { text: "🆕 New Account", callback_data: "new_account" }
-      ],
-      [{ text: "⬅️ Back", callback_data: order.back }]
-    ]
-
-  : ["textnow", "textfree", "textplus", "texttone", "sideline"].includes(order.productKey)
-
-  ? [
-      [
-        { text: "🌐 Web Login", callback_data: "web_login" },
-        { text: "📱 Phone Login", callback_data: "phone_login" }
-      ],
-      [{ text: "⬅️ Back", callback_data: order.back }]
-    ]
-
-  : [
-      [
-        { text: "👴 OLD Account", callback_data: "old_account" },
-        { text: "🆕 New Account", callback_data: "new_account" }
-      ],
-      [{ text: "🎟️ Redeem Code", callback_data: "redeem_code" }],
-      [{ text: "⬅️ Back", callback_data: order.back }]
-    ]
-    ); 
+      buildAccountTypeButtons(order)
+    );
 
     return;
   }
 
-  // বাকি সব product সরাসরি payment method এ যাবে
   await showPaymentMethods(bot, chatId, {
     ...order,
-    stock: stockCount
+    stock: getStockText(order)
   });
 }
 
@@ -419,14 +490,41 @@ async function handleProductOptions(bot, query) {
   const chatId = query.message.chat.id;
   const data = query.data;
 
-  // package click handle
+  if (otherProductGroups[data]) {
+    await showOtherProductPackageMenu(bot, query, data);
+    return true;
+  }
+
   if (proxyProducts[data]) {
     const order = proxyProducts[data];
 
-    if (!isAvailable(order.productKey, order.itemKey)) {
+    if (order.forceStockOut) {
       await sendOrEdit(bot, query, "❌ Out of Stock!", [
         [{ text: "⬅️ Back", callback_data: order.back }]
       ]);
+      return true;
+    }
+
+    if (!isOthersProduct(order) && !isAvailable(order.productKey, order.itemKey)) {
+      await sendOrEdit(bot, query, "❌ Out of Stock!", [
+        [{ text: "⬅️ Back", callback_data: order.back }]
+      ]);
+      return true;
+    }
+
+    if (String(order.price).toLowerCase().includes("contact support")) {
+      await sendOrEdit(
+        bot,
+        query,
+        `📦 ${order.name}
+
+এই product এর জন্য support এ contact করুন।`,
+        [
+          [{ text: "☎ Contact Support", callback_data: "hotline" }],
+          [{ text: "⬅️ Back", callback_data: order.back }]
+        ]
+      );
+
       return true;
     }
 
@@ -434,7 +532,6 @@ async function handleProductOptions(bot, query) {
     return true;
   }
 
-  // New account customer will provide details
   if (data === "new_account_own_details") {
     const order = pendingOrders[chatId];
 
@@ -453,7 +550,6 @@ async function handleProductOptions(bot, query) {
     return true;
   }
 
-  // New account from admin, no email/password needed from customer
   if (data === "new_account_from_admin") {
     const order = pendingOrders[chatId];
 
@@ -471,7 +567,6 @@ async function handleProductOptions(bot, query) {
     return true;
   }
 
-  // account type handle only for 9proxy IP / GB
   if (!accountTypes[data]) return false;
 
   const order = pendingOrders[chatId];
@@ -483,7 +578,30 @@ async function handleProductOptions(bot, query) {
 
   const selectedAccountType = accountTypes[data];
 
-  // OLD Account হলে customer-এর email/password লাগবে
+  if (order.productKey === "google_voice") {
+    await showPaymentMethods(bot, chatId, {
+      ...order,
+      accountType: selectedAccountType,
+      price: data === "old_account" ? "$6" : "$3"
+    });
+
+    delete pendingOrders[chatId];
+    return true;
+  }
+
+  if (data === "web_login" || data === "phone_login") {
+    const selectedType = data === "web_login" ? "Web Login" : "Phone Login";
+
+    await showPaymentMethods(bot, chatId, {
+      ...order,
+      accountType: selectedType,
+      price: data === "web_login" ? "$2" : "$1"
+    });
+
+    delete pendingOrders[chatId];
+    return true;
+  }
+
   if (data === "old_account") {
     await startAccountDetailsFlow(bot, chatId, {
       ...order,
@@ -495,31 +613,7 @@ async function handleProductOptions(bot, query) {
     delete pendingOrders[chatId];
     return true;
   }
-    // Web Login / Phone Login
-  if (data === "web_login" || data === "phone_login") {
 
-    const order = pendingOrders[chatId];
-
-    if (!order) {
-      await bot.sendMessage(chatId, "⚠️ Please select product/package first.");
-      return true;
-    }
-
-    const selectedType =
-      data === "web_login"
-        ? "Web Login"
-        : "Phone Login";
-
-    await showPaymentMethods(bot, chatId, {
-      ...order,
-      accountType: selectedType
-    });
-
-    delete pendingOrders[chatId];
-
-    return true;
-  }
-  // New Account হলে customer choose করবে নিজের account দিবে নাকি admin থেকে নিবে
   if (data === "new_account") {
     pendingOrders[chatId] = {
       ...order,
@@ -548,7 +642,6 @@ async function handleProductOptions(bot, query) {
     return true;
   }
 
-  // Redeem Code হলে সরাসরি payment method এ যাবে
   await showPaymentMethods(bot, chatId, {
     ...order,
     accountType: selectedAccountType,
