@@ -376,15 +376,34 @@ async function showProductOptions(bot, query, order) {
 📦 Stock: ${stockCount} Available
 
 Select account type:`,
+      order.productKey === "google_voice"
+  ? [
       [
-        [
-          { text: "👴 OLD Account", callback_data: "old_account" },
-          { text: "🆕 New Account", callback_data: "new_account" }
-        ],
-        [{ text: "🎟️ Redeem Code", callback_data: "redeem_code" }],
-        [{ text: "⬅️ Back", callback_data: order.back }]
-      ]
-    );
+        { text: "👴 OLD Account", callback_data: "old_account" },
+        { text: "🆕 New Account", callback_data: "new_account" }
+      ],
+      [{ text: "⬅️ Back", callback_data: order.back }]
+    ]
+
+  : ["textnow", "textfree", "textplus", "texttone", "sideline"].includes(order.productKey)
+
+  ? [
+      [
+        { text: "🌐 Web Login", callback_data: "web_login" },
+        { text: "📱 Phone Login", callback_data: "phone_login" }
+      ],
+      [{ text: "⬅️ Back", callback_data: order.back }]
+    ]
+
+  : [
+      [
+        { text: "👴 OLD Account", callback_data: "old_account" },
+        { text: "🆕 New Account", callback_data: "new_account" }
+      ],
+      [{ text: "🎟️ Redeem Code", callback_data: "redeem_code" }],
+      [{ text: "⬅️ Back", callback_data: order.back }]
+    ]
+    ); 
 
     return;
   }
@@ -476,7 +495,30 @@ async function handleProductOptions(bot, query) {
     delete pendingOrders[chatId];
     return true;
   }
+    // Web Login / Phone Login
+  if (data === "web_login" || data === "phone_login") {
 
+    const order = pendingOrders[chatId];
+
+    if (!order) {
+      await bot.sendMessage(chatId, "⚠️ Please select product/package first.");
+      return true;
+    }
+
+    const selectedType =
+      data === "web_login"
+        ? "Web Login"
+        : "Phone Login";
+
+    await showPaymentMethods(bot, chatId, {
+      ...order,
+      accountType: selectedType
+    });
+
+    delete pendingOrders[chatId];
+
+    return true;
+  }
   // New Account হলে customer choose করবে নিজের account দিবে নাকি admin থেকে নিবে
   if (data === "new_account") {
     pendingOrders[chatId] = {
