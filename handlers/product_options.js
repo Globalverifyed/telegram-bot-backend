@@ -15,13 +15,7 @@ const accountTypes = {
 function needsAccountType(order) {
   return [
     "proxy_ip",
-    "proxy_gb",
-    "google_voice",
-    "textnow",
-    "textfree",
-    "textplus",
-    "texttone",
-    "sideline"
+    "proxy_gb"
   ].includes(order.productKey);
 }
 
@@ -258,13 +252,23 @@ abc_discount_10gb: { productKey: "abc_proxy", itemKey: "abc_d_10", name: "ABC Pr
   edu_us_org_10: { productKey: "edu_us_org", itemKey: "edu_org_10", name: "EDU Mail (.US.ORG)", package: "10 Mail", price: "$1.99", back: "others" },
   edu_us_org_25: { productKey: "edu_us_org", itemKey: "edu_org_25", name: "EDU Mail (.US.ORG)", package: "25 Mail", price: "$4.90", back: "others" },
 
-  google_voice: { productKey: "google_voice", itemKey: "gv_1", name: "Google Voice Account", package: "1 Account", price: "$3", back: "others" },
+  google_voice_new: { productKey: "google_voice", itemKey: "gv_new", name: "Google Voice Account", package: "New Account", price: "$3", back: "google_voice_menu", accountType: "New Account" },
+  google_voice_old: { productKey: "google_voice", itemKey: "gv_old", name: "Google Voice Account", package: "Old Account", price: "$6", back: "google_voice_menu", accountType: "OLD Account" },
 
-  textnow: { productKey: "textnow", itemKey: "tn_1", name: "TextNow (TN)", package: "1 Account", price: "$2", back: "others" },
-  textfree: { productKey: "textfree", itemKey: "tf_1", name: "TextFree (TF)", package: "1 Account", price: "$2", back: "others" },
-  textplus: { productKey: "textplus", itemKey: "tp_1", name: "TextPlus", package: "1 Account", price: "$2", back: "others" },
-  texttone: { productKey: "texttone", itemKey: "tt_1", name: "TextTone (TT)", package: "1 Account", price: "$2", back: "others" },
-  sideline: { productKey: "sideline", itemKey: "sl_1", name: "Sideline (SL)", package: "1 Account", price: "$2", back: "others" },
+  textnow_web: { productKey: "textnow", itemKey: "tn_web", name: "TextNow (TN)", package: "Web Login", price: "$2", back: "textnow_menu", accountType: "Web Login" },
+  textnow_phone: { productKey: "textnow", itemKey: "tn_phone", name: "TextNow (TN)", package: "Phone Login", price: "$1", back: "textnow_menu", accountType: "Phone Login" },
+
+  textfree_web: { productKey: "textfree", itemKey: "tf_web", name: "TextFree (TF)", package: "Web Login", price: "$2", back: "textfree_menu", accountType: "Web Login" },
+  textfree_phone: { productKey: "textfree", itemKey: "tf_phone", name: "TextFree (TF)", package: "Phone Login", price: "$1", back: "textfree_menu", accountType: "Phone Login" },
+
+  textplus_web: { productKey: "textplus", itemKey: "tp_web", name: "TextPlus", package: "Web Login", price: "$2", back: "textplus_menu", accountType: "Web Login" },
+  textplus_phone: { productKey: "textplus", itemKey: "tp_phone", name: "TextPlus", package: "Phone Login", price: "$1", back: "textplus_menu", accountType: "Phone Login" },
+
+  texttone_web: { productKey: "texttone", itemKey: "tt_web", name: "TextTone (TT)", package: "Web Login", price: "$2", back: "texttone_menu", accountType: "Web Login" },
+  texttone_phone: { productKey: "texttone", itemKey: "tt_phone", name: "TextTone (TT)", package: "Phone Login", price: "$1", back: "texttone_menu", accountType: "Phone Login" },
+
+  sideline_web: { productKey: "sideline", itemKey: "sl_web", name: "Sideline (SL)", package: "Web Login", price: "$2", back: "sideline_menu", accountType: "Web Login" },
+  sideline_phone: { productKey: "sideline", itemKey: "sl_phone", name: "Sideline (SL)", package: "Phone Login", price: "$1", back: "sideline_menu", accountType: "Phone Login" },
 
   hitmess: { productKey: "hitmess", itemKey: "hm_new", name: "Hitmess", package: "New Account", price: "$25", back: "others", accountType: "New Account" },
 
@@ -354,12 +358,12 @@ const otherProductGroups = {
     "edu_us_org_25"
   ],
 
-  google_voice: ["google_voice"],
-  textnow: ["textnow"],
-  textfree: ["textfree"],
-  textplus: ["textplus"],
-  texttone: ["texttone"],
-  sideline: ["sideline"],
+  google_voice: ["google_voice_new", "google_voice_old"],
+  textnow: ["textnow_web", "textnow_phone"],
+  textfree: ["textfree_web", "textfree_phone"],
+  textplus: ["textplus_web", "textplus_phone"],
+  texttone: ["texttone_web", "texttone_phone"],
+  sideline: ["sideline_web", "sideline_phone"],
 
   hitmess: ["hitmess"],
   iplum_premium: ["iplum_premium"],
