@@ -177,7 +177,7 @@ async function handleOthers(bot, query) {
     return bot.sendMessage(chatId, "📲 TextFree (TF)", {
       reply_markup: {
         inline_keyboard: [
-          [{ text: "Web Login - $2", callback_data: "textfree_web" }],
+          [{ text: "Web Login - $3", callback_data: "textfree_web" }],
           [{ text: "Phone Login - $1", callback_data: "textfree_phone" }],
           [{ text: "⬅ Back", callback_data: "others" }]
         ]
@@ -189,7 +189,7 @@ async function handleOthers(bot, query) {
     return bot.sendMessage(chatId, "📲 TextPlus", {
       reply_markup: {
         inline_keyboard: [
-          [{ text: "Web Login - $2", callback_data: "textplus_web" }],
+          [{ text: "Premium Textplus - $10.00", callback_data: "textplus_web" }],
           [{ text: "Phone Login - $1", callback_data: "textplus_phone" }],
           [{ text: "⬅ Back", callback_data: "others" }]
         ]
@@ -213,8 +213,8 @@ async function handleOthers(bot, query) {
     return bot.sendMessage(chatId, "☎ Sideline (SL)", {
       reply_markup: {
         inline_keyboard: [
-          [{ text: "Web Login - $2", callback_data: "sideline_web" }],
-          [{ text: "Phone Login - $1", callback_data: "sideline_phone" }],
+          [{ text: "Web Login - $10", callback_data: "sideline_web" }],
+          [{ text: "Phone Login - $3", callback_data: "sideline_phone" }],
           [{ text: "⬅ Back", callback_data: "others" }]
         ]
       }
