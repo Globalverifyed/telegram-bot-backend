@@ -197,8 +197,8 @@ async function handleOthers(bot, query) {
     });
   }
 
-  if (data === "texttone_menu") {
-    return bot.sendMessage(chatId, "📲 TextTone (TT)", {
+  if (data === "Talkatone_menu") {
+    return bot.sendMessage(chatId, "📲 Talkatone (TT)", {
       reply_markup: {
         inline_keyboard: [
           [{ text: "Web Login - $2", callback_data: "texttone_web" }],
