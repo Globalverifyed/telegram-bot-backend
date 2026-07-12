@@ -1,4 +1,5 @@
 const { reduceStock } = require("./stock_manager");
+const { reduceCustomStock } = require("./catalog_store");
 const { ADMIN_CHAT_IDS } = require("../config");
 const { formatPrice, getPriceNumber } = require("./utils");
 const { trackOrder, updateOrderDelivered } = require("./sheet_tracker");
@@ -248,7 +249,15 @@ async function handlePaymentDone(bot, query) {
   order.createdAt = new Date().toISOString();
 
   if (order.productKey && order.itemKey && !order.stockReduced) {
-    reduceStock(order.productKey, order.itemKey);
+    const reduced = order.customProduct
+      ? reduceCustomStock(order.catalogId || order.itemKey)
+      : reduceStock(order.productKey, order.itemKey);
+
+    if (!reduced) {
+      await bot.sendMessage(chatId, "❌ This product is out of stock. Please contact support.");
+      return true;
+    }
+
     order.stockReduced = true;
   }
 

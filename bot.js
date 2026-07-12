@@ -1,6 +1,6 @@
 // bot.js
 require("dotenv").config();
-console.log("STARTING BOT...");
+console.log(`STARTING BOT v1.1.0 - ${new Date().toISOString()}`);
 
 const TelegramBot = require("node-telegram-bot-api");
 const http = require("http");
@@ -36,6 +36,8 @@ const {
 
 const { handleAdmin, handleAdminButtons } = require("./handlers/admin");
 const { handleAdminStock } = require("./handlers/admin_stock");
+const { handleAdminProducts, handleAdminProductMessage } = require("./handlers/admin_products");
+const { handleCustomProducts } = require("./handlers/custom_products");
 
 const {
   handlePaymentMethod,
@@ -100,10 +102,12 @@ bot.on("callback_query", async (query) => {
     await bot.answerCallbackQuery(query.id).catch(() => {});
 
     // ADMIN
+    if (await handleAdminProducts(bot, query)) return;
     if (await handleAdminStock(bot, query)) return;
     if (await handleAdminButtons(bot, query)) return;
 
     // FEATURES
+    if (await handleCustomProducts(bot, query)) return;
     if (await handleOthers(bot, query)) return;
     if (await handleSupport(bot, query)) return;
     if (await handleIPProxy(bot, query)) return;
@@ -182,6 +186,7 @@ bot.on("message", async (msg) => {
   try {
     if (msg.text && msg.text.startsWith("/")) return;
 
+    if (await handleAdminProductMessage(bot, msg)) return;
     if (await handleAccountDetailsMessage(bot, msg)) return;
 
     await handleAdminDeliveryMessage(bot, msg);
@@ -213,5 +218,15 @@ http
   .listen(process.env.PORT || 10000, () => {
     console.log("Server running...");
   });
+
+function shutdown(signal) {
+  console.log(`${signal} received. Stopping bot safely...`);
+  bot.stopPolling()
+    .catch(() => {})
+    .finally(() => process.exit(0));
+}
+
+process.on("SIGINT", () => shutdown("SIGINT"));
+process.on("SIGTERM", () => shutdown("SIGTERM"));
 
 console.log("Bot running...");

@@ -637,6 +637,69 @@ vpn_cyberghost: {
   
 };
 
+const fs = require("fs");
+const path = require("path");
+
+const DATA_DIR = path.join(__dirname, "..", "data");
+const STOCK_FILE = path.join(DATA_DIR, "stock.json");
+
+function ensureDataDirectory() {
+  if (!fs.existsSync(DATA_DIR)) {
+    fs.mkdirSync(DATA_DIR, { recursive: true });
+  }
+}
+
+function exportStockValues() {
+  const values = {};
+
+  for (const [productKey, product] of Object.entries(stockRegistry)) {
+    values[productKey] = {};
+    for (const [itemKey, item] of Object.entries(product.items)) {
+      values[productKey][itemKey] = Number(item.stock) || 0;
+    }
+  }
+
+  return values;
+}
+
+function saveStock() {
+  try {
+    ensureDataDirectory();
+    const tempFile = `${STOCK_FILE}.tmp`;
+    fs.writeFileSync(tempFile, JSON.stringify(exportStockValues(), null, 2), "utf8");
+    fs.renameSync(tempFile, STOCK_FILE);
+    return true;
+  } catch (error) {
+    console.error("Stock save error:", error.message);
+    return false;
+  }
+}
+
+function loadStock() {
+  try {
+    ensureDataDirectory();
+
+    if (!fs.existsSync(STOCK_FILE)) {
+      saveStock();
+      return;
+    }
+
+    const saved = JSON.parse(fs.readFileSync(STOCK_FILE, "utf8"));
+
+    for (const [productKey, product] of Object.entries(stockRegistry)) {
+      for (const [itemKey, item] of Object.entries(product.items)) {
+        const savedValue = saved?.[productKey]?.[itemKey];
+        if (Number.isInteger(savedValue) && savedValue >= 0) {
+          item.stock = savedValue;
+        }
+      }
+    }
+  } catch (error) {
+    console.error("Stock load error; default stock will be used:", error.message);
+    saveStock();
+  }
+}
+
 function getStock(productKey, itemKey) {
   return stockRegistry[productKey]?.items[itemKey]?.stock || 0;
 }
@@ -645,23 +708,30 @@ function isAvailable(productKey, itemKey) {
   return getStock(productKey, itemKey) > 0;
 }
 
+function updateStock(productKey, itemKey, delta) {
+  const item = stockRegistry[productKey]?.items[itemKey];
+  if (!item) return false;
+
+  const nextStock = Math.max(0, (Number(item.stock) || 0) + delta);
+  if (nextStock === item.stock) return false;
+
+  item.stock = nextStock;
+  return saveStock();
+}
+
 function reduceStock(productKey, itemKey) {
-  if (stockRegistry[productKey]?.items[itemKey]?.stock > 0) {
-    stockRegistry[productKey].items[itemKey].stock -= 1;
-  }
+  return updateStock(productKey, itemKey, -1);
 }
 
 function addStock(productKey, itemKey) {
-  if (stockRegistry[productKey]?.items[itemKey]) {
-    stockRegistry[productKey].items[itemKey].stock += 1;
-  }
+  return updateStock(productKey, itemKey, 1);
 }
 
 function removeStock(productKey, itemKey) {
-  if (stockRegistry[productKey]?.items[itemKey]?.stock > 0) {
-    stockRegistry[productKey].items[itemKey].stock -= 1;
-  }
+  return updateStock(productKey, itemKey, -1);
 }
+
+loadStock();
 
 module.exports = {
   stockRegistry,
@@ -669,5 +739,8 @@ module.exports = {
   isAvailable,
   reduceStock,
   addStock,
-  removeStock
+  removeStock,
+  updateStock,
+  saveStock,
+  loadStock
 };

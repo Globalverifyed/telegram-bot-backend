@@ -43,8 +43,8 @@ const vpnProducts = {
     stockKey: "vpn_express",
     packages: {
       express_3d: { label: "3 Days", price: "$0.27" },
-      express_7d: { label: "7 Days", price: "Stock Out" },
-      express_1m: { label: "1 Month", price: "$1.05" },
+      express_7d: { label: "7 Days", price: "$0.32" },
+      express_1m: { label: "1 Month", price: "$0.95" },
       express_6m: { label: "6 Month", price: "Stock Out" },
       express_1y: { label: "1 Year", price: "Stock Out" },
       express_2y: { label: "2 Year", price: "Stock Out" }

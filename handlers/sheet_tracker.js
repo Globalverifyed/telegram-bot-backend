@@ -44,6 +44,20 @@ async function trackOrder(order) {
   });
 }
 
+async function trackProductChange(action, product) {
+  await sendToSheet({
+    type: "product",
+    action,
+    productId: product.id || product.catalogId || "",
+    product: product.name || "",
+    package: product.package || "",
+    price: product.price || "",
+    stock: product.stock ?? "",
+    enabled: product.enabled !== false,
+    date: new Date().toLocaleString()
+  });
+}
+
 async function updateOrderDelivered(order) {
   await sendToSheet({
     type: "order",
@@ -63,5 +77,6 @@ async function updateOrderDelivered(order) {
 module.exports = {
   trackUser,
   trackOrder,
-  updateOrderDelivered
+  updateOrderDelivered,
+  trackProductChange
 };

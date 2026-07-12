@@ -8,6 +8,7 @@ async function handleOthers(bot, query) {
     return bot.sendMessage(chatId, "📦 Others Products", {
       reply_markup: {
         inline_keyboard: [
+          [{ text: "🛍 More Products", callback_data: "custom_products" }],
           [
             { text: "🤖 Google AI Pro", callback_data: "google_ai_pro_1m" },
             { text: "💬 ChatGPT Go", callback_data: "chatgpt_go_10m" }

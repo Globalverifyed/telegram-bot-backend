@@ -1,6 +1,7 @@
 const { showPaymentMethods, startAccountDetailsFlow } = require("./payment");
 const { sendOrEdit, formatPrice } = require("./utils");
 const { isAvailable, getStock } = require("./stock_manager");
+const { applyOverride } = require("./catalog_store");
 
 const pendingOrders = {};
 
@@ -500,7 +501,13 @@ async function handleProductOptions(bot, query) {
   }
 
   if (proxyProducts[data]) {
-    const order = proxyProducts[data];
+    const baseOrder = proxyProducts[data];
+    const order = applyOverride(`${baseOrder.productKey}:${baseOrder.itemKey}`, baseOrder);
+
+    if (order.enabled === false) {
+      await sendOrEdit(bot, query, "❌ This product is currently disabled.", [[{ text: "⬅️ Back", callback_data: order.back }]]);
+      return true;
+    }
 
     if (order.forceStockOut) {
       await sendOrEdit(bot, query, "❌ Out of Stock!", [

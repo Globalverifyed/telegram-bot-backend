@@ -22,6 +22,7 @@ async function showAdminDashboard(bot, chatId) {
           { text: "💰 Today Sales", callback_data: "admin_sales" },
           { text: "👥 Customers", callback_data: "admin_customers" }
         ],
+        [{ text: "🛍 Product Manager", callback_data: "admin_products" }],
         [{ text: "📊 Stock Dashboard", callback_data: "admin_stock" }],
         [{ text: "⚙ Settings", callback_data: "admin_settings" }]
       ]
