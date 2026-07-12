@@ -230,3 +230,5 @@ process.on("SIGINT", () => shutdown("SIGINT"));
 process.on("SIGTERM", () => shutdown("SIGTERM"));
 
 console.log("Bot running...");
+
+// test auto update
