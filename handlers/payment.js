@@ -3,13 +3,19 @@ const { reduceCustomStock } = require("./catalog_store");
 const { ADMIN_CHAT_IDS } = require("../config");
 const { formatPrice, getPriceNumber } = require("./utils");
 const { trackOrder, updateOrderDelivered } = require("./sheet_tracker");
+const {
+  pendingOrders,
+  deliveredOrders,
+  deliverySessions,
+  addPending,
+  markDelivered,
+  setDeliverySession,
+  clearDeliverySession
+} = require("./order_store");
 
 let orders = {};
-let deliveryMode = {};
 let waitingAccountDetails = {};
 
-const pendingOrders = {};
-const deliveredOrders = {};
 
 const USD_TO_BDT = 127;
 
@@ -261,7 +267,7 @@ async function handlePaymentDone(bot, query) {
     order.stockReduced = true;
   }
 
-  pendingOrders[orderId] = order;
+  addPending(orderId, order);
 
   await trackOrder({
     orderId,
@@ -321,13 +327,13 @@ async function handleDeliveryButton(bot, query) {
     return true;
   }
 
-  deliveryMode[adminId] = {
+  setDeliverySession(adminId, {
     orderId,
     customerChatId: order.customerChatId,
     order,
     adminOrderChatId: query.message.chat.id,
     adminOrderMessageId: query.message.message_id
-  };
+  });
 
   await bot.sendMessage(
     adminId,
@@ -354,7 +360,7 @@ ${order.accountDetails || "No Details"}
 async function handleAdminDeliveryMessage(bot, msg) {
   const adminId = msg.from.id;
 
-  if (!deliveryMode[adminId]) return false;
+  if (!deliverySessions[String(adminId)]) return false;
 
   const {
     orderId,
@@ -362,7 +368,7 @@ async function handleAdminDeliveryMessage(bot, msg) {
     order,
     adminOrderChatId,
     adminOrderMessageId
-  } = deliveryMode[adminId];
+  } = deliverySessions[String(adminId)];
 
   if (msg.text) {
     await bot.sendMessage(
@@ -407,10 +413,9 @@ ${msg.text}`
   order.status = "delivered";
   order.deliveredAt = new Date().toISOString();
   await updateOrderDelivered(order);
-  deliveredOrders[orderId] = order;
+  markDelivered(orderId, order);
 
-  delete pendingOrders[orderId];
-  delete deliveryMode[adminId];
+  clearDeliverySession(adminId);
 
   await bot.editMessageReplyMarkup(
     {

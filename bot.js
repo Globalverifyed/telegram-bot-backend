@@ -186,10 +186,11 @@ bot.on("message", async (msg) => {
   try {
     if (msg.text && msg.text.startsWith("/")) return;
 
+    // Manual delivery has priority so admin text/photo/document is not
+    // consumed by another admin flow after Delivery Done is pressed.
+    if (await handleAdminDeliveryMessage(bot, msg)) return;
     if (await handleAdminProductMessage(bot, msg)) return;
     if (await handleAccountDetailsMessage(bot, msg)) return;
-
-    await handleAdminDeliveryMessage(bot, msg);
 
   } catch (err) {
     console.log("Message handler error:", err.message);
